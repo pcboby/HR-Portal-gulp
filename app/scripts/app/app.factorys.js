@@ -1,15 +1,13 @@
-;(function(){
-	'use strict';
-	angular.module('app.factorys', [])
-	.factory('settings', ['$rootScope',function($rootScope) {
-	    var settings = {
-	        layout: {
-	        	pageState:'Dashboard'
-	        }
-	    };
+'use strict';
+angular.module('app.factorys', [])
+    .factory('settings', ['$rootScope', function($rootScope) {
+        var settings = {
+            layout: {
+                pageState: 'Dashboard'
+            }
+        };
 
-	    $rootScope.settings = settings;
+        $rootScope.settings = settings;
 
-	    return settings;
-	}])
-})()
+        return settings;
+    }]);

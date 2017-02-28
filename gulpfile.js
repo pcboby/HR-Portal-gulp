@@ -17,18 +17,18 @@ var yeoman = {
 var paths = {
   scripts: [yeoman.app + '/scripts/app/*.js'],
   themes: [yeoman.app + '/themes/**/**/*.css'],
-  // test: ['test/spec/**/*.js'],
-  // testRequire: [
-  //   yeoman.app + '/bower_components/angular/angular.js',
-  //   yeoman.app + '/bower_components/angular-mocks/angular-mocks.js',
-  //   yeoman.app + '/bower_components/angular-resource/angular-resource.js',
-  //   yeoman.app + '/bower_components/angular-cookies/angular-cookies.js',
-  //   yeoman.app + '/bower_components/angular-sanitize/angular-sanitize.js',
-  //   yeoman.app + '/bower_components/angular-route/angular-route.js',
-  //   'test/mock/**/*.js',
-  //   'test/spec/**/*.js'
-  // ],
-  // karma: 'karma.conf.js',
+  test: ['test/spec/**/*.js'],
+  testRequire: [
+    yeoman.app + '/bower_components/angular/angular.js',
+    yeoman.app + '/bower_components/angular-mocks/angular-mocks.js',
+    yeoman.app + '/bower_components/angular-resource/angular-resource.js',
+    yeoman.app + '/bower_components/angular-cookies/angular-cookies.js',
+    yeoman.app + '/bower_components/angular-sanitize/angular-sanitize.js',
+    yeoman.app + '/bower_components/angular-route/angular-route.js',
+    'test/mock/**/*.js',
+    'test/spec/**/*.js'
+  ],
+  karma: 'karma.conf.js',
   views: {
     main: yeoman.app + '/index.html',
     files: [yeoman.app + '/views/**/*.html']
@@ -78,13 +78,13 @@ gulp.task('start:server', function() {
   });
 });
 
-// gulp.task('start:server:test', function() {
-//   $.connect.server({
-//     root: ['test', yeoman.app, '.tmp'],
-//     livereload: true,
-//     port: 9001
-//   });
-// });
+gulp.task('start:server:test', function() {
+  $.connect.server({
+    root: ['test', yeoman.app, '.tmp'],
+    livereload: true,
+    port: 9001
+  });
+});
 
 gulp.task('watch', function () {
   $.watch(paths.themes)
@@ -123,14 +123,14 @@ gulp.task('serve:prod', function() {
   });
 });
 
-// gulp.task('test', ['start:server:test'], function () {
-//   var testToFiles = paths.testRequire.concat(paths.scripts, paths.test);
-//   return gulp.src(testToFiles)
-//     .pipe($.karma({
-//       configFile: paths.karma,
-//       action: 'watch'
-//     }));
-// });
+gulp.task('test', ['start:server:test'], function () {
+  var testToFiles = paths.testRequire.concat(paths.scripts, paths.test);
+  return gulp.src(testToFiles)
+    .pipe($.karma({
+      configFile: paths.karma,
+      action: 'watch'
+    }));
+});
 
 // inject bower components
 gulp.task('bower', function () {
