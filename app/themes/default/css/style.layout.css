@@ -23,7 +23,7 @@ body.page-on-first slider{
 	height: 48%;
 	overflow: hidden;
 	background-color: #333;
-	min-height: 256px;
+	min-height: 264px;
 }
 body.page-on-first slider .search{
 	position: absolute;
@@ -45,17 +45,18 @@ body.page-on-search slider{
 body.page-on-search slider .search{
 	position: absolute;
 	width: 35%;
-	right: 5.625%;
-	top: 89px;
+	right: 3.715%;
+	top: 93px;
+	margin-right: 22px;
 
 }
 body.page-on-search slider .banner,
 body.page-on-search slider .search .search-logo{
 	display: none;
 }
-body slider .topmenu{
+/* body slider .topmenu{
 	position: fixed;
 	z-index: 11;
 	top: 0;
 	left: 256px;
-}
+} */

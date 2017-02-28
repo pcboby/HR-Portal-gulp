@@ -2,25 +2,6 @@
 	<div class="banner" ng-if="$state.includes('web.Dashboard')">
 		<img src="upload/bg.jpg" alt="" style="min-width:100%; min-height: 100%; float: right;">
 	</div>
-	<div class="topmenu">
-		<ul>
-		    <li ng-class="{active:$state.includes('web.Dashboard')||$state.includes('web.Search')}">
-				<a href="#/web/Dashboard.html">首页</a>
-		    </li>
-		    <li ng-class="{active:$state.includes('web.Record')||$state.includes('web.RecordView')||$state.includes('web.RecordAdd')||$state.includes('web.RecordEdit')}">
-				<a href="#/web/Record.html">沟通记录</a>
-		    </li>
-		    <li ng-class="{active:$state.includes('web.Chart')}">
-				<a href="#/web/Chart.html">报表分析</a>
-		    </li>
-		    <li ng-class="{active:$state.includes('web.Track')||$state.includes('web.TrackView')||$state.includes('web.TrackAdd')||$state.includes('web.TrackEdit')}">
-				<a href="#/web/Track.html">待跟踪事项</a>
-		    </li>
-		    <li ng-class="{active:$state.includes('web.Database')||$state.includes('web.DatabaseView')}">
-				<a href="#/web/Database.html">基础数据</a>
-		    </li>
-		</ul>
-	</div>
 	<ng-search ng-if="$state.includes('web.Dashboard')||$state.includes('web.Search')"
 		data-placeholder="请输入关键字"
 		data-min-length="0"

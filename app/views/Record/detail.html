@@ -3,21 +3,37 @@
         <ng-page-label-bar/>
     </div>
     <div class="col-md-9">
-        <form action="">
+        <form>
             <!--  -->
-            <div class="form-horizontal">
+            <div class="form-horizontal" ng-view-block ng-view-type="blockViews[0]">
                 <div class="form-horizontal-header" ng-page-label>
                     <i class="fa fa-bookmark"></i><span>访谈记录</span>
                     <div class="btn-group pull-right">
-                        <a class="btn btn-link" data-trigger="hover" data-type="success" data-title="编辑" ng-click="setViewModel(true)" bs-tooltip>
+                        <a class="btn btn-link"
+                            data-trigger="hover"
+                            data-type="success"
+                            data-title="编辑"
+                            ng-click="setter('EDIT')"
+                            ng-if="$viewType!='EDIT'"
+                            bs-tooltip>
                             <i class="glyphicon glyphicon-edit"></i>
                             <span>编辑</span>
                         </a>
-                        <a class="btn btn-link" data-trigger="hover" data-type="success" data-title="保存" ng-click="setViewModel(false)" bs-tooltip>
+                        <a class="btn btn-link"
+                            data-trigger="hover"
+                            data-type="success"
+                            data-title="保存"
+                            ng-click="setter('SAVE')"
+                            ng-if="$viewType=='EDIT'"
+                            bs-tooltip>
                             <i class="glyphicon glyphicon-floppy-saved"></i>
                             <span>保存</span>
                         </a>
-                        <a class="btn btn-link" data-type="success" data-title="还原" bs-tooltip>
+                        <a class="btn btn-link"
+                            data-type="success"
+                            data-title="还原"
+                            ng-if="$viewType=='EDIT'"
+                            bs-tooltip>
                             <i class="glyphicon glyphicon-share"></i>
                             <span>还原</span>
                         </a>
@@ -25,10 +41,10 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">访谈人</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
@@ -37,35 +53,35 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">工号</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">hwx333214</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" disabled placeholder="员工工号" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">部门</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">hwx333214</span>
                     </div>
-                    <ng-input-search ng-if="$isEdit" class="col-md-8" placeholder="部门名称/代码" data-btn-icon-cls="fa fa-search" ng-model="forms.department"></ng-input-search>
+                    <ng-input-search ng-if="$viewType=='EDIT'" class="col-md-8" placeholder="部门名称/代码" data-btn-icon-cls="fa fa-search" ng-model="forms.department"></ng-input-search>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">任命岗位</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">hwx333214</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="岗位名称/代码" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">沟通人</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">hwx333214</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
@@ -74,10 +90,10 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">访谈日期</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">hwx333214</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <span class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </span>
@@ -86,10 +102,10 @@
                 </div>
                 <div class="form-group col-md-12">
                     <label class="col-md-2 control-label">访谈原始记录</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">hwx333214</span>
                     </div>
-                    <div ng-if="$isEdit" ng-if="$isEdit" class="input-group col-md-10">
+                    <div ng-if="$viewType=='EDIT'" ng-if="$viewType=='EDIT'" class="input-group col-md-10">
                         <ng-combo-kindeditor name="rems" ng-model="forms.rem" placeholder="请输入访谈内容" height="320" width="100%" /> {{forms.rem}}
                     </div>
                 </div>
@@ -115,10 +131,10 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">姓名</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
@@ -127,37 +143,37 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">工号</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" disabled placeholder="员工工号" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">个人职级</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="职级名称/代码" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">任命岗位</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="岗位名称/代码" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">任命时间</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <span class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </span>
@@ -166,28 +182,28 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">近5年绩效</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="近5年绩效(14-10)" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">一层组织</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="一层组织" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">入职日期</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <span class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </span>
@@ -196,37 +212,37 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">性别</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="性别" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">年龄</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="性别" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">国籍</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="国籍" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">工作地</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="工作地" ng-model="forms.userName">
                     </div>
                 </div>
@@ -252,10 +268,10 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">日期</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <span class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </span>
@@ -264,10 +280,10 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">沟通人</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
@@ -276,19 +292,19 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">沟通方式</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="沟通方式" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">沟通发起</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-user"></i>
                         </span>
@@ -297,37 +313,37 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">人才类型</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="人才类型" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-5 control-label">近3年海外回机关</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-7">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-7">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-7">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-7">
                         <input type="text" class="form-control" placeholder="近3年海外回机关" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-5 control-label">近3年商业领袖职能</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-7">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-7">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-7">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-7">
                         <input type="text" class="form-control" placeholder="近3年商业领袖职能" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">状态</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <button type="button" class="btn btn-default" ng-model="forms.state" data-html="1" data-toggle="true" bs-options="state.value as state.label for state in states" bs-select>
                             Action <span class="caret"></span>
                         </button>
@@ -355,64 +371,64 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">发展机会</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="发展机会" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">工作挑战性</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="工作挑战性" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-6 control-label">工作与个人意愿一致性</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-6">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-6">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-6">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-6">
                         <input type="text" class="form-control" placeholder="工作与个人意愿一致性" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">工作成就感</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="工作成就感" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">价值认可</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="价值认可" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">工作压力</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="工作压力" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label class="col-md-2 control-label">其它</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-10">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-10">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-10">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-10">
                         <textarea class="form-control"></textarea>
                     </div>
                 </div>
@@ -438,64 +454,64 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">授权与责任</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="授权与责任" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">汇报关系</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="汇报关系" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">文化与氛围</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="文化与氛围" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-6 control-label">经理人素养与领导力</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-6">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-6">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-6">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-6">
                         <input type="text" class="form-control" placeholder="经理人素养与领导力" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">流程与运作</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="流程与运作" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">管理制度</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="管理制度" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">关怀与服务</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="关怀与服务" ng-model="forms.userName">
                     </div>
                 </div>
@@ -521,28 +537,28 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">薪酬</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="薪酬" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">岗位职级</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="岗位职级" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label class="col-md-2 control-label">其它</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-10">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-10">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-10">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-10">
                         <textarea class="form-control"></textarea>
                     </div>
                 </div>
@@ -568,28 +584,28 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">家庭</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="家庭" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="col-md-4 control-label">个人健康</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-8">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-8">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-8">
                         <input type="text" class="form-control" placeholder="个人健康" ng-model="forms.userName">
                     </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label class="col-md-2 control-label">其它</label>
-                    <div ng-if="!$isEdit" class="input-group col-md-10">
+                    <div ng-if="$viewType!='EDIT'" class="input-group col-md-10">
                         <span class="form-control no-border">黄磊</span>
                     </div>
-                    <div ng-if="$isEdit" class="input-group col-md-10">
+                    <div ng-if="$viewType=='EDIT'" class="input-group col-md-10">
                         <textarea class="form-control"></textarea>
                     </div>
                 </div>

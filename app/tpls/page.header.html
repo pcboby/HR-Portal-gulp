@@ -1,16 +1,29 @@
-<div>
+<!-- <div>
+    <a href="#/" class="top-logo"></a>
+
+    <ul>
+        <li ng-class="{active:$state.includes('web.Dashboard')||$state.includes('web.Search')}">
+            <a href="#/web/Dashboard.html">首页</a>
+        </li>
+        <li ng-class="{active:$state.includes('web.Record')||$state.includes('web.RecordView')||$state.includes('web.RecordAdd')||$state.includes('web.RecordEdit')}">
+            <a href="#/web/Record.html">沟通记录</a>
+        </li>
+        <li ng-class="{active:$state.includes('web.Chart')}">
+            <a href="#/web/Chart.html">报表分析</a>
+        </li>
+        <li ng-class="{active:$state.includes('web.Track')||$state.includes('web.TrackView')||$state.includes('web.TrackAdd')||$state.includes('web.TrackEdit')}">
+            <a href="#/web/Track.html">待跟踪事项</a>
+        </li>
+        <li ng-class="{active:$state.includes('web.Database')||$state.includes('web.DatabaseView')}">
+            <a href="#/web/Database.html">基础数据</a>
+        </li>
+    </ul>
     <ul class="list-top-menu pull-right">
-        <!-- <li>
-        	<a href="">
-        		<i class="icon-bell"></i>
-        		<span ng-if="msgTotal" class="badge" ng-bind="msgTotal"></span>
-        	</a>
-        </li> -->
         <li>
-        	<a href="#/web/System.html">
-        		<i class="icon icon-settings"></i>
+            <a href="#/web/System.html">
+                <i class="icon icon-settings"></i>
                 <span>用户设置</span>
-        	</a>
+            </a>
         </li>
         <li>
             <a href="">
@@ -25,4 +38,83 @@
             </a>
         </li>
     </ul>
-</div>
+</div> -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/web/Dashboard.html">HR WORKPLACE</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ng-class="{active:$state.includes('web.Dashboard')||$state.includes('web.Search')}">
+                    <a href="#/web/Dashboard.html">首页</a>
+                </li>
+                <li ng-class="{active:$state.includes('web.Record')||$state.includes('web.RecordView')||$state.includes('web.RecordAdd')}">
+                    <a href="#/web/Record.html">沟通记录</a>
+                </li>
+                <li ng-class="{active:$state.includes('web.Chart')}">
+                    <a href="#/web/Chart.html">报表分析</a>
+                </li>
+                <li ng-class="{active:$state.includes('web.Track')||$state.includes('web.TrackView')||$state.includes('web.TrackAdd')}">
+                    <a href="#/web/Track.html">待跟踪事项</a>
+                </li>
+                <li ng-class="{active:$state.includes('web.Database')||$state.includes('web.DatabaseView')}">
+                    <a href="#/web/Database.html">基础数据</a>
+                </li>
+                <!-- <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    
+                </li> -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{active:$state.includes('web.System')||$state.includes('web.SystemView')}">
+                    <a href="#/web/System.html">
+                        <i class="icon icon-settings"></i>
+                        <span>用户设置</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                        <i class="icon icon-user"></i>
+                        <span>hwx333214</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class=" icon-logout"></i>
+                        <span>注消</span>
+                    </a>
+                </li>
+                <!-- <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li> -->
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
