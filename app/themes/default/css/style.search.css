@@ -1,0 +1,9 @@
+.search{}
+.search .search-logo{
+	color: #fff;
+	text-align: center;
+	font-size: 28px;
+	padding: 20px;
+}
+.search .search-input input{}
+.search a{}

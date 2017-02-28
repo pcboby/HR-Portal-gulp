@@ -1,0 +1,64 @@
+.table{
+	margin-bottom: 10px;
+	min-width: 100%;
+}
+
+.table-lock-group{
+	position: relative;
+}
+
+.table-lock-group .table{
+	width: auto;
+	margin: 0px;
+	/* border-top: 1px solid #ddd; */
+}
+.table-lock-group .table td,th{
+	white-space:nowrap; 
+	padding: 4px 8px !important;
+}
+.table-lock-group .table td>span{
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+}
+.table-lock-group .ng-table-pager{
+	margin-top: 10px;
+	height: 34px;
+}
+.table-lock-group .pagination{
+	margin: 0;
+}
+.table-lock-group>.north{
+	position: absolute;
+}
+.table-lock-group>.east{
+	position: absolute;
+	z-index: 1;
+	background-color: #fff;
+	border-left: 1px solid #ddd;
+	top: 0;
+	right: 0;
+}
+.table-lock-group>.center{}
+.table-lock-group>.south{}
+.table-lock-group>.south .table{
+	display: none;
+}
+.table-lock-group>.west{
+	position: absolute;
+	z-index: 1;
+	background-color: #fff;
+	border-right: 1px solid #ddd;
+	top: 0;
+	left: 0;
+}
+.table-lock-group>.north [ng-table-pagination],
+.table-lock-group>.east [ng-table-pagination],
+.table-lock-group>.center [ng-table-pagination],
+.table-lock-group>.west [ng-table-pagination]{
+	display: none;
+}
+
+.table-lock-group .progress{
+	margin: 5px 0px;
+}

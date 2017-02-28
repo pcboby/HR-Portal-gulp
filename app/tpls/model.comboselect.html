@@ -1,0 +1,38 @@
+<button type="button"
+    class="btn btn-default"
+    ng-model="$model"
+    placeholder="{{placeholder}}"
+    data-max-length="{{maxLength}}"
+    data-all-none-buttons="{{allButtons}}"
+    data-max-length-html="{{selectedText}}"
+    data-template-url="comboboxs.html"
+    data-html="1"
+    data-multiple="1"
+    bs-options="{{bsOptions}}"
+    bs-select>
+    Action <span class="caret"></span>
+</button>
+<script type="text/ng-template" id="comboboxs.html">
+<ul tabindex="-1" class="select dropdown-menu dropdown-menu-list"
+    ng-show="$isVisible()"
+    role="select">
+    <li ng-if="$showAllNoneButtons" ng-init="traceAll()"
+        ng-click="$activeIndex.length==$matches.length?$selectNone():$selectAll()">
+        <div>
+            <input type="checkbox" class="combo-select-all"
+                ng-checked="$activeIndex.length==$matches.length">
+            <span>全部</span>
+        </div>
+
+    </li>
+    <li role="separator" class="divider" ng-if="$showAllNoneButtons"></li>
+    <li role="presentation" ng-repeat="match in $matches"
+        ng-click="$select($index, $event);">
+
+        <div>
+            <input type="checkbox" ng-checked="$isActive($index);">
+            <span ng-bind="match.label"></span>
+        </div>
+    </li>
+</ul>
+</script>

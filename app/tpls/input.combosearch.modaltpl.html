@@ -1,0 +1,38 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" ng-show="title">
+        <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" ng-bind="title"></h4>
+      </div>
+      <div class="modal-body">
+		<table class="table table-bordered table-hover" ng-table="tableParams">
+			<tr ng-repeat="$item in $data" 
+				ng-class="{'active':$isSelect[$item.code]}" 
+				ng-click="$select($item.code)"
+				ng-dblclick="confirm($selected);$hide();">
+				<td title="''" align="center">
+					<input type="radio" value="$index" ng-checked="$isSelect[$item.code]">
+				</td>
+				<td data-title="'ID'"
+					sortable="'id'">
+					{{$item.id}}
+				</td>
+				<td data-title="'Code'"
+					sortable="'code'">
+					{{$item.code}}
+				</td>
+				<td data-title="'Name'" 
+					sortable="'name'">
+					{{$item.name}}
+				</td>
+			</tr>
+		</table>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary" ng-click="confirm($selected);$hide();">Confirm</button>
+        <button type="button" class="btn btn-default" ng-click="cancel();$hide();">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title data-ng-bind="'HR-Portal | ' + $state.current.data.pageTitle"></title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta content="" name="author" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no" name="viewport" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) themes/default/css/libs.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/bower_components/simple-line-icons/css/simple-line-icons.css" />
+    <link rel="stylesheet" href="/bower_components/ng-table/dist/ng-table.css" />
+    <link rel="stylesheet" href="/bower_components/kindeditor/themes/default/default.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) themes/default/css/style.css -->
+    <link rel="stylesheet" href="../.tmp/themes/default/css/style.css">
+    <!-- endbuild -->
+    <link id="ng_load_before" />
+</head>
+
+<body class="page-on-load"
+	ng-class="{
+		'page-on-first':$state.includes('web.Dashboard'),
+		'page-on-search':$state.includes('web.Search')
+	}"
+	controller="appController"
+	>
+    <!-- *************************************************************************************** -->
+    <!-- Page Spinner loader -->
+    <!-- *************************************************************************************** -->
+    <spinner>
+        <i></i>
+        <p>正在努力加载,请稍等....</p>
+    </spinner>
+    <!-- *************************************************************************************** -->
+    <!-- Page header -->
+    <!-- *************************************************************************************** -->
+    <header ui-view="header"></header>
+    <div class="clearfix"></div>
+    <!-- *************************************************************************************** -->
+    <!-- Page slider -->
+    <!-- *************************************************************************************** -->
+    <slider ui-view="slider"></slider>
+    <div class="clearfix"></div>
+    <!-- *************************************************************************************** -->
+    <!-- Page wraper -->
+    <!-- *************************************************************************************** -->
+    <wraper ui-view="wraper"></wraper>
+    <div class="clearfix"></div>
+    <!-- *************************************************************************************** -->
+    <!-- Page footer -->
+    <!-- *************************************************************************************** -->
+    <footer ui-view="footer"></footer>
+
+    <!-- *************************************************************************************** -->
+    <!-- javascript plugins -->
+    <!-- *************************************************************************************** -->
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/angular-touch/angular-touch.js"></script>
+    <script src="/bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/ng-table/dist/ng-table.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/bootbox.js/bootbox.js"></script>
+    <script src="/bower_components/amcharts3/amcharts/amcharts.js"></script>
+    <script src="/bower_components/amstock3/amcharts/amstock.js"></script>
+    <script src="/bower_components/ammap3/ammap/ammap.js"></script>
+    <script src="/bower_components/highcharts/highcharts.js"></script>
+    <script src="/bower_components/kindeditor/kindeditor.js"></script>
+    <script src="/bower_components/kindeditor/lang/zh-CN.js"></script>
+    <script src="/bower_components/Flot/jquery.flot.js"></script>
+    <script src="/bower_components/Flot/jquery.flot.pie.js"></script>
+    <script src="/bower_components/Flot/jquery.flot.categories.js"></script>
+    <script src="/bower_components/Flot/jquery.flot.selection.js"></script>
+    <script src="/bower_components/angular-i18n/angular-locale_zh-cn.js"></script>
+    <script src="/bower_components/angular-translate/angular-translate.js"></script>
+    <script src="/bower_components/angular-strap/dist/angular-strap.js"></script>
+    <script src="/bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- Javascript Utils -->
+    <script src="scripts/common.js"></script>
+    <script src="scripts/utils/config.js"></script>
+    <script src="scripts/utils/layout.js"></script>
+    <script src="scripts/utils/utils.js"></script>
+    <!-- Javascript Utils end-->
+
+    <!-- build:js({.tmp,app}) scripts/app.js -->
+    <script src="scripts/app/app.js"></script>
+    <script src="scripts/app/app.config.js"></script>
+    <script src="scripts/app/app.routers.js"></script>
+    <script src="scripts/app/app.filters.js"></script>
+    <script src="scripts/app/app.factorys.js"></script>
+    <script src="scripts/app/app.directives.js"></script>
+    <script src="scripts/app/app.resources.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

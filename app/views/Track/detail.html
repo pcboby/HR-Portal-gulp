@@ -1,0 +1,146 @@
+<div class="row">
+    <div class="col-md-3">
+    	<ng-page-label-bar/>
+    </div>
+    <div class="col-md-9">
+    	<form action="">
+	    	<!--  -->
+	        <div class="form-horizontal">
+	        	<div class="form-horizontal-header" ng-page-label>
+	        		<i class="fa fa-bookmark"></i><span>事项信息</span>
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-link" data-trigger="hover" data-type="success" data-title="编辑" ng-click="setViewModel(true)" bs-tooltip>
+                            <i class="glyphicon glyphicon-edit"></i>
+                            <span>编辑</span>
+                        </a>
+                        <a class="btn btn-link" data-trigger="hover" data-type="success" data-title="保存" ng-click="setViewModel(false)" bs-tooltip>
+                            <i class="glyphicon glyphicon-floppy-saved"></i>
+                            <span>保存</span>
+                        </a>
+                        <a class="btn btn-link" data-type="success" data-title="还原" bs-tooltip>
+                            <i class="glyphicon glyphicon-share"></i>
+                            <span>还原</span>
+                        </a>
+                    </div>
+	        	</div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">需求提出人</label>
+			        <div class="input-group col-md-8">
+			            <span class="input-group-addon">
+			                <i class="glyphicon glyphicon-user"></i>
+			            </span>
+			            <input type="text" class="form-control"
+			                placeholder="员工姓名/工号"
+			                ng-model="forms.userCode">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">需求人工号</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control" disabled 
+			                placeholder="员工工号"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">提出日期</label>
+			        <div class="input-group col-md-8">
+			        	<span class="input-group-addon">
+			                <i class="fa fa-calendar"></i>
+			            </span>
+			            <input type="text" class="form-control"
+			                placeholder="日期"
+			                data-placement="auto"
+			                data-autoclose="1"
+			                data-date-format="yyyy-MM-dd"
+			                data-container="body"
+			                ng-model="forms.date"
+			                bs-datepicker>
+			        </div>
+			    </div>
+			    <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">问题类型</label>
+			        <button type="button" class="btn btn-default"
+			            ng-model="forms.state"
+			            data-html="1"
+			            data-toggle="true"
+			            bs-options="state.value as state.label for state in states"
+			            bs-select>
+			            Action <span class="caret"></span>
+			        </button>
+			    </div>
+	            <div class="form-group col-md-12">
+			        <label class="col-md-2 control-label">问题描述</label>
+			        <div class="input-group col-md-10">
+			        	<textarea class="form-control"></textarea>
+			        </div>
+			    </div>
+	        </div>
+	        <!--  -->
+	        <div class="form-horizontal">
+	        	<div class="form-horizontal-header" ng-page-label>
+	        		<i class="fa fa-bookmark"></i><span>受理信息</span>
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-link" data-trigger="hover" data-type="success" data-title="编辑" ng-click="setViewModel(true)" bs-tooltip>
+                            <i class="glyphicon glyphicon-edit"></i>
+                            <span>编辑</span>
+                        </a>
+                        <a class="btn btn-link" data-trigger="hover" data-type="success" data-title="保存" ng-click="setViewModel(false)" bs-tooltip>
+                            <i class="glyphicon glyphicon-floppy-saved"></i>
+                            <span>保存</span>
+                        </a>
+                        <a class="btn btn-link" data-type="success" data-title="还原" bs-tooltip>
+                            <i class="glyphicon glyphicon-share"></i>
+                            <span>还原</span>
+                        </a>
+                    </div>
+	        	</div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">受理人</label>
+			        <div class="input-group col-md-8">
+			            <span class="input-group-addon">
+			                <i class="glyphicon glyphicon-user"></i>
+			            </span>
+			            <input type="text" class="form-control"
+			                placeholder="员工姓名/工号"
+			                ng-model="forms.userCode">
+			        </div>
+			    </div>
+			    <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">协助部门</label>
+			        <ng-input-search class="col-md-8"
+			            placeholder="部门名称/代码"
+			            data-btn-icon-cls="fa fa-search"
+			            ng-model="forms.department"
+			            />
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">当前进度</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control"
+			                placeholder="当前进度"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">是否关闭</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control"
+			                placeholder="是否关闭"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-12">
+			        <label class="col-md-2 control-label">备注</label>
+			        <div class="input-group col-md-10">
+			        	<textarea class="form-control"></textarea>
+			        </div>
+			    </div>
+	        </div>
+            <div style="margin: 20px 0px;">
+                <button type="submit" class="btn btn-success">全部提交</button>
+                <button type="reset" class="btn btn-default">重置</button>
+            </div>
+    	</form>
+    </div>
+</div>

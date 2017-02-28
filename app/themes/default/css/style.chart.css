@@ -1,0 +1,9 @@
+.chart{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+}
+.chart.chart-flot{
+	width:100px;
+	height: 100px;
+}

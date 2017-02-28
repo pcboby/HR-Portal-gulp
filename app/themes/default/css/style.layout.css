@@ -1,0 +1,61 @@
+html,body{}
+header{
+	position: fixed !important;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 9;
+}
+slider{}
+wraper{}
+footer{}
+
+body.page-on-load header,
+body.page-on-load slider,
+body.page-on-load wraper,
+body.page-on-load footer{
+	/* opacity: 0; */
+	/* display: none; */
+}
+/* page-on-first */
+body.page-on-first slider{
+	padding-top: 0;
+	height: 48%;
+	overflow: hidden;
+	background-color: #333;
+	min-height: 256px;
+}
+body.page-on-first slider .search{
+	position: absolute;
+	bottom: 11.5%;
+	left: 20%;
+	right: 20%;
+}
+/* page-on-search */
+body.page-on-search wraper{
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	margin-top: 20px;
+}
+body.page-on-search slider{
+	height: auto;
+	min-height: 0;
+	background-color: transparent;
+}
+body.page-on-search slider .search{
+	position: absolute;
+	width: 35%;
+	right: 5.625%;
+	top: 89px;
+
+}
+body.page-on-search slider .banner,
+body.page-on-search slider .search .search-logo{
+	display: none;
+}
+body slider .topmenu{
+	position: fixed;
+	z-index: 11;
+	top: 0;
+	left: 256px;
+}

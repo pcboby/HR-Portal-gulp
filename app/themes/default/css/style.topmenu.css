@@ -1,0 +1,26 @@
+.topmenu{
+	margin: 0;
+	min-height: auto;
+}
+.topmenu ul{}
+.topmenu ul li{
+	height: 46px;
+	float: left;
+	color: #fff;
+	opacity: .7;
+}
+.topmenu ul li.active{
+	background-color: #d9534f !important;
+	padding: 0;
+	opacity: 1;
+}
+.topmenu ul li:hover{
+	opacity: 1;
+	background-color: rgba(255,255,255,.1);
+}
+.topmenu ul li a{
+	display: inline-block;
+	color: inherit;
+	padding: 10px 30px;
+	line-height: 26px;
+}
