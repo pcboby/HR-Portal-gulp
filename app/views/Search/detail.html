@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-md-3">
+    	<ng-page-label-bar/>
+    </div>
+    <div class="col-md-9">
+    	<form action="">
+	        <!--  -->
+	        <div class="form-horizontal">
+	        	<div class="form-horizontal-header" ng-page-label>
+	        		<i class="fa fa-bookmark"></i><span>基本信息</span>
+	        	</div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">姓名</label>
+			        <div class="input-group col-md-8">
+			            <span class="input-group-addon">
+			                <i class="glyphicon glyphicon-user"></i>
+			            </span>
+			            <input type="text" class="form-control"
+			                placeholder="员工姓名/工号"
+			                ng-model="forms.userCode">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">工号</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control" disabled 
+			                placeholder="员工工号"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">个人职级</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control"
+			                placeholder="职级名称/代码"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">任命岗位</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control"
+			                placeholder="岗位名称/代码"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">任命时间</label>
+			        <div class="input-group col-md-8">
+			        	<span class="input-group-addon">
+			                <i class="fa fa-calendar"></i>
+			            </span>
+			            <input type="text" class="form-control"
+			                placeholder="日期时间"
+			                data-placement="auto"
+			                data-autoclose="1"
+			                data-date-format="yyyy-MM-dd"
+			                data-container="body"
+			                ng-model="forms.date"
+			                bs-datepicker>
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">近5年绩效</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control"
+			                placeholder="近5年绩效(14-10)"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">一层组织</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control"
+			                placeholder="一层组织"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">入职日期</label>
+			        <div class="input-group col-md-8">
+			        	<span class="input-group-addon">
+			                <i class="fa fa-calendar"></i>
+			            </span>
+			            <input type="text" class="form-control"
+			                placeholder="日期"
+			                data-placement="auto"
+			                data-autoclose="1"
+			                data-date-format="yyyy-MM-dd"
+			                data-container="body"
+			                ng-model="forms.date"
+			                bs-datepicker>
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">性别</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control"
+			                placeholder="性别"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">年龄</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control"
+			                placeholder="性别"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">国籍</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control"
+			                placeholder="国籍"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	            <div class="form-group col-md-6">
+			        <label class="col-md-4 control-label">工作地</label>
+			        <div class="input-group col-md-8">
+			            <input type="text" class="form-control"
+			                placeholder="工作地"
+			                ng-model="forms.userName">
+			        </div>
+			    </div>
+	        </div>
+	        <!--  -->
+    	</form>
+    </div>
+</div>

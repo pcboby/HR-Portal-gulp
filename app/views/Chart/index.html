@@ -1,0 +1,523 @@
+<form class="form-horizontal form-horizontal-box">
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">关键字</label>
+        <div class="input-group col-md-9">
+            <input type="text" class="form-control" placeholder="请输入您要查询的关键字" ng-model="forms.user">
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">部门</label>
+        <ng-input-search class="col-md-9" placeholder="部门名称/代码" data-btn-icon-cls="fa fa-search" ng-model="forms.department" />
+        <!-- 
+            placeholder="部门名称/代码"
+            data-btn-icon-cls="fa fa-search"
+            data-btn-text="search"
+         -->
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">日期</label>
+        <div class="input-group col-md-9">
+            <input type="text" class="form-control" placeholder="开始日期" data-placement="auto" data-autoclose="1" data-date-format="yyyy-MM-dd" data-container="body" data-max-date="{{forms.dateEntryUntil}}" ng-model="dateEntryFrom" bs-datepicker>
+            <span class="input-group-addon">至</span>
+            <input type="text" class="form-control" placeholder="结束日期" data-placement="auto" data-autoclose="1" data-date-format="yyyy-MM-dd" data-container="body" data-min-date="{{forms.dateEntryFrom}}" ng-model="dateEntryUntil" placement="right" bs-datepicker>
+        </div>
+    </div>
+    <div class="col-md-12" style="text-align: center;">
+        <button type="submit" class="btn btn-success">搜索</button>
+        <button type="reset" class="btn btn-default">重置</button>
+    </div>
+</form>
+<div class="clearfix"></div>
+<div class="table-toolbar">
+    <div class="row">
+        <div class="col-md-6">
+            <ng-combo-select ng-model="dims" ng-data="dimensions" placeholder="请选择" data-selected-text="条记录" data-all-buttons="true" data-options="dim.id as dim.name for dim in $data" />
+            <!-- <div class="btn-group">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    维度 <i class="fa fa-bars"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-list">
+                    <li>
+                        <div>
+                            <input type="checkbox" ng-model="checkall" class="select-all">
+                            <span>全部</span>
+                        </div>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-menu-item"
+                        ng-repeat="dim in dimensions">
+                        <div>
+                            <input type="checkbox" ng-model="dim.checked">
+                            <span ng-bind="dim.name"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div> -->
+        </div>
+        <div class="col-md-6 ">
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button class="btn btn-success" ng-click="_refresh()">
+                        导出数据 <i class="glyphicon glyphicon-cloud-download"></i>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-info" ng-click="_refresh()">
+                        导出报告 <i class="glyphicon glyphicon-cloud-download"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>沟通方式（按人次统计）</span>
+                <div ng-init="tabs.activeTab_0='chart'" class="btn-group pull-right"
+                    ng-model="tabs.activeTab_0" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <!--  -->
+                <div class="col-sm-4">
+                    <ng-chart-flot data-width="135" height="135"
+                        ng-data="data_flot"
+                        data-options="{
+                            series: {
+                                pie: { 
+                                    innerRadius: 0.615,
+                                    show: true,
+                                    label: {
+                                        show: false
+                                    }
+                                }
+                            },
+                            legend:{
+                                show:false
+                            },
+                            grid: {
+                                hoverable: true,
+                                clickable: true
+                            }
+                        }"/>
+                </div>
+                <div class="col-sm-8 dashboard-stat2">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-green-sharp">31 / 175</h3>
+                            <small>次数/总次数（单位：次）</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon icon-bubbles"></i>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <ng-progress data-value-now="76" data-bar-style="progress-bar-success green-sharp"/>
+                        <div class="status">
+                            <div class="status-title">
+                                比例
+                            </div>
+                            <div class="status-number">
+                                76%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>沟通方式（按人数统计）</span>
+                <div ng-init="tabs.activeTab_1='chart'" class="btn-group pull-right" ng-model="tabs.activeTab_1" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <!--  -->
+                <div class="col-sm-4">
+                    <ng-chart-flot data-width="135" height="135"
+                        ng-data="data_flot"
+                        data-options="{
+                            series: {
+                                pie: { 
+                                    innerRadius: 0.615,
+                                    show: true,
+                                    label: {
+                                        show: false
+                                    }
+                                }
+                            },
+                            legend:{
+                                show:false
+                            },
+                            grid: {
+                                hoverable: true,
+                                clickable: true
+                            }
+                        }"/>
+                </div>
+                <div class="col-sm-8 dashboard-stat2">
+                    <div class="display">
+                        <div class="number">
+                            <h3 class="font-red-haze">75 / 11,371</h3>
+                            <small>人数/总人数（单位：人）</small>
+                        </div>
+                        <div class="icon">
+                            <i class="icon icon-people"></i>
+                        </div>
+                    </div>
+                    <div class="progress-info">
+                        <ng-progress data-value-now="85" data-bar-style="progress-bar-info red-haze"/>
+                        <div class="status">
+                            <div class="status-title">
+                                比例
+                            </div>
+                            <div class="status-number">
+                                85%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>职级</span>
+                <div ng-init="tabs.activeTab_0='chart'" class="btn-group pull-right" ng-model="tabs.activeTab" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ng-chart-flot data-width="100%" height="320"
+                    ng-data="data_flot1"
+                    data-options="{
+                        series: {
+                            lines: {
+                                show: true
+                            }
+                        },
+                        crosshair: {
+                            mode: 'x'
+                        },
+                        grid: {
+                            hoverable: true,
+                            autoHighlight: false
+                        }
+                    }"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>近3年商业领袖职能</span>
+                <div ng-init="tabs.activeTab_0='chart'" class="btn-group pull-right" ng-model="tabs.activeTab" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ng-chart-flot data-width="100%" height="320"
+                    ng-data="data_flot2"
+                    data-options="{
+                        series: {
+                            bars: {
+                                show: true,
+                                barWidth: 0.315,
+                                align: 'center'
+                            }
+                        },
+                        xaxis: {
+                            mode: 'categories',
+                            tickLength: 0
+                        }
+                    }"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>近3年海外回机关</span>
+                <div ng-init="tabs.activeTab_0='chart'" class="btn-group pull-right" ng-model="tabs.activeTab" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ng-chart-flot id="placeholder" data-width="100%" height="320"
+                    ng-data="data_flot3"
+                    data-options="{
+                        series: {
+                            lines: {
+                                show: true
+                            },
+                            points: {
+                                show: true
+                            }
+                        },
+                        legend: {
+                            noColumns: 2
+                        },
+                        xaxis: {
+                            tickDecimals: 0
+                        },
+                        yaxis: {
+                            min: 0
+                        },
+                        selection: {
+                            mode: 'x'
+                        }
+                    }"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>沟通发起</span>
+                <div ng-init="tabs.activeTab_0='chart'" class="btn-group pull-right" ng-model="tabs.activeTab" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ng-chart-flot data-width="100%" height="320"
+                    ng-data="data_flot2"
+                    data-options="{
+                        series: {
+                            bars: {
+                                show: true,
+                                barWidth: 0.315,
+                                align: 'center'
+                            }
+                        },
+                        xaxis: {
+                            mode: 'categories',
+                            tickLength: 0
+                        }
+                    }"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>部门</span>
+                <div ng-init="tabs.activeTab_0='chart'" class="btn-group pull-right" ng-model="tabs.activeTab" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ng-chart-flot data-width="100%" height="320"
+                    ng-data="data_flot2"
+                    data-options="{
+                        series: {
+                            bars: {
+                                show: true,
+                                barWidth: 0.315,
+                                align: 'center'
+                            }
+                        },
+                        xaxis: {
+                            mode: 'categories',
+                            tickLength: 0
+                        }
+                    }"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>年龄段</span>
+                <div ng-init="tabs.activeTab_0='chart'" class="btn-group pull-right" ng-model="tabs.activeTab" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ng-chart-flot data-width="100%" height="320"
+                    ng-data="data_flot2"
+                    data-options="{
+                        series: {
+                            bars: {
+                                show: true,
+                                barWidth: 0.315,
+                                align: 'center'
+                            }
+                        },
+                        xaxis: {
+                            mode: 'categories',
+                            tickLength: 0
+                        }
+                    }"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>是否管理者</span>
+                <div ng-init="tabs.activeTab_0='chart'" class="btn-group pull-right" ng-model="tabs.activeTab" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ng-chart-flot data-width="100%" height="320"
+                    ng-data="data_flot2"
+                    data-options="{
+                        series: {
+                            bars: {
+                                show: true,
+                                barWidth: 0.315,
+                                align: 'center'
+                            }
+                        },
+                        xaxis: {
+                            mode: 'categories',
+                            tickLength: 0
+                        }
+                    }"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>人才类型</span>
+                <div ng-init="tabs.activeTab_0='chart'" class="btn-group pull-right" ng-model="tabs.activeTab" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ng-chart-flot data-width="100%" height="320"
+                    ng-data="data_flot2"
+                    data-options="{
+                        series: {
+                            bars: {
+                                show: true,
+                                barWidth: 0.315,
+                                align: 'center'
+                            }
+                        },
+                        xaxis: {
+                            mode: 'categories',
+                            tickLength: 0
+                        }
+                    }"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>工作地</span>
+                <div ng-init="tabs.activeTab_0='chart'" class="btn-group pull-right" ng-model="tabs.activeTab" bs-radio-group>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="chart">
+                        <i class="fa fa-image"></i>
+                    </label>
+                    <label class="btn btn-default btn-sm">
+                        <input type="radio" class="btn btn-default" value="tabel">
+                        <i class="fa fa-th"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ng-chart-flot data-width="100%" height="320"
+                    ng-data="data_flot2"
+                    data-options="{
+                        series: {
+                            bars: {
+                                show: true,
+                                barWidth: 0.315,
+                                align: 'center'
+                            }
+                        },
+                        xaxis: {
+                            mode: 'categories',
+                            tickLength: 0
+                        }
+                    }"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>

@@ -1,0 +1,19 @@
+<div class="input-group">
+    <div class="input-group-addon" 
+    	ng-if="iconDisplay"
+    	><i class="{{iconClass}}"></i></div>
+    <input type="text" class="form-control input-typehead" 
+    	placeholder="{{placeholder}}"
+    	ng-model="ngModel" 
+    	bs-options="{{options}}"
+    	data-min-length="0" 
+    	data-html="1" 
+    	data-auto-select="true" 
+    	bs-typeahead>
+    <span class="input-group-btn"
+    	ng-if="btnDisplay">
+    	<button class="btn btn-default" type="button" 
+    		ng-bind-html="btnValue"
+    		ng-click="openModal()"></button>
+    </span>
+</div>

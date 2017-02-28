@@ -1,0 +1,168 @@
+<form class="form-horizontal form-horizontal-box">
+    <div class="form-group col-md-8">
+        <label class="col-md-2 control-label">工号／姓名</label>
+        <div class="input-group col-md-8">
+            <input type="text" class="form-control"
+                placeholder="请输入您要搜索的工号／姓名"
+                ng-model="forms.key">
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">用户状态</label>
+        <button type="button" class="btn btn-default"
+            ng-model="forms.state"
+            data-html="1"
+            data-toggle="true"
+            bs-options="state.value as state.label for state in states"
+            bs-select>
+            Action <span class="caret"></span>
+        </button>
+    </div>
+    <div class="col-md-12" style="text-align: center;">
+        <button type="submit" class="btn btn-success">搜索</button>
+        <button type="reset" class="btn btn-default">重置</button>
+    </div>
+</form>
+<div class="clearfix"></div>
+<div class="table-toolbar">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="btn-group">
+                <button class="btn btn-default" ng-click="_add()">
+                    新增 <i class="glyphicon glyphicon-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button class="btn btn-success" ng-click="_refresh()">
+                        导出数据 <i class="glyphicon glyphicon-cloud-download"></i>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-info" ng-click="_refresh()">
+                        导出报告 <i class="glyphicon glyphicon-cloud-download"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-lock-group">
+    <div class="north">
+        <!--  -->
+        <!--  -->
+    </div>
+    <div class="east">
+        <!--  -->
+        <!--  -->
+    </div>
+    <div class="center table-responsive">
+        <!--  -->
+        <table class="table table-striped table-hover"
+            ng-table="tableParams"
+            show-filter="false">
+            <tr ng-repeat="data in $data">
+                <td data-title="'序号'" style="text-align: center;">
+                    <span ng-bind="(params.page()-1)*params.count()+$index+1"></span>
+                </td>
+                <td data-title="'操作'">
+                    <button class="btn btn-default btn-sm"
+                        ng-click="_view(data.id)"
+                        data-trigger="hover"
+                        data-type="success"
+                        data-title="查看"
+                        bs-tooltip>
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                    </button>
+                    <button class="btn btn-sm"
+                        ng-class="{'btn-default':!switchs[$index],'btn-warning':switchs[$index]}"
+                        ng-click="switchs[$index]=!switchs[$index]"
+                        data-trigger="hover"
+                        data-type="success"
+                        data-title="切换为{{!switchs[$index]?'失效':'有效'}}"
+                        bs-tooltip>
+                        <span class="fa" ng-class="{'fa-play':!switchs[$index],'fa-pause':switchs[$index]}"></span>
+                    </button>
+                </td>
+                <td data-title="'用户名'" style="text-align: center;"
+                    filter="{ label_1: 'text'}"
+                    sortable="'label_1'">
+                    <span ng-bind="data.label_1"></span>
+                </td>
+                <td data-title="'用户状态'" style="text-align: center;"
+                    filter="{ label_2: 'text'}"
+                    sortable="'label_2'">
+                    <i class="fa" ng-class="{'fa-check-circle text-success':!switchs[$index],'fa-minus-circle text-danger':switchs[$index]}"></i>
+                    <span ng-bind="switchs[$index]?'失效':'有效'"></span>
+                    <!-- <span ng-bind="data.label_2"></span> -->
+                </td>
+                <td data-title="'创建人'" style="text-align: center;"
+                    filter="{ label_5: 'text'}"
+                    sortable="'label_5'">
+                    <span ng-bind="data.label_5"></span>
+                </td>
+                <td data-title="'创建日期'" style="text-align: center;"
+                    filter="{ label_3: 'text'}"
+                    sortable="'label_3'">
+                    <span ng-bind="data.label_3"></span>
+                </td>
+                <td data-title="'更新人'" style="text-align: center;"
+                    filter="{ label_1: 'text'}"
+                    sortable="'label_1'">
+                    <span ng-bind="data.label_1"></span>
+                </td>
+                <td data-title="'更新日期'" style="text-align: center;"
+                    filter="{ label_3: 'text'}"
+                    sortable="'label_3'">
+                    <span ng-bind="data.label_3"></span>
+                </td>
+            </tr>
+        </table>
+        <!--  -->
+    </div>
+    <div class="south">
+        <!--  -->
+        <table class="table table-striped table-hover"
+            ng-table="tableParams"
+            show-filter="false">
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+        <!--  -->
+    </div>
+    <div class="west">
+        <!--  -->
+        <table class="table table-striped table-hover"
+            ng-table="tableParams"
+            show-filter="false">
+            <tr ng-repeat="data in $data">
+                <td data-title="'序号'" style="text-align: center;">
+                    <span ng-bind="(params.page()-1)*params.count()+$index+1"></span>
+                </td>
+                <td data-title="'操作'">
+                    <button class="btn btn-default btn-sm"
+                        ng-click="_view(data.id)"
+                        data-trigger="hover"
+                        data-type="success"
+                        data-title="查看"
+                        bs-tooltip>
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                    </button>
+                    <button class="btn btn-sm"
+                        ng-class="{'btn-default':!switchs[$index],'btn-warning':switchs[$index]}"
+                        ng-click="switchs[$index]=!switchs[$index]"
+                        data-trigger="hover"
+                        data-type="success"
+                        data-title="切换为{{!switchs[$index]?'失效':'有效'}}"
+                        bs-tooltip>
+                        <span class="fa" ng-class="{'fa-play':!switchs[$index],'fa-pause':switchs[$index]}"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <!--  -->
+    </div>
+</div>

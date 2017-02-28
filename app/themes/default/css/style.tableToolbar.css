@@ -1,0 +1,10 @@
+.table-toolbar {
+  margin-bottom: 10px;
+}
+.table-toolbar:before, .table-toolbar:after {
+  content: " ";
+  display: table;
+}
+.table-toolbar:after {
+  clear: both;
+}

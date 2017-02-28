@@ -1,0 +1,139 @@
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue-madison">
+            <div class="visual">
+                <i class="fa fa-comments"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    {{statistics.record}}
+                </div>
+                <div class="desc">
+                    Total Record
+                </div>
+            </div>
+            <a class="more" href="#/web/Record.html">
+			View more <i class="glyphicon glyphicon-chevron-right"></i>
+			</a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat green-haze">
+            <div class="visual">
+                <i class="fa fa-crosshairs"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    {{statistics.track}}
+                </div>
+                <div class="desc">
+                    Total Track
+                </div>
+            </div>
+            <a class="more" href="#/web/Track.html">
+			View more <i class="glyphicon glyphicon-chevron-right"></i>
+			</a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat purple-plum">
+            <div class="visual">
+                <i class="fa fa-database"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    {{statistics.database}}
+                </div>
+                <div class="desc">
+                    Total Database
+                </div>
+            </div>
+            <a class="more" href="#/web/Database.html">
+			View more <i class="glyphicon glyphicon-chevron-right"></i>
+			</a>
+        </div>
+    </div>
+</div>
+<div class="table-lock-group">
+    <div class="north">
+        <!--  -->
+        <!--  -->
+    </div>
+    <div class="east">
+        <!--  -->
+        <!--  -->
+    </div>
+    <div class="center table-responsive">
+        <!--  -->
+        <table class="table table-striped table-hover"
+            ng-table="tableParams"
+            show-filter="false">
+            <tr ng-repeat="data in $data">
+                <td data-title="'序号'" style="text-align: center;width: 44px;">
+                    <span ng-bind="(params.page()-1)*params.count()+$index+1"></span>
+                </td>
+                <td data-title="'操作'" style="width: 50px;">
+                    <button class="btn btn-default btn-sm"
+                        ng-click="_view(data.id)"
+                        data-trigger="hover"
+                        data-type="success"
+                        data-title="查看"
+                        bs-tooltip>
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                    </button>
+                </td>
+                <td data-title="'来源'" style="text-align: center;" 
+                    filter="{ label_1: 'text'}"
+                    sortable="'label_1'">
+                    <span ng-bind="data.label_1"></span>
+                </td>
+                <td data-title="'工号'" style="text-align: center;" 
+                    filter="{ label_2: 'text'}"
+                    sortable="'label_2'">
+                    <span ng-bind="data.label_2"></span>
+                </td>
+                <td data-title="'姓名'" style="text-align: center;" 
+                    filter="{ label_3: 'text'}"
+                    sortable="'label_3'">
+                    <span ng-bind="data.label_3"></span>
+                </td>
+            </tr>
+        </table>
+        <!--  -->
+    </div>
+    <div class="south">
+        <!--  -->
+        <table class="table table-striped table-hover"
+            ng-table="tableParams"
+            show-filter="false">
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+        <!--  -->
+    </div>
+    <div class="west">
+        <!--  -->
+        <table class="table table-striped table-hover"
+            ng-table="tableParams"
+            show-filter="false">
+            <tr ng-repeat="data in $data">
+                <td data-title="'序号'" style="text-align: center;width: 44px;">
+                    <span ng-bind="(params.page()-1)*params.count()+$index+1"></span>
+                </td>
+                <td data-title="'操作'" style="width: 50px;">
+                    <button class="btn btn-default btn-sm"
+                        ng-click="_view(data.id)"
+                        data-trigger="hover"
+                        data-type="success"
+                        data-title="查看"
+                        bs-tooltip>
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <!--  -->
+    </div>
+</div>
+

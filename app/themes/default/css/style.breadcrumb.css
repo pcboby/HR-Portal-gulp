@@ -1,0 +1,30 @@
+.breadcrumb{
+	margin: 0 0 20px !important;
+	padding: 2px 10px;
+	line-height: 36px;
+}
+.breadcrumb>ul{
+	display: inline-block;
+}
+.breadcrumb>ul>li{
+	display: inline-block;
+}
+.breadcrumb>ul>li+li::before{
+	content: "\f105";
+	font-family: FontAwesome;
+	margin: 0 .615em;
+	color: #999;
+}
+.breadcrumb>ul>li a,.breadcrumb>ul>li a:hover{
+	text-decoration: none;
+	cursor: default;
+}
+.breadcrumb>ul>li a i{
+	margin: 0 .5em;
+}
+.breadcrumb>ul>li:last-child a[href]{
+	cursor: pointer;
+}
+.breadcrumb>ul>li:last-child a{
+	color: #999;
+}
