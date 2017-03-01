@@ -8,7 +8,8 @@ spinner{
 }
 spinner i{
 	display: inline-block;
-	background-color: #eee;
+  background-image: url(../images/logo.png);
+  background-size: cover;
 	-webkit-animation-fill-mode: both;
 		animation-fill-mode: both;
 	width: 50px;
