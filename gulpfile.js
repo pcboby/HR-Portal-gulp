@@ -150,29 +150,34 @@ gulp.task('clean:dist', function (cb) {
   rimraf('./dist', cb);
 });
 
-gulp.task('client:build', ['html', 'themes'], function () {
+gulp.task('client:build', ['themes'], function () {
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
 
-  return gulp.src(paths.views.main)
-    .pipe($.useref({searchPath: [yeoman.app, '.tmp']}))
+  return gulp.src(yeoman.app+'/**/**/*.html')
+    //join path
+    .pipe($.useref({searchPath: ['.tmp']}))
+    //filter js
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.uglify())
     .pipe(jsFilter.restore())
+    //filter css
     .pipe(cssFilter)
     .pipe($.minifyCss({cache: true}))
     .pipe(cssFilter.restore())
+    //add rev
     .pipe($.rev())
     .pipe($.revReplace())
+    //pipe to
     .pipe(gulp.dest(yeoman.dist));
 });
 
-gulp.task('html', function () {
-  return gulp.src(yeoman.app + '/views/**/*')
-    //.pipe($.rev())
-    .pipe(gulp.dest(yeoman.dist + '/views'));
-});
+// gulp.task('html', function () {
+//   return gulp.src(yeoman.app + '/views/**/*')
+//     // .pipe($.rev())
+//     .pipe(gulp.dest(yeoman.dist + '/views'));
+// });
 
 gulp.task('copy:extras', function () {
   return gulp.src(yeoman.app + '/*/.*', { dot: true })
@@ -197,10 +202,10 @@ gulp.task('copy:images', function () {
     .pipe(gulp.dest(yeoman.dist + '/themes/default/images'));
 });
 
-gulp.task('copy:tpls', function () {
-  return gulp.src(yeoman.app + '/tpls/**/*')
-    .pipe(gulp.dest(yeoman.dist + '/tpls'));
-});
+// gulp.task('copy:tpls', function () {
+//   return gulp.src(yeoman.app + '/tpls/**/*')
+//     .pipe(gulp.dest(yeoman.dist + '/tpls'));
+// });
 
 gulp.task('copy:upload', function () {
   return gulp.src(yeoman.app + '/upload/**/*')
@@ -229,7 +234,7 @@ gulp.task('copy:scripts', function () {
 });
 
 gulp.task('build', ['clean:dist'], function () {
-  runSequence(['copy:extras', 'copy:scripts','copy:images', 'copy:fonts', 'copy:api', 'copy:tpls', 'copy:upload', 'client:build']);
+  runSequence(['copy:extras', 'copy:scripts','copy:images', 'copy:fonts', 'copy:api', 'copy:upload', 'client:build']);
 });
 
 gulp.task('default', ['build']);
