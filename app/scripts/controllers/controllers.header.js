@@ -1,7 +1,7 @@
 ;(function(){
 	'use strict';
 	app
-	.controller('headerController', function ($scope) {
-		$scope.msgTotal=14;
-	})
+	.controller('headerController', ['$scope',function ($scope) {
+			$scope.msgTotal=14;
+		}])
 })()

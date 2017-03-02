@@ -5,7 +5,7 @@ angular.module('app.filters', [])
     //            return $sce.trustAsHtml(input.replace(/\n/g, '<br/>'));
     //        };
     //    })
-    .filter('sex', function($sce) {
+    .filter('sex', ['$sce', function($sce) {
         return function(val) {
             var styles = [{ //女
                 text: '女',
@@ -18,8 +18,8 @@ angular.module('app.filters', [])
             }]
             return $sce.trustAsHtml('<i class="' + styles[val].cls + '" style="color:' + styles[val].color + ';">' + styles[val].text + '</i>')
         };
-    })
-    .filter('state', function($sce) {
+    }])
+    .filter('state', ['$sce', function($sce) {
         return function(val) {
             // console.log(val)
             var styles = [{ //（危险）Danger
@@ -40,4 +40,4 @@ angular.module('app.filters', [])
             }]
             return $sce.trustAsHtml('<i class="glyphicon ' + styles[val].cls + '" style="color:' + styles[val].color + ';"></i>')
         };
-    });
+    }]);

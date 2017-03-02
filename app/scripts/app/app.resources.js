@@ -1,20 +1,20 @@
 'use strict';
 angular.module('app.resources', [])
-    .factory('SimpleList', function($resource) {
+    .factory('SimpleList', ['$resource', function($resource) {
         return $resource($path_api + '/SimpleList.json', null, {
             query: {
                 method: 'GET'
             }
         });
-    })
-    .factory('SimpleData', function($resource) {
+    }])
+    .factory('SimpleData', ['$resource', function($resource) {
         return $resource($path_api + '/SimpleData.json', null, {
             query: {
                 method: 'GET'
             }
         });
-    })
-    .factory('RecordList', function($resource) {
+    }])
+    .factory('RecordList', ['$resource', function($resource) {
         return $resource($path_api + '/Data_record.json', null, {
             query: {
                 method: 'GET'
@@ -27,8 +27,8 @@ angular.module('app.resources', [])
                 method: 'GET'
             }
         });
-    })
-    .factory('DataSearch', function($resource) {
+    }])
+    .factory('DataSearch', ['$resource', function($resource) {
         return $resource($path_api + '/Data_search.json', null, {
             query: {
                 method: 'GET'
@@ -47,4 +47,4 @@ angular.module('app.resources', [])
                 method: 'DELETE'
             }
         });
-    });
+    }]);
