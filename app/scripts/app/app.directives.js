@@ -134,7 +134,7 @@ angular.module('app.directives', [])
                         height: $scope.height
                     });
 
-                    $.plot($element, $scope.$data, $scope.opts);
+                    $.plot($element, $scope.$data, $scope.opts).resize();
                 }
             },
             link: function(scope, iElement, iAttrs) {
