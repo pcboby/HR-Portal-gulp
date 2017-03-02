@@ -114,7 +114,7 @@
     <div class="east">
         <!--  -->
         <table class="table table-striped table-hover"
-            ng-table="tableParams"
+            ng-table="tableParamsLock"
             show-filter="false">
             <tr ng-repeat="data in $data">
                 <td data-title="'工作状态'" style="text-align: center;" 
@@ -129,14 +129,14 @@
     <div class="center table-responsive">
         <!--  -->
         <table class="table table-striped table-hover"
-            ng-table="tableParams"
+            ng-table="tableParamsLock"
             show-filter="false">
             <tr ng-repeat="data in $data">
                 <td header="'headerCheckbox.html'">
                     <span><input type="checkbox" ng-model="checkboxes.items[data.id]" /></span>
                 </td>
                 <td data-title="'序号'" style="text-align: center;">
-                    <span ng-bind="(params.page()-1)*params.count()+$index+1"></span>
+                    <span ng-bind="(tableParams.page()-1)*tableParams.count()+$index+1"></span>
                 </td>
                 <td data-title="'操作'">
                     <button class="btn btn-default btn-sm"
@@ -239,14 +239,14 @@
     <div class="west">
         <!--  -->
         <table class="table table-striped table-hover"
-            ng-table="tableParams"
+            ng-table="tableParamsLock"
             show-filter="false">
             <tr ng-repeat="data in $data">
                 <td header="'headerCheckbox.html'">
                     <span><input type="checkbox" ng-model="checkboxes.items[data.id]" /></span>
                 </td>
                 <td data-title="'序号'" style="text-align: center;">
-                    <span ng-bind="(params.page()-1)*params.count()+$index+1"></span>
+                    <span ng-bind="(tableParams.page()-1)*tableParams.count()+$index+1"></span>
                 </td>
                 <td data-title="'操作'">
                     <button class="btn btn-default btn-sm"
