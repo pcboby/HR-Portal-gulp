@@ -14,6 +14,6 @@ var app = angular.module('app', [
         'app.resources',
         'app.filters'
     ])
-    .run(function($rootScope, settings, $state) {
+    .run(['$rootScope', 'settings', '$state', function($rootScope, settings, $state) {
         $rootScope.$state = $state;
-    });
+    }]);
