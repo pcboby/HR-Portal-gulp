@@ -1288,18 +1288,32 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
     </p>
 </div>
 <div class="clearfix"></div>
-    <ng-combo-search 
-        placeholder="请选择部门"
-        icon-class="glyphicon glyphicon-user"
-        icon-display="true"
-        btn-display="true"
-        btn-value="<i class='fa fa-search'></i>"
-        ng-data="dataSearch"
-        ng-model="searchModel"
-        data-options="data.code as data.name for data in $data"
-        modal-title="请选择部门"
-        modal-backdrop="static"
-        modal-template-url="tpls/input.combosearch.modaltpl.html">
+<div>
+    <ng-combo-search placeholder="请选择部门" icon-class="glyphicon glyphicon-user" icon-display="true" btn-display="true" btn-value="<i class='fa fa-search'></i>" ng-data="dataSearch" ng-model="searchModel" data-options="data.code as data.name for data in $data" modal-title="请选择部门" modal-backdrop="static" modal-template-url="tpls/input.combosearch.modaltpl.html">
     </ng-combo-search>
     <br>
     <p>{{searchModel}}</p>
+</div>
+<!--  -->
+<div class="note note-success">
+    <p>
+        ng-combo-search
+    </p>
+</div>
+<div>
+    <button class="btn btn-default" ng-click="alert()">alert</button>
+    <button class="btn btn-default" ng-click="alert1()">alert1</button>
+    <button class="btn btn-default" ng-click="confirm()">confirm</button>
+    <button class="btn btn-default" ng-click="confirm1()">confirm1</button>
+    <button class="btn btn-default" ng-click="prompt()">prompt</button>
+    <button class="btn btn-default" ng-click="promptNumber()">promptNumber</button>
+    <button class="btn btn-default" ng-click="promptPassword()">promptPassword</button>
+    <button class="btn btn-default" ng-click="promptSelect()">promptSelect</button>
+    <button class="btn btn-default" ng-click="promptCheckbox()">promptCheckbox</button>
+    <button class="btn btn-default" ng-click="promptTextarea()">promptTextarea</button>
+    <button class="btn btn-default" ng-click="dialog()">dialog</button>
+    <button type="button" class="btn btn-lg btn-primary" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal">Click to toggle modal
+        <br>
+        <small>(using an object)</small>
+    </button>
+</div>

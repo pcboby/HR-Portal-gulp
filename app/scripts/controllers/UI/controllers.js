@@ -1,8 +1,9 @@
-;(function() {
+;
+(function() {
     'use strict';
     app
-        .controller('UI', function($scope, $element, $state, $stateParams, NgTableParams, RecordList, DataSearch) {
-            
+        .controller('UI', function($scope, $Until, $element, $state, $stateParams, NgTableParams, RecordList, DataSearch) {
+
             $scope.dimensions = [{
                 id: 0,
                 name: '沟通方式'
@@ -37,11 +38,132 @@
             }]
 
 
-            DataSearch.query(function(res){
+            DataSearch.query(function(res) {
                 $scope.dataSearch = res.rows;
                 console.log(res)
             })
 
-    })
-        
+            $scope.alert = function() {
+                $Until.alert('这里是信息', function() {
+                    console.log('这里是返回')
+                })
+            }
+            $scope.alert1 = function() {
+                $Until.alert({
+                    title: '这里是标题',
+                    message: '这里是信息',
+                    callback: function() {
+                        console.log('这里是返回')
+                    }
+                })
+            }
+
+            $scope.confirm = function() {
+                $Until.confirm('这里是信息', function(res) {
+                    console.log('这里是返回:' + res)
+                })
+            }
+
+            $scope.confirm1 = function() {
+                $Until.confirm({
+                    title: '这里是标题',
+                    message: '这里是信息',
+                    callback: function(res) {
+                        console.log('这里是返回:' + res)
+                    }
+                })
+            }
+
+            $scope.prompt = function() {
+                $Until.prompt('这里是信息', function(res) {
+                    console.log('这里是返回:' + res)
+                })
+            }
+            $scope.promptNumber = function() {
+                $Until.prompt({
+                    title: '这里是标题',
+                    message: '这里是信息',
+                    inputType: 'number',
+                    callback: function(res) {
+                        console.log('这里是返回:' + res)
+                    }
+                })
+            }
+            $scope.promptTextarea = function() {
+                $Until.prompt({
+                    title: '这里是标题',
+                    message: '这里是信息',
+                    inputType: 'textarea',
+                    callback: function(res) {
+                        console.log('这里是返回:' + res)
+                    }
+                })
+            }
+            $scope.promptPassword = function() {
+                $Until.prompt({
+                    title: '这里是标题',
+                    message: '这里是信息',
+                    inputType: 'password',
+                    callback: function(res) {
+                        console.log('这里是返回:' + res)
+                    }
+                })
+            }
+            $scope.promptSelect = function() {
+                $Until.prompt({
+                    title: '这里是标题',
+                    message: '这里是信息',
+                    inputType: 'select',
+                    inputOptions: [{
+                        text: 'Choose one...',
+                        value: '',
+                    }, {
+                        text: 'Choice One',
+                        value: '1',
+                    }, {
+                        text: 'Choice Two',
+                        value: '2',
+                    }, {
+                        text: 'Choice Three',
+                        value: '3',
+                    }],
+                    callback: function(res) {
+                        console.log('这里是返回:' + res)
+                    }
+                })
+            }
+            $scope.promptCheckbox = function() {
+                $Until.prompt({
+                    title: '这里是标题',
+                    message: '这里是信息',
+                    inputType: 'checkbox',
+                    inputOptions: [{
+                        text: 'Choose one...',
+                        value: '0',
+                    }, {
+                        text: 'Choice One',
+                        value: '1',
+                    }, {
+                        text: 'Choice Two',
+                        value: '2',
+                    }, {
+                        text: 'Choice Three',
+                        value: '3',
+                    }],
+                    callback: function(res) {
+                        console.log('这里是返回:' + res)
+                    }
+                })
+            }
+
+            $scope.modal = {
+                "title": "Title",
+                "content": "Hello Modal<br />This is a multiline message!"
+            };
+            $scope.dialog = function() {
+                return $Until.dialog('这里是标题', '这里是信息<br>这里是信息')
+            }
+
+        })
+
 })()

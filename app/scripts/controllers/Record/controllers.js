@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     app
-        .controller('Record', function($scope, $element, $state, $stateParams, $tableParams, $tableParamsLock, RecordList) {
+        .controller('Record', function($scope, $element,$Until, $state, $stateParams, $tableParams, $tableParamsLock, RecordList) {
 
 
             $scope.forms = {
@@ -87,16 +87,16 @@
             function _del(id) {
                 console.log('_del', id || getIdsByChecked());
                 var ids = id || getIdsByChecked();
-                bootbox.confirm('您确定要删除［' + ids + '］吗？', function(evt) {
+                $Until.confirm('您确定要删除［' + ids + '］吗？', function(evt) {
                     if (evt) {
                         RecordList.remove({
                             ids: ids
                         }, function(res) {
                             if (res.status == 1) {
-                                bootbox.alert('删除成功！')
+                                $Until.alert('删除成功！')
                                 _refresh();
                             } else {
-                                bootbox.alert(res.msg);
+                                $Until.alert(res.msg);
                             }
                         })
                     }

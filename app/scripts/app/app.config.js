@@ -15,14 +15,14 @@ angular.module('app.config', [])
     .config(['$controllerProvider', function($controllerProvider) {
         $controllerProvider.allowGlobals();
     }])
-    .config([
-        '$modalProvider', '$tooltipProvider', '$popoverProvider', '$typeaheadProvider', '$datepickerProvider', '$timepickerProvider', '$dropdownProvider', '$selectProvider',
-        function($modalProvider, $tooltipProvider, $popoverProvider, $typeaheadProvider, $datepickerProvider, $timepickerProvider, $dropdownProvider, $selectProvider) {
+    .config(function($modalProvider, $tooltipProvider, $popoverProvider, $typeaheadProvider, $datepickerProvider, $timepickerProvider, $dropdownProvider, $selectProvider) {
             var defaultOptions = {
                 // animation: 'am-flip-x',
                 container: 'body',
             }
-            angular.extend($modalProvider.defaults, defaultOptions, {});
+            angular.extend($modalProvider.defaults, defaultOptions, {
+                animation: 'am-fade-and-scale'
+            });
             angular.extend($tooltipProvider.defaults, defaultOptions, {
                 trigger: 'hover'
             });
@@ -49,4 +49,4 @@ angular.module('app.config', [])
             });
 
         }
-    ]);
+    );
