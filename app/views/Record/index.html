@@ -61,7 +61,7 @@
                 <button class="btn btn-default" ng-click="_add()">
                     新增 <i class="glyphicon glyphicon-plus"></i>
                 </button>
-                <button class="btn btn-default" ng-click="_del()" ng-disabled="!checked">
+                <button class="btn btn-default" ng-click="_del()" ng-disabled="!tableParams.hasChecked">
                     删除 <i class="glyphicon glyphicon-minus"></i>
                 </button>
             </div>
@@ -133,7 +133,7 @@
             show-filter="false">
             <tr ng-repeat="data in $data">
                 <td header="'headerCheckbox.html'">
-                    <span><input type="checkbox" ng-model="checkboxes.items[data.id]" /></span>
+                    <span><input type="checkbox" ng-model="tableParams.checkboxes.items[data.id]" /></span>
                 </td>
                 <td data-title="'序号'" style="text-align: center;">
                     <span ng-bind="(tableParams.page()-1)*tableParams.count()+$index+1"></span>
@@ -243,7 +243,7 @@
             show-filter="false">
             <tr ng-repeat="data in $data">
                 <td header="'headerCheckbox.html'">
-                    <span><input type="checkbox" ng-model="checkboxes.items[data.id]" /></span>
+                    <span><input type="checkbox" ng-model="tableParams.checkboxes.items[data.id]" /></span>
                 </td>
                 <td data-title="'序号'" style="text-align: center;">
                     <span ng-bind="(tableParams.page()-1)*tableParams.count()+$index+1"></span>
@@ -272,5 +272,5 @@
     </div>
 </div>
 <script type="text/ng-template" id="headerCheckbox.html">
-    <input type="checkbox" ng-model="checkboxes.checked" class="select-all" value="" />
+    <input type="checkbox" ng-model="tableParams.checkboxes.allchecked" class="select-all" value="" />
 </script>

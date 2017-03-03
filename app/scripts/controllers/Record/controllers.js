@@ -27,37 +27,37 @@
             $scope._import = _import;
             $scope._export = _export;
 
-            $scope.checkboxes = {
-                checked: false,
-                items: {}
-            };
+            // $scope.checkboxes = {
+            //     checked: false,
+            //     items: {}
+            // };
 
-            $scope.$watch(function() {
-                console.log($scope.checkboxes)
-                return $scope.checkboxes.checked;
-            }, function(value) {
-                angular.forEach($scope.data, function(item) {
-                    $scope.checkboxes.items[item.id] = value;
-                });
-            });
+            // $scope.$watch(function() {
+            //     console.log($scope.checkboxes)
+            //     return $scope.checkboxes.checked;
+            // }, function(value) {
+            //     angular.forEach($scope.data, function(item) {
+            //         $scope.checkboxes.items[item.id] = value;
+            //     });
+            // });
 
-            $scope.$watch(function() {
-                return $scope.checkboxes.items;
-            }, function(values) {
-                console.log('items', $scope.checkboxes.items);
-                $scope.checked = 0;
-                $scope.unchecked = 0;
-                // $scope.total = $scope.data.length;
-                angular.forEach($scope.data, function(item) {
-                    $scope.checked += ($scope.checkboxes.items[item.id]) || 0;
-                    $scope.unchecked += (!$scope.checkboxes.items[item.id]) || 0;
-                });
-                if (($scope.unchecked == 0) || ($scope.checked == 0)) {
-                    $scope.checkboxes.checked = ($scope.checked == $scope.total && $scope.checked != 0);
-                }
-                // grayed checkbox
-                angular.element($element[0].getElementsByClassName("select-all")).prop("indeterminate", ($scope.checked != 0 && $scope.unchecked != 0));
-            }, true);
+            // $scope.$watch(function() {
+            //     return $scope.checkboxes.items;
+            // }, function(values) {
+            //     console.log('items', $scope.checkboxes.items);
+            //     $scope.checked = 0;
+            //     $scope.unchecked = 0;
+            //     // $scope.total = $scope.data.length;
+            //     angular.forEach($scope.data, function(item) {
+            //         $scope.checked += ($scope.checkboxes.items[item.id]) || 0;
+            //         $scope.unchecked += (!$scope.checkboxes.items[item.id]) || 0;
+            //     });
+            //     if (($scope.unchecked == 0) || ($scope.checked == 0)) {
+            //         $scope.checkboxes.checked = ($scope.checked == $scope.total && $scope.checked != 0);
+            //     }
+            //     // grayed checkbox
+            //     angular.element($element[0].getElementsByClassName("select-all")).prop("indeterminate", ($scope.checked != 0 && $scope.unchecked != 0));
+            // }, true);
 
             // $scope.tableParams = new NgTableParams({
             //     count: 5
