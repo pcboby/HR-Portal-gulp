@@ -2,9 +2,10 @@
 (function() {
     'use strict';
     app
-        .controller('Search', function($scope, $element, $state, $stateParams, NgTableParams, SimpleList) {
+        .controller('Search', function($scope, $element, $state, $stateParams, $tableParams, $tableParamsLock, SimpleList) {
 
             // console.log('Search $stateParams',$stateParams)
+
             $scope.data = [];
             $scope.statistics = {
                 record: 0,
@@ -15,19 +16,32 @@
 
             $scope._view = _view;
 
-            $scope.tableParams = new NgTableParams({
-                count: 5
-            }, {
-                counts: [5, 10, 20],
-                // dataset: $scope.data
+
+            $scope.tableParams = $tableParams.creat($scope, {
                 getData: function(params) {
-                    return SimpleList.get(params.url()).$promise.then(function(res) {
-                        params.total(res.total); // recal. page nav controls
+                    // console.log('params.url()',params.url())
+                    return SimpleList.get(angular.extend(params.url(), {
+                        filter: $stateParams
+                    })).$promise.then(function(res) {
+
+                        console.log(res);
                         $scope.data = res.rows
-                        return $scope.data;
+
+                        $scope.statistics = res.statistics;
+                        params.total(res.total);
+
+                        $tableParamsLock.settings($scope, {
+                            dataset: res.rows,
+                            page: params.page(),
+                            counts: params.count()
+                        })
+
+                        return res.rows;
                     });
                 }
-            });
+            })
+
+            $tableParamsLock.init($scope, $scope.tableParams);
 
 
             function _view(id) {
