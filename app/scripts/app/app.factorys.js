@@ -30,7 +30,7 @@ angular.module('app.factorys', [])
                     // console.log('nt.checkboxes',nt.checkboxes)
                     return nt.checkboxes.allchecked;
                 }, function(value) {
-                    console.log(nt.data)
+                    // console.log(nt.data)
                     angular.forEach(nt.data, function(item) {
                         nt.checkboxes.items[item.id] = value;
                     });
@@ -48,7 +48,7 @@ angular.module('app.factorys', [])
                         unchecked += (!nt.checkboxes.items[item.id]) || 0;
                     });
 
-                    console.log('nt.checkboxes.items', nt.checkboxes.items);
+                    // console.log('nt.checkboxes.items', nt.checkboxes.items);
 
                     nt.hasChecked = checked > 0;
 
