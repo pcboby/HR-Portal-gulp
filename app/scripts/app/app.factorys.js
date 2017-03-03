@@ -21,10 +21,19 @@ angular.module('app.factorys', [])
                     dataset: null
                 }, options, true))
 
-                nt.checkboxes = {
-                    allchecked: false,
-                    items: {}
-                };
+                // nt.checkboxes = {
+                //     allchecked: false,
+                //     items: {}
+                // };
+
+                scope.$watch(function(){
+                    return nt.data
+                },function(d){
+                    nt.checkboxes={
+                        allchecked: false,
+                        items: {}
+                    }
+                },true)
 
                 scope.$watch(function() {
                     // console.log('nt.checkboxes',nt.checkboxes)
