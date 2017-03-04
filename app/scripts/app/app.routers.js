@@ -1,7 +1,23 @@
 'use strict';
-angular.module('app.routers', [
-    ])
+angular.module('app.routers', [])
     .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+
+
+        // function resovleDep(param, tpl, module) {
+        //     var resolves = {
+        //         loadMyCtrl: [‘$ocLazyLoad‘, ‘$templateCache‘, ‘$q‘, function($ocLazyLoad, $templateCache, $q) {
+        //             lazyDeferred = $q.defer();
+        //             return $ocLazyLoad.load({
+        //                 name: module,
+        //                 cache: false,
+        //                 files: param.files
+        //             }).then(function() {
+        //                 lazyDeferred.resolve($templateCache.get(tpl));
+        //             });
+        //         }]
+        //     };
+        //     return resolves;
+        // };
 
 
         // 默认跳转

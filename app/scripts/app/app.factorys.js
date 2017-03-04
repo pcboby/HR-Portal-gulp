@@ -11,72 +11,72 @@ angular.module('app.factorys', [])
 
         return settings;
     }])
-    .factory('$Until', ['$rootScope','$modal', function($rootScope,$modal) {
-        var modal_defaults={
-            show:true
+    .factory('$Until', ['$rootScope', '$modal', function($rootScope, $modal) {
+        var modal_defaults = {
+            show: true
         }
-        var bootbox_defaults={
-            alert:{
-                title:'提示:',
-                message:'点击［确认］后关闭',
-                buttons:{
-                    ok:{
-                        label:'确认',
+        var bootbox_defaults = {
+            alert: {
+                title: '提示:',
+                message: '点击［确认］后关闭',
+                buttons: {
+                    ok: {
+                        label: '确认',
                     }
                 },
-                callback:function(){}
+                callback: function() {}
             },
-            confirm:{
-                title:'选择:',
-                message:'请选择［确认］或［取消］',
-                buttons:{
-                    confirm:{
-                        label:'确认'
+            confirm: {
+                title: '选择:',
+                message: '请选择［确认］或［取消］',
+                buttons: {
+                    confirm: {
+                        label: '确认'
                     },
-                    cancel:{
-                        label:'取消'
+                    cancel: {
+                        label: '取消'
                     }
                 },
-                callback:function(res){}
+                callback: function(res) {}
             },
-            prompt:{
-                title:'请输入:',
-                inputType:'text',
-                buttons:{
-                    confirm:{
-                        label:'确认'
+            prompt: {
+                title: '请输入:',
+                inputType: 'text',
+                buttons: {
+                    confirm: {
+                        label: '确认'
                     },
-                    cancel:{
-                        label:'取消'
+                    cancel: {
+                        label: '取消'
                     }
                 },
-                callback:function(res){}
+                callback: function(res) {}
             }
         }
 
-        function useBootbox(name,params){
+        function useBootbox(name, params) {
             // console.log(name);
-            if(angular.isObject(params[0])){
-                bootbox[name](angular.extend({},bootbox_defaults[name],params[0],true));
-            }else{
-                bootbox[name](angular.extend({},bootbox_defaults[name],name=='prompt'?{
-                    title:params[0],
-                    callback:params[1]
-                }:{
-                    message:params[0],
-                    callback:params[1]
+            if (angular.isObject(params[0])) {
+                bootbox[name](angular.extend({}, bootbox_defaults[name], params[0], true));
+            } else {
+                bootbox[name](angular.extend({}, bootbox_defaults[name], name == 'prompt' ? {
+                    title: params[0],
+                    callback: params[1]
+                } : {
+                    message: params[0],
+                    callback: params[1]
                 }));
             }
         }
 
-        function useModal(params){
+        function useModal(params) {
             // console.log('useModal')
-            if(angular.isObject(params[0])){
-                var modal=$modal(angular.extend({},modal_defaults,params[0],true))
-            }else{
-                var modal=$modal(angular.extend({},modal_defaults,{
-                    title:params[0],
-                    content:params[1]
+            if (angular.isObject(params[0])) {
+                var modal = $modal(angular.extend({}, modal_defaults, params[0], true))
+            } else {
+                var modal = $modal(angular.extend({}, modal_defaults, {
+                    title: params[0],
+                    content: params[1]
                 }))
             }
             return modal
@@ -88,16 +88,38 @@ angular.module('app.factorys', [])
             logout: function() {},
             message: function() {},
             alert: function() {
-                useBootbox('alert',arguments)
+                useBootbox('alert', arguments)
             },
             confirm: function() {
-                useBootbox('confirm',arguments)
+                useBootbox('confirm', arguments)
             },
-            prompt:function(){
-                useBootbox('prompt',arguments)
+            prompt: function() {
+                useBootbox('prompt', arguments)
             },
             dialog: function() {
                 return useModal(arguments)
+            }
+        };
+    }])
+    // .factory('SessionToken', ['SessionService', function(SessionService) {
+    //     return {
+    //         request: function(config) {
+    //             if (!SessionService.isAnonymus) {
+    //                 config.headers['x-session-token'] = SessionService.token;
+    //             }
+    //             return config;
+    //         }
+    //     }
+    // }])
+    .factory('TimerInterceptor', [function() {
+        return {
+            request: function(config) {
+                config.requestTimestamp = new Date().getTime();
+                return config;
+            },
+            response: function(response) {
+                response.config.responseTimestamp = new Date().getTime();
+                return response;
             }
         };
     }])
