@@ -98,6 +98,7 @@ angular.module('app.factorys', [])
             }
         };
     }])
+    // 拦截注入token
     // .factory('SessionToken', ['SessionService', function(SessionService) {
     //     return {
     //         request: function(config) {
@@ -108,6 +109,7 @@ angular.module('app.factorys', [])
     //         }
     //     }
     // }])
+    //拦截注入时间
     .factory('TimerInterceptor', [function() {
         return {
             request: function(config) {
@@ -120,6 +122,32 @@ angular.module('app.factorys', [])
             }
         };
     }])
+    //拦截请求恢复
+    // .factory('sessionRecoverer', ['$q', '$injector', function($q, $injector) {
+    //     var sessionRecoverer = {
+    //         responseError: function(response) {
+    //             // Session has expired
+    //             if (response.status == 419) {
+    //                 var SessionService = $injector.get('SessionService');
+    //                 var $http = $injector.get('$http');
+    //                 var deferred = $q.defer();
+
+    //                 // Create a new session (recover the session)
+    //                 // We use login method that logs the user in using the current credentials and
+    //                 // returns a promise
+    //                 SessionService.login().then(deferred.resolve, deferred.reject);
+
+    //                 // When the session recovered, make the same backend call again and chain the request
+    //                 return deferred.promise.then(function() {
+    //                     return $http(response.config);
+    //                 });
+    //             }
+    //             return $q.reject(response);
+    //         }
+    //     };
+    //     return sessionRecoverer;
+    // }])
+    //拦截请求与返回
     .factory('HttpInterceptor', ['$q', function($q) {
         return {
             // 请求发出之前，可以用于添加各种身份验证信息
@@ -154,6 +182,7 @@ angular.module('app.factorys', [])
             }
         };
     }])
+    //重新封闭NgTableParams方法
     .factory('$tableParams', ['NgTableParams', '$document', function(NgTableParams, $document) {
         return {
             creat: function(scope, options) {
@@ -163,11 +192,6 @@ angular.module('app.factorys', [])
                     counts: [5, 10, 20],
                     dataset: null
                 }, options, true));
-
-                // nt.checkboxes = {
-                //     allchecked: false,
-                //     items: {}
-                // };
 
                 scope.$watch(function() {
                     return nt.data;
@@ -214,6 +238,7 @@ angular.module('app.factorys', [])
             }
         };
     }])
+    // 辅助封装NgTableParams表格锁定列
     .factory('$tableParamsLock', ['$tableParams', function($tableParams) {
         return {
             init: function(scope, lockTableObj) {
