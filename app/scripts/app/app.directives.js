@@ -74,7 +74,7 @@ angular.module('app.directives', [])
                 allButtons: '@',
                 selectedText: '@'
             },
-            controller: function($scope, $document, $element) {
+            controller: function($scope, $document) {
 
                 function traceAll() {
                     angular.element($document[0].getElementsByClassName('combo-select-all')).prop('indeterminate', ($scope.$model.length !== 0 && $scope.$model.length !== $scope.$data.length));
@@ -82,10 +82,10 @@ angular.module('app.directives', [])
 
                 $scope.traceAll = traceAll;
             },
-            link: function(scope, iElement, iAttrs) {
+            link: function(scope) {
                 scope.$model = angular.copy(scope.$model) || [];
                 scope.$watch(function() {
-                    return scope.$model
+                    return scope.$model;
                 }, scope.traceAll);
             }
         };
@@ -94,21 +94,21 @@ angular.module('app.directives', [])
         return {
             restrict: 'AEC',
             templateUrl: 'tpls/model.pageLabelBar.html',
-            controller: function($scope, $document, $element) {
+            controller: function($scope, $document) {
                 $scope.getter = getter;
 
                 function getter() {
-                    var d = []
+                    var d = [];
                     angular.forEach($document.find('[ng-page-label]'), function(item, key) {
                         d.push({
                             iconCls: angular.element(item).find('i').attr('class'),
                             title: angular.element(item).find('span').html()
-                        })
+                        });
                     });
-                    return d
+                    return d;
                 }
             },
-            link: function(scope, iElement, iAttrs) {
+            link: function(scope) {
                 scope.$data = scope.getter();
             }
         };
@@ -159,11 +159,11 @@ angular.module('app.directives', [])
                     var eTH = $scope.eastTable.find('tr:first-child th');
                     var cTH = $scope.centerTable.find('tr:first-child th');
                     angular.forEach(wTH, function(elmt, idx) {
-                        $scope.centerTable.find('tr:first-child th:nth-child(' + (idx + 1) + ')').width(angular.element(elmt).width())
-                    })
+                        $scope.centerTable.find('tr:first-child th:nth-child(' + (idx + 1) + ')').width(angular.element(elmt).width());
+                    });
                     angular.forEach(eTH, function(elmt, idx) {
-                        $scope.centerTable.find('tr:first-child th:nth-child(' + (cTH.length - eTH.length + idx + 1) + ')').width(angular.element(elmt).width())
-                    })
+                        $scope.centerTable.find('tr:first-child th:nth-child(' + (cTH.length - eTH.length + idx + 1) + ')').width(angular.element(elmt).width());
+                    });
                 }
             },
             link: function(scope, iElement, iAttrs) {
@@ -187,14 +187,14 @@ angular.module('app.directives', [])
                     startY = 0,
                     x = 0,
                     y = 0;
-                var element = iElement
+                var element = iElement;
                 var header = element.find('.modal-header');
                 element.css({
                     position: 'relative'
                 });
                 header.css({
                     cursor: 'move'
-                })
+                });
 
                 header.on('mousedown', function(event) {
                     // Prevent default dragging of selected content
@@ -242,7 +242,7 @@ angular.module('app.directives', [])
 
                 function search() {
                     if (!!$scope.$href && !!$scope.$model) {
-                        $state.go($scope.$href, { key: $scope.$model })
+                        $state.go($scope.$href, { key: $scope.$model });
                     }
 
                 }
@@ -252,12 +252,12 @@ angular.module('app.directives', [])
                 angular.element(iElement.find('input')).on('keyup', function(event) {
                     var keycode = window.event ? event.keyCode : event.which;
                     if (keycode == 13) {
-                        console.log('on enter')
+                        console.log('on enter');
                         scope.search();
                     }
                 });
                 angular.element(iElement.find('button')).on('click', function() {
-                    console.log('click A')
+                    console.log('click A');
                     scope.search();
                 });
             }
@@ -303,7 +303,7 @@ angular.module('app.directives', [])
                         'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
                         'insertunorderedlist', '|', 'emoticons', 'image', 'link', '|', 'fullscreen'
                     ]
-                }
+                };
                 $scope.build = build;
 
                 function build() {
@@ -402,4 +402,5 @@ angular.module('app.directives', [])
 
     //         }
     //     }
-    // });
+    // })
+    ;

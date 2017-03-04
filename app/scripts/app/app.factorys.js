@@ -59,7 +59,7 @@ angular.module('app.factorys', [])
             if (angular.isObject(params[0])) {
                 bootbox[name](angular.extend({}, bootbox_defaults[name], params[0], true));
             } else {
-                bootbox[name](angular.extend({}, bootbox_defaults[name], name == 'prompt' ? {
+                bootbox[name](angular.extend({}, bootbox_defaults[name], name === 'prompt' ? {
                     title: params[0],
                     callback: params[1]
                 } : {
@@ -165,7 +165,7 @@ angular.module('app.factorys', [])
                 }, angular.extend({
                     counts: [5, 10, 20],
                     dataset: null
-                }, options, true))
+                }, options, true));
 
                 // nt.checkboxes = {
                 //     allchecked: false,
@@ -178,7 +178,7 @@ angular.module('app.factorys', [])
                     nt.checkboxes = {
                         allchecked: false,
                         items: {}
-                    }
+                    };
                 }, true);
 
                 scope.$watch(function() {
@@ -199,19 +199,19 @@ angular.module('app.factorys', [])
                     var total = nt.data.length;
 
                     angular.forEach(nt.data, function(item) {
-                        checked += (nt.checkboxes.items[item.id]) || 0;
-                        unchecked += (!nt.checkboxes.items[item.id]) || 0;
+                        checked += (values[item.id]) || 0;
+                        unchecked += (!values[item.id]) || 0;
                     });
 
                     // console.log('nt.checkboxes.items', nt.checkboxes.items);
 
                     nt.hasChecked = checked > 0;
 
-                    if ((unchecked == 0) || (checked == 0)) {
-                        nt.checkboxes.allchecked = (checked == total) && (checked != 0);
+                    if ((unchecked === 0) || (checked === 0)) {
+                        nt.checkboxes.allchecked = (checked === total) && (checked !== 0);
                     }
                     // grayed checkbox
-                    angular.element($document[0].getElementsByClassName("select-all")).prop("indeterminate", (checked != 0 && unchecked != 0));
+                    angular.element($document[0].getElementsByClassName("select-all")).prop("indeterminate", (checked !== 0 && unchecked !==0));
                 }, true);
                 return nt;
             }
