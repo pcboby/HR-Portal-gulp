@@ -95,21 +95,22 @@ angular.module('app.directives', [])
             restrict: 'AEC',
             templateUrl: 'tpls/model.pageLabelBar.html',
             controller: function($scope, $document) {
-                $scope.getter = getter;
+                $scope.$data = [];
 
-                function getter() {
-                    var d = [];
-                    angular.forEach($document.find('[ng-page-label]'), function(item, key) {
-                        d.push({
+
+                function build() {
+                    angular.forEach($document.find('[ng-page-label]'), function(item) {
+                        $scope.$data.push({
                             iconCls: angular.element(item).find('i').attr('class'),
                             title: angular.element(item).find('span').html()
                         });
                     });
-                    return d;
                 }
+
+                $scope.build = build;
             },
             link: function(scope) {
-                scope.$data = scope.getter();
+                scope.build();
             }
         };
     })
@@ -125,7 +126,6 @@ angular.module('app.directives', [])
             },
             replace: true,
             controller: function($scope, $element) {
-                $scope.build = build;
 
                 function build() {
 
@@ -136,8 +136,9 @@ angular.module('app.directives', [])
 
                     $.plot($element, $scope.$data, $scope.opts).resize();
                 }
+                $scope.build = build;
             },
-            link: function(scope, iElement, iAttrs) {
+            link: function(scope) {
                 // var options_default = {};
                 scope.opts = angular.extend({}, parseObj(scope.options), true);
                 scope.build();
@@ -148,7 +149,6 @@ angular.module('app.directives', [])
         return {
             restrict: 'AEC',
             controller: function($scope) {
-                $scope.setLockSize = setLockSize;
 
                 function setLockSize() {
                     // console.log($scope.northTable.find('tr:first-child th').length)
@@ -165,8 +165,9 @@ angular.module('app.directives', [])
                         $scope.centerTable.find('tr:first-child th:nth-child(' + (cTH.length - eTH.length + idx + 1) + ')').width(angular.element(elmt).width());
                     });
                 }
+                $scope.setLockSize = setLockSize;
             },
-            link: function(scope, iElement, iAttrs) {
+            link: function(scope, iElement) {
                 scope.northTable = iElement.find('.north .table');
                 scope.westTable = iElement.find('.west .table');
                 scope.eastTable = iElement.find('.east .table');
@@ -182,7 +183,7 @@ angular.module('app.directives', [])
         return {
             restrict: 'AEC',
             controller: function() {},
-            link: function(scope, iElement, attr) { //scope, iElement, iAttrs
+            link: function(scope, iElement) { //scope, iElement, iAttrs
                 var startX = 0,
                     startY = 0,
                     x = 0,
@@ -196,14 +197,6 @@ angular.module('app.directives', [])
                     cursor: 'move'
                 });
 
-                header.on('mousedown', function(event) {
-                    // Prevent default dragging of selected content
-                    event.preventDefault();
-                    startX = event.pageX - x;
-                    startY = event.pageY - y;
-                    $document.on('mousemove', mousemove);
-                    $document.on('mouseup', mouseup);
-                });
 
                 function mousemove(event) {
                     y = event.pageY - startY;
@@ -218,6 +211,15 @@ angular.module('app.directives', [])
                     $document.off('mousemove', mousemove);
                     $document.off('mouseup', mouseup);
                 }
+
+                header.on('mousedown', function(event) {
+                    // Prevent default dragging of selected content
+                    event.preventDefault();
+                    startX = event.pageX - x;
+                    startY = event.pageY - y;
+                    $document.on('mousemove', mousemove);
+                    $document.on('mouseup', mouseup);
+                });
             }
         };
     })
@@ -238,7 +240,6 @@ angular.module('app.directives', [])
             // replace:true,
             // require:'ngModel',
             controller: function($scope) {
-                $scope.search = search;
 
                 function search() {
                     if (!!$scope.$href && !!$scope.$model) {
@@ -246,12 +247,14 @@ angular.module('app.directives', [])
                     }
 
                 }
+
+                $scope.search = search;
             },
-            link: function(scope, iElement, iAttrs) {
+            link: function(scope, iElement) {
                 iElement.addClass('search');
                 angular.element(iElement.find('input')).on('keyup', function(event) {
                     var keycode = window.event ? event.keyCode : event.which;
-                    if (keycode == 13) {
+                    if (keycode === 13) {
                         console.log('on enter');
                         scope.search();
                     }
@@ -263,22 +266,20 @@ angular.module('app.directives', [])
             }
         };
     }])
-    .directive('ngInputSearch', [function() {
-        return {
-            restrict: 'AEC',
-            replace: true,
-            templateUrl: 'tpls/model.inputSearch.html',
-            scope: {
-                placeholder: '@',
-                btnIconCls: '@',
-                btnText: '@'
-            },
-            controller: function($scope) {},
-            link: function(scope, iElement, iAttrs) {
-
-            }
-        };
-    }])
+    // .directive('ngInputSearch', [function() {
+    //     return {
+    //         restrict: 'AEC',
+    //         replace: true,
+    //         templateUrl: 'tpls/model.inputSearch.html',
+    //         scope: {
+    //             placeholder: '@',
+    //             btnIconCls: '@',
+    //             btnText: '@'
+    //         },
+    //         controller: function($scope) {},
+    //         link: function(scope, iElement, iAttrs) {}
+    //     };
+    // }])
     .directive('ngComboKindeditor', [function() {
         return {
             restrict: 'AEC',
@@ -304,13 +305,11 @@ angular.module('app.directives', [])
                         'insertunorderedlist', '|', 'emoticons', 'image', 'link', '|', 'fullscreen'
                     ]
                 };
-                $scope.build = build;
 
                 function build() {
-                    // var editor = KindEditor.create($element[0], angular.extend({
-
-                    // }, $scope.defaults, parseObj($scope.options)));
+                    KindEditor.create($element[0], angular.extend({}, $scope.defaults, parseObj($scope.options)));
                 }
+                $scope.build = build;
             },
             link: function(scope) {
                 scope.build();
@@ -339,68 +338,68 @@ angular.module('app.directives', [])
     //         templateUrl: 'tpls/input.combosearch.html',
     //         controller: function($scope, $log, $modal, NgTableParams) {
 
-    //             var modal = $modal({
-    //                 title: $scope.modalTitle,
-    //                 templateUrl: $scope.modalTemplateUrl,
-    //                 backdrop: $scope.modalBackdrop,
-    //                 controller: modalCtrl,
-    //                 show: false
-    //             });
+//             var modal = $modal({
+//                 title: $scope.modalTitle,
+//                 templateUrl: $scope.modalTemplateUrl,
+//                 backdrop: $scope.modalBackdrop,
+//                 controller: modalCtrl,
+//                 show: false
+//             });
 
-    //             $scope.openModal = function() {
-    //                 // modal.$promise.then(modal.show);
-    //             }
+//             $scope.openModal = function() {
+//                 // modal.$promise.then(modal.show);
+//             }
 
-    //             /////*********************************************************
-    //             /////*********************************************************
-    //             function confirm($selected) {
-    //                 $scope.ngModel = $selected;
-    //             }
+//             /////*********************************************************
+//             /////*********************************************************
+//             function confirm($selected) {
+//                 $scope.ngModel = $selected;
+//             }
 
-    //             function cancel() {
-    //                 $log.log('cancel');
-    //             }
+//             function cancel() {
+//                 $log.log('cancel');
+//             }
 
-    //             function getSelected() {
-    //                 return $scope.ngModel;
-    //             }
+//             function getSelected() {
+//                 return $scope.ngModel;
+//             }
 
-    //             function isSelect() {
-    //                 var obj = {};
-    //                 if ($scope.ngModel) {
-    //                     obj[$scope.ngModel] = true;
-    //                 }
-    //                 return obj;
-    //             }
+//             function isSelect() {
+//                 var obj = {};
+//                 if ($scope.ngModel) {
+//                     obj[$scope.ngModel] = true;
+//                 }
+//                 return obj;
+//             }
 
-    //             function getData() {
-    //                 return $scope.$data;
-    //             }
+//             function getData() {
+//                 return $scope.$data;
+//             }
 
-    //             function modalCtrl($scope) {
-    //                 $scope.$data = getData();
-    //                 $scope.$selected = getSelected() || null;
-    //                 $scope.$isSelect = isSelect();
+//             function modalCtrl($scope) {
+//                 $scope.$data = getData();
+//                 $scope.$selected = getSelected() || null;
+//                 $scope.$isSelect = isSelect();
 
-    //                 $scope.tableParams = new NgTableParams({
-    //                     page: 1,
-    //                     count: 5
-    //                 }, {
-    //                     counts: false,
-    //                     dataset: $scope.$data
-    //                 });
+//                 $scope.tableParams = new NgTableParams({
+//                     page: 1,
+//                     count: 5
+//                 }, {
+//                     counts: false,
+//                     dataset: $scope.$data
+//                 });
 
-    //                 $scope.confirm = confirm;
-    //                 $scope.cancel = cancel;
+//                 $scope.confirm = confirm;
+//                 $scope.cancel = cancel;
 
-    //                 $scope.$select = function($item) {
-    //                     $scope.$isSelect = {};
-    //                     $scope.$isSelect[$item] = !$scope.$isSelect[$item];
-    //                     $scope.$selected = $item;
-    //                 }
-    //             }
+//                 $scope.$select = function($item) {
+//                     $scope.$isSelect = {};
+//                     $scope.$isSelect[$item] = !$scope.$isSelect[$item];
+//                     $scope.$selected = $item;
+//                 }
+//             }
 
-    //         }
-    //     }
-    // })
-    ;
+//         }
+//     }
+// })
+;

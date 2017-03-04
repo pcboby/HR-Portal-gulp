@@ -1,5 +1,3 @@
-;(function() {
-    'use strict';
-    app
-        .controller('appController', ['$scope',function($scope) {}])
-})()
+'use strict';
+app
+    .controller('appController', ['$scope', function($scope) {}])

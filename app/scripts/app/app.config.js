@@ -1,20 +1,22 @@
 'use strict';
 angular.module('app.config', [])
-    .config(['$interpolateProvider', function($interpolateProvider) {
-        // $interpolateProvider.startSymbol('//');
-        // $interpolateProvider.endSymbol('//');
-    }])
+    //配置angular页面标识，默认:{{}}
+    // .config(['$interpolateProvider', function($interpolateProvider) {
+    //     // $interpolateProvider.startSymbol('//');
+    //     // $interpolateProvider.endSymbol('//');
+    // }])
+    //配置路由替代字符，默认:!(1.6＋版)
     .config(['$locationProvider', function($locationProvider) {
         $locationProvider.hashPrefix('');
     }])
-    //配置预加载
+    //配置预加载默认值
     .config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
         $ocLazyLoadProvider.config({
-            debug:false,
-            event:false
+            debug: false,
+            event: false
         });
     }])
-    //设置初始化变量
+    //设置初始变量
     .config(['$controllerProvider', function($controllerProvider) {
         $controllerProvider.allowGlobals();
     }])
@@ -27,7 +29,7 @@ angular.module('app.config', [])
         //request intercept
         $httpProvider.interceptors.push('HttpInterceptor');
     }])
-    //设置插件
+    //设置angular-strap插件默认值
     .config(function($modalProvider, $tooltipProvider, $popoverProvider, $typeaheadProvider, $datepickerProvider, $timepickerProvider, $dropdownProvider, $selectProvider) {
         var defaultOptions = {
             // animation: 'am-flip-x',

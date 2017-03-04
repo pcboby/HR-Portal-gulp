@@ -211,7 +211,7 @@ angular.module('app.factorys', [])
                         nt.checkboxes.allchecked = (checked === total) && (checked !== 0);
                     }
                     // grayed checkbox
-                    angular.element($document[0].getElementsByClassName("select-all")).prop("indeterminate", (checked !== 0 && unchecked !==0));
+                    angular.element($document[0].getElementsByClassName("select-all")).prop("indeterminate", (checked !== 0 && unchecked !== 0));
                 }, true);
                 return nt;
             }
