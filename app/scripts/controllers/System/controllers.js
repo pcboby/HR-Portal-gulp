@@ -1,6 +1,5 @@
-;(function() {
-    'use strict';
-    app
+'use strict';
+angular.module('app')
         .controller('System', function($scope, $element, $state, $stateParams, NgTableParams, RecordList) {
 
             $scope.states = [{
@@ -138,5 +137,4 @@
             	return arr.join();
             }
 
-        })
-})()
+        });

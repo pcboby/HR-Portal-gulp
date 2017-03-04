@@ -1,6 +1,5 @@
-;(function() {
-  'use strict';
-    app
+'use strict';
+angular.module('app')
         .controller('Chart', function($scope, $element, $stateParams, NgTableParams, SimpleList) {
 
             $scope.forms = {
@@ -227,5 +226,4 @@
                     plot.clearSelection();
                 }
             });
-        })
-})()
+        });

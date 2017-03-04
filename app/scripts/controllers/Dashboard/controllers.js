@@ -1,7 +1,5 @@
-;(function(){
-	'use strict';
-	app
-	.controller('Dashboard', ['$scope', function ($scope) {
+'use strict';
+angular.module('app')
+    .controller('Dashboard', ['$scope', function($scope) {
 
-	}])
-})()
+    }]);

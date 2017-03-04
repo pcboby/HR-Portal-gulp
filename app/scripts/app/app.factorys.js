@@ -23,8 +23,7 @@ angular.module('app.factorys', [])
                     ok: {
                         label: '确认',
                     }
-                },
-                callback: function() {}
+                }
             },
             confirm: {
                 title: '选择:',
@@ -36,8 +35,7 @@ angular.module('app.factorys', [])
                     cancel: {
                         label: '取消'
                     }
-                },
-                callback: function(res) {}
+                }
             },
             prompt: {
                 title: '请输入:',
@@ -49,8 +47,7 @@ angular.module('app.factorys', [])
                     cancel: {
                         label: '取消'
                     }
-                },
-                callback: function(res) {}
+                }
             }
         };
 

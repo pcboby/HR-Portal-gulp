@@ -1,7 +1,5 @@
-;(function(){
-	'use strict';
-	app
-	.controller('wraperController', ['$scope',function ($scope) {
-	
-		}])
-})()
+'use strict';
+angular.module('app')
+    .controller('wraperController', ['$scope', function($scope) {
+
+    }]);
