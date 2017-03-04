@@ -14,7 +14,7 @@ angular.module('app.factorys', [])
     .factory('$Until', ['$rootScope', '$modal', function($rootScope, $modal) {
         var modal_defaults = {
             show: true
-        }
+        };
         var bootbox_defaults = {
             alert: {
                 title: '提示:',
@@ -52,7 +52,7 @@ angular.module('app.factorys', [])
                 },
                 callback: function(res) {}
             }
-        }
+        };
 
         function useBootbox(name, params) {
             // console.log(name);
@@ -72,14 +72,14 @@ angular.module('app.factorys', [])
         function useModal(params) {
             // console.log('useModal')
             if (angular.isObject(params[0])) {
-                var modal = $modal(angular.extend({}, modal_defaults, params[0], true))
+                var modal = $modal(angular.extend({}, modal_defaults, params[0], true));
             } else {
                 var modal = $modal(angular.extend({}, modal_defaults, {
                     title: params[0],
                     content: params[1]
-                }))
+                }));
             }
-            return modal
+            return modal;
         }
 
         return {
@@ -88,16 +88,16 @@ angular.module('app.factorys', [])
             logout: function() {},
             message: function() {},
             alert: function() {
-                useBootbox('alert', arguments)
+                useBootbox('alert', arguments);
             },
             confirm: function() {
-                useBootbox('confirm', arguments)
+                useBootbox('confirm', arguments);
             },
             prompt: function() {
-                useBootbox('prompt', arguments)
+                useBootbox('prompt', arguments);
             },
             dialog: function() {
-                return useModal(arguments)
+                return useModal(arguments);
             }
         };
     }])
@@ -130,22 +130,22 @@ angular.module('app.factorys', [])
                 if (localStorage.token) {
                     config.headers.token = localStorage.token;
                 }
-                console.log('request by config:', config)
+                console.log('request by config:', config);
                 return config;
             },
             // 请求发出时出错
             requestError: function(err) {
-                console.log('request by error:', err)
+                console.log('request by error:', err);
                 return $q.reject(err);
             },
             // 成功返回了响应
             response: function(res) {
-                console.log('response by res:', res)
+                console.log('response by res:', res);
                 return res;
             },
             // 返回的响应出错，包括后端返回响应时，设置了非 200 的 http 状态码
             responseError: function(err) {
-                console.log('response by error:', err)
+                console.log('response by error:', err);
                 if (-1 === err.status) {
                     // 远程服务器无响应
                 } else if (401 === err.status) {
@@ -173,13 +173,13 @@ angular.module('app.factorys', [])
                 // };
 
                 scope.$watch(function() {
-                    return nt.data
-                }, function(d) {
+                    return nt.data;
+                }, function() {
                     nt.checkboxes = {
                         allchecked: false,
                         items: {}
                     }
-                }, true)
+                }, true);
 
                 scope.$watch(function() {
                     // console.log('nt.checkboxes',nt.checkboxes)
@@ -208,29 +208,29 @@ angular.module('app.factorys', [])
                     nt.hasChecked = checked > 0;
 
                     if ((unchecked == 0) || (checked == 0)) {
-                        nt.checkboxes.allchecked = (checked == total && checked != 0);
+                        nt.checkboxes.allchecked = (checked == total) && (checked != 0);
                     }
                     // grayed checkbox
                     angular.element($document[0].getElementsByClassName("select-all")).prop("indeterminate", (checked != 0 && unchecked != 0));
                 }, true);
-                return nt
+                return nt;
             }
         };
     }])
     .factory('$tableParamsLock', ['$tableParams', function($tableParams) {
         return {
             init: function(scope, lockTableObj) {
-                scope.tableParamsLock = $tableParams.creat(scope)
+                scope.tableParamsLock = $tableParams.creat(scope);
 
                 scope.$watch(function() {
                     return scope.tableParamsLock.sorting();
                 }, function(sort) {
                     lockTableObj.sorting(sort);
-                }, true)
+                }, true);
 
             },
             settings: function(scope, settings) {
-                scope.tableParamsLock.settings(settings)
+                scope.tableParamsLock.settings(settings);
             }
         };
     }]);

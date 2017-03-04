@@ -3,7 +3,7 @@ angular.module('app.directives', [])
     .directive('spinner', ['$rootScope', function($rootScope) {
         return {
             restrict: 'E',
-            link: function(scope, element, attrs) {
+            link: function(scope, element) {
                 // by defult hide the spinner bar
                 element.addClass('hide'); // hide spinner bar by default
 
@@ -53,8 +53,8 @@ angular.module('app.directives', [])
                 barStyle: '@'
             },
             replace: true,
-            controller: function($scope) {},
-            link: function(scope, iElement, iAttrs) {
+            // controller: function($scope) {},
+            link: function(scope) {
                 scope.min = scope.min || 0;
                 scope.max = scope.max || 100;
             }
@@ -76,11 +76,11 @@ angular.module('app.directives', [])
             },
             controller: function($scope, $document, $element) {
 
-                $scope.traceAll = traceAll;
-
                 function traceAll() {
-                    angular.element($document[0].getElementsByClassName('combo-select-all')).prop('indeterminate', ($scope.$model.length != 0 && $scope.$model.length != $scope.$data.length));
+                    angular.element($document[0].getElementsByClassName('combo-select-all')).prop('indeterminate', ($scope.$model.length !== 0 && $scope.$model.length !== $scope.$data.length));
                 }
+
+                $scope.traceAll = traceAll;
             },
             link: function(scope, iElement, iAttrs) {
                 scope.$model = angular.copy(scope.$model) || [];

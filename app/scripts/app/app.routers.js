@@ -3,12 +3,12 @@ angular.module('app.routers', [])
     .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
 
-        // function resovleDep(param, tpl, module) {
+        // function resovleDep(param,tpl,module){
         //     var resolves = {
-        //         loadMyCtrl: [‘$ocLazyLoad‘, ‘$templateCache‘, ‘$q‘, function($ocLazyLoad, $templateCache, $q) {
+        //         loadMyCtrl: [‘$ocLazyLoad‘, ‘$templateCache‘, ‘$q‘, function($ocLazyLoad,$templateCache,$q) {
         //             lazyDeferred = $q.defer();
         //             return $ocLazyLoad.load({
-        //                 name: module,
+        //                 name : module,
         //                 cache: false,
         //                 files: param.files
         //             }).then(function() {
@@ -22,7 +22,7 @@ angular.module('app.routers', [])
 
         // 默认跳转
         $urlRouterProvider.otherwise('/web')
-            .when('/web', '/web/Dashboard.html')
+            .when('/web', '/web/Dashboard.html');
 
         $stateProvider
 
@@ -466,6 +466,6 @@ angular.module('app.routers', [])
                         });
                     }]
                 }
-            })
+            });
 
     }]);

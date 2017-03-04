@@ -15,8 +15,8 @@ angular.module('app.filters', [])
                 text: '男',
                 cls: 'icon icon-user',
                 color: '#5cb85c'
-            }]
-            return $sce.trustAsHtml('<i class="' + styles[val].cls + '" style="color:' + styles[val].color + ';">' + styles[val].text + '</i>')
+            }];
+            return $sce.trustAsHtml('<i class="' + styles[val].cls + '" style="color:' + styles[val].color + ';">' + styles[val].text + '</i>');
         };
     }])
     .filter('state', ['$sce', function($sce) {
@@ -37,7 +37,7 @@ angular.module('app.filters', [])
             }, { //（警告）Warning
                 cls: 'glyphicon-exclamation-sign',
                 color: '#ec971f'
-            }]
-            return $sce.trustAsHtml('<i class="glyphicon ' + styles[val].cls + '" style="color:' + styles[val].color + ';"></i>')
+            }];
+            return $sce.trustAsHtml('<i class="glyphicon ' + styles[val].cls + '" style="color:' + styles[val].color + ';"></i>');
         };
     }]);
