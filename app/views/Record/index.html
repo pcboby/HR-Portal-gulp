@@ -5,18 +5,12 @@
             <span class="input-group-addon">
                 <i class="glyphicon glyphicon-user"></i>
             </span>
-            <input type="text" class="form-control"
-                placeholder="员工姓名/工号"
-                ng-model="forms.userName">
+            <input type="text" class="form-control" placeholder="员工姓名/工号" ng-model="forms.userName">
         </div>
     </div>
     <div class="form-group col-md-4">
         <label class="col-md-3 control-label">部门</label>
-        <ng-input-search class="col-md-9"
-            placeholder="部门名称/代码"
-            data-btn-icon-cls="fa fa-search"
-            ng-model="forms.department"
-            />
+        <ng-input-search class="col-md-9" placeholder="部门名称/代码" data-btn-icon-cls="fa fa-search" ng-model="forms.department" />
         <!-- 
             placeholder="部门名称/代码"
             data-btn-icon-cls="fa fa-search"
@@ -26,26 +20,9 @@
     <div class="form-group col-md-4">
         <label class="col-md-3 control-label">日期</label>
         <div class="input-group col-md-9">
-            <input type="text" class="form-control"
-                placeholder="开始日期"
-                data-placement="auto"
-                data-autoclose="1"
-                data-date-format="yyyy-MM-dd"
-                data-container="body"
-                data-max-date="{{forms.dateEntryUntil}}"
-                ng-model="forms.dateEntryFrom"
-                bs-datepicker>
+            <input type="text" class="form-control" placeholder="开始日期" data-placement="auto" data-autoclose="1" data-date-format="yyyy-MM-dd" data-container="body" data-max-date="{{forms.dateEntryUntil}}" ng-model="forms.dateEntryFrom" bs-datepicker>
             <span class="input-group-addon">至</span>
-            <input type="text" class="form-control"
-                placeholder="结束日期"
-                data-placement="auto"
-                data-autoclose="1"
-                data-date-format="yyyy-MM-dd"
-                data-container="body"
-                data-min-date="{{forms.dateEntryFrom}}"
-                ng-model="forms.dateEntryUntil"
-                placement="right"
-                bs-datepicker>
+            <input type="text" class="form-control" placeholder="结束日期" data-placement="auto" data-autoclose="1" data-date-format="yyyy-MM-dd" data-container="body" data-min-date="{{forms.dateEntryFrom}}" ng-model="forms.dateEntryUntil" placement="right" bs-datepicker>
         </div>
     </div>
     <div class="col-md-12" style="text-align: center;">
@@ -113,13 +90,9 @@
     </div>
     <div class="east">
         <!--  -->
-        <table class="table table-striped table-hover"
-            ng-table="tableParamsLock"
-            show-filter="false">
+        <table class="table table-striped table-hover" ng-table="tableParamsLock" show-filter="false">
             <tr ng-repeat="data in $data">
-                <td data-title="'工作状态'" style="text-align: center;" 
-                    filter="{ label_13: 'text'}"
-                    sortable="'label_13'">
+                <td data-title="'工作状态'" style="text-align: center;" filter="{ label_13: 'text'}" sortable="'label_13'">
                     <span ng-bind-html="data.label_13 | state"></span>
                 </td>
             </tr>
@@ -128,9 +101,7 @@
     </div>
     <div class="center table-responsive">
         <!--  -->
-        <table class="table table-striped table-hover"
-            ng-table="tableParamsLock"
-            show-filter="false">
+        <table class="table table-striped table-hover" ng-table="tableParamsLock" show-filter="false">
             <tr ng-repeat="data in $data">
                 <td header="'headerCheckbox.html'">
                     <span><input type="checkbox" ng-model="tableParams.checkboxes.items[data.id]" /></span>
@@ -139,86 +110,50 @@
                     <span ng-bind="(tableParams.page()-1)*tableParams.count()+$index+1"></span>
                 </td>
                 <td data-title="'操作'">
-                    <button class="btn btn-default btn-sm"
-                        ng-click="_view(data.id)"
-                        data-trigger="hover"
-                        data-type="success"
-                        data-title="查看"
-                        bs-tooltip>
+                    <button class="btn btn-default btn-sm" ng-click="_view(data.id)" data-trigger="hover" data-type="success" data-title="查看" bs-tooltip>
                         <i class="glyphicon glyphicon-list-alt"></i>
                     </button>
-                    <button class="btn btn-danger btn-sm"
-                        ng-click="_del(data.id)"
-                        data-trigger="hover"
-                        data-type="success"
-                        data-title="删除"
-                        bs-tooltip>
+                    <button class="btn btn-danger btn-sm" ng-click="_del(data.id)" data-trigger="hover" data-type="success" data-title="删除" bs-tooltip>
                         <i class="glyphicon glyphicon-trash"></i>
                     </button>
                 </td>
-                <td data-title="'姓名'" style="text-align: center;" 
-                    filter="{ label_1: 'text'}"
-                    sortable="'label_1'">
+                <td data-title="'姓名'" style="text-align: center;" filter="{ label_1: 'text'}" sortable="'label_1'">
                     <span ng-bind="data.label_1"></span>
                 </td>
-                <td data-title="'工号'" style="text-align: center;" 
-                    filter="{ label_2: 'text'}"
-                    sortable="'label_2'">
+                <td data-title="'工号'" style="text-align: center;" filter="{ label_2: 'text'}" sortable="'label_2'">
                     <span ng-bind="data.label_2"></span>
                 </td>
-                <td data-title="'沟通日期'" style="text-align: center;" 
-                    filter="{ label_3: 'text'}"
-                    sortable="'label_3'">
+                <td data-title="'沟通日期'" style="text-align: center;" filter="{ label_3: 'text'}" sortable="'label_3'">
                     <span ng-bind="data.label_3"></span>
                 </td>
-                <td data-title="'报名日期'" style="text-align: center;" 
-                    filter="{ label_4: 'text'}"
-                    sortable="'label_4'">
+                <td data-title="'报名日期'" style="text-align: center;" filter="{ label_4: 'text'}" sortable="'label_4'">
                     <span ng-bind="data.label_4"></span>
                 </td>
-                <td data-title="'沟通人'" style="text-align: center;" 
-                    filter="{ label_5: 'text'}"
-                    sortable="'label_5'">
+                <td data-title="'沟通人'" style="text-align: center;" filter="{ label_5: 'text'}" sortable="'label_5'">
                     <span ng-bind="data.label_5"></span>
                 </td>
-                <td data-title="'个人职级'" style="text-align: center;" 
-                    filter="{ label_6: 'text'}"
-                    sortable="'label_6'">
+                <td data-title="'个人职级'" style="text-align: center;" filter="{ label_6: 'text'}" sortable="'label_6'">
                     <span ng-bind="data.label_6"></span>
                 </td>
-                <td data-title="'一级部门'"
-                    filter="{ label_7: 'text'}"
-                    sortable="'label_7'">
+                <td data-title="'一级部门'" filter="{ label_7: 'text'}" sortable="'label_7'">
                     <span ng-bind="data.label_7"></span>
                 </td>
-                <td data-title="'性别'" style="text-align: center;" 
-                    filter="{ label_8: 'text'}"
-                    sortable="'label_8'">
+                <td data-title="'性别'" style="text-align: center;" filter="{ label_8: 'text'}" sortable="'label_8'">
                     <span ng-bind-html="data.label_8 | sex"></span>
                 </td>
-                <td data-title="'年龄'" style="text-align: center;" 
-                    filter="{ label_9: 'text'}"
-                    sortable="'label_9'">
+                <td data-title="'年龄'" style="text-align: center;" filter="{ label_9: 'text'}" sortable="'label_9'">
                     <span ng-bind="data.label_9"></span>
                 </td>
-                <td data-title="'人才类型'" style="text-align: center;" 
-                    filter="{ label_10: 'text'}"
-                    sortable="'label_10'">
+                <td data-title="'人才类型'" style="text-align: center;" filter="{ label_10: 'text'}" sortable="'label_10'">
                     <span ng-bind="data.label_10"></span>
                 </td>
-                <td data-title="'近3年商业领袖转职能'" style="text-align: center;" 
-                    filter="{ label_11: 'text'}"
-                    sortable="'label_11'">
+                <td data-title="'近3年商业领袖转职能'" style="text-align: center;" filter="{ label_11: 'text'}" sortable="'label_11'">
                     <span ng-bind="data.label_11"></span>
                 </td>
-                <td data-title="'近3年海外回机关'" style="text-align: center;" 
-                    filter="{ label_12: 'text'}"
-                    sortable="'label_12'">
+                <td data-title="'近3年海外回机关'" style="text-align: center;" filter="{ label_12: 'text'}" sortable="'label_12'">
                     <span ng-bind="data.label_12"></span>
                 </td>
-                <td data-title="'工作状态'" style="text-align: center;" 
-                    filter="{ label_13: 'text'}"
-                    sortable="'label_13'">
+                <td data-title="'工作状态'" style="text-align: center;" filter="{ label_13: 'text'}" sortable="'label_13'">
                     <span ng-bind-html="data.label_13 | state"></span>
                 </td>
             </tr>
@@ -227,9 +162,7 @@
     </div>
     <div class="south">
         <!--  -->
-        <table class="table table-striped table-hover"
-            ng-table="tableParams"
-            show-filter="false">
+        <table class="table table-striped table-hover" ng-table="tableParams" show-filter="false">
             <tr>
                 <td></td>
             </tr>
@@ -238,9 +171,7 @@
     </div>
     <div class="west">
         <!--  -->
-        <table class="table table-striped table-hover"
-            ng-table="tableParamsLock"
-            show-filter="false">
+        <table class="table table-striped table-hover" ng-table="tableParamsLock" show-filter="false">
             <tr ng-repeat="data in $data">
                 <td header="'headerCheckbox.html'">
                     <span><input type="checkbox" ng-model="tableParams.checkboxes.items[data.id]" /></span>
@@ -249,20 +180,10 @@
                     <span ng-bind="(tableParams.page()-1)*tableParams.count()+$index+1"></span>
                 </td>
                 <td data-title="'操作'">
-                    <button class="btn btn-default btn-sm"
-                        ng-click="_view(data.id)"
-                        data-trigger="hover"
-                        data-type="success"
-                        data-title="查看"
-                        bs-tooltip>
+                    <button class="btn btn-default btn-sm" ng-click="_view(data.id)" data-trigger="hover" data-type="success" data-title="查看" bs-tooltip>
                         <i class="glyphicon glyphicon-list-alt"></i>
                     </button>
-                    <button class="btn btn-danger btn-sm"
-                        ng-click="_del(data.id)"
-                        data-trigger="hover"
-                        data-type="success"
-                        data-title="删除"
-                        bs-tooltip>
+                    <button class="btn btn-danger btn-sm" ng-click="_del(data.id)" data-trigger="hover" data-type="success" data-title="删除" bs-tooltip>
                         <i class="glyphicon glyphicon-trash"></i>
                     </button>
                 </td>

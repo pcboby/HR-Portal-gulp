@@ -124,8 +124,6 @@ angular.module('app.directives', [])
 
                 $scope.$on('$destroy', $scope.$view);
 
-
-
                 $scope.$edit = function() {
                     $rootScope.settings.hasEdit.push({ qid: qid });
                 };

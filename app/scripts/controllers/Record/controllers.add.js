@@ -1,6 +1,11 @@
 'use strict';
 angular.module('app')
     .controller('RecordAdd', function($rootScope, $scope, $Until, $element, $stateParams, NgTableParams, RecordList) {
+
+        $scope.$on('$destroy', function() {
+            $rootScope.settings.hasEdit = [];
+        });
+
         $scope.pageType = 'ADD'; //EDIT or VIEW
 
         $scope._saveAll = _saveAll;
