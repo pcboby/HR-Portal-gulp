@@ -111,8 +111,8 @@ h.url = function(url) {
     return args;
 }
 
-function parseObj( strData ){ 
-    return (new Function( "return " + strData ))(); 
+function parseObj(strData) {
+    return (new Function("return " + strData))();
 }
 
 
@@ -239,7 +239,8 @@ function setHomepage(homeurl) {
 //跨浏览器绑定事件  
 function addEventSamp(obj, evt, fn) {
     if (!oTarget) {
-        return; }
+        return;
+    }
     if (obj.addEventListener) {
         obj.addEventListener(evt, fn, false);
     } else if (obj.attachEvent) {
@@ -251,7 +252,8 @@ function addEventSamp(obj, evt, fn) {
 //跨浏览器删除事件  
 function delEvt(obj, evt, fn) {
     if (!obj) {
-        return; }
+        return;
+    }
     if (obj.addEventListener) {
         obj.addEventListener(evt, fn, false);
     } else if (oTarget.attachEvent) {
@@ -484,6 +486,16 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 
+
+function getRandom(n) {
+    var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    var res = "";
+    for (var i = 0; i < n; i++) {
+        var id = Math.ceil(Math.random() * 35);
+        res += chars[id];
+    }
+    return res;
+}
 
 // var rgx=[
 //  ^\\d+$,　　//非负整数（正整数 + 0） 

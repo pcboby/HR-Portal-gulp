@@ -114,6 +114,51 @@ angular.module('app.directives', [])
             }
         };
     })
+    .directive('ngFormBlock', ['$rootScope', function($rootScope) {
+        return {
+            restrict: 'AEC',
+            scope: true,
+            controller: function($scope, $element) {
+                var qid = 'BlockForm_' + getRandom(8);
+                $element.attr('ng-form-block-query', qid);
+
+                $scope.$on('$destroy', function() {
+                    $rootScope.settings.hasEdit = [];
+                });
+
+
+
+                $scope.$edit = function() {
+                    $rootScope.settings.hasEdit.push({ qid: qid });
+                };
+                $scope.$view = function() {
+                    angular.forEach($rootScope.settings.hasEdit, function(elmt, idx) {
+                        if (elmt.qid === qid) {
+                            $rootScope.settings.hasEdit.remove(idx);
+                        }
+                    });
+
+                };
+
+                $scope.$watch(function(){
+                    return $rootScope.settings.hasEdit;
+                },function(elems){
+                    var flag=false;
+                    angular.forEach(elems,function(elmt){
+                        if (elmt.qid === qid) {
+                            flag=true;
+                        }
+                    });
+                    $scope.$isEdit=flag;
+                },true);
+
+            },
+            link: function(scope, elmt, attrs) {
+                var fn=attrs.formType === 'EDIT' ? '$edit' : '$view';
+                scope[fn]();
+            }
+        };
+    }])
     .directive('ngChartFlot', function() {
         return {
             restrict: 'AEC',

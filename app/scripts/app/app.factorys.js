@@ -4,7 +4,8 @@ angular.module('app.factorys', [])
         var settings = {
             layout: {
                 pageState: 'Dashboard'
-            }
+            },
+            hasEdit:[]
         };
 
         $rootScope.settings = settings;
@@ -152,25 +153,25 @@ angular.module('app.factorys', [])
         return {
             // 请求发出之前，可以用于添加各种身份验证信息
             request: function(config) {
-                if (localStorage.token) {
-                    config.headers.token = localStorage.token;
-                }
-                console.log('request by config:', config);
+                // if (localStorage.token) {
+                //     config.headers.token = localStorage.token;
+                // }
+                // console.log('request by config:', config);
                 return config;
             },
             // 请求发出时出错
             requestError: function(err) {
-                console.log('request by error:', err);
+                // console.log('request by error:', err);
                 return $q.reject(err);
             },
             // 成功返回了响应
             response: function(res) {
-                console.log('response by res:', res);
+                // console.log('response by res:', res);
                 return res;
             },
             // 返回的响应出错，包括后端返回响应时，设置了非 200 的 http 状态码
             responseError: function(err) {
-                console.log('response by error:', err);
+                // console.log('response by error:', err);
                 if (-1 === err.status) {
                     // 远程服务器无响应
                 } else if (401 === err.status) {

@@ -12,8 +12,8 @@ angular.module('app.config', [])
     //配置预加载默认值
     .config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
         $ocLazyLoadProvider.config({
-            debug: false,
-            event: false
+            // debug: false,
+            // event: false
         });
     }])
     //设置初始变量
