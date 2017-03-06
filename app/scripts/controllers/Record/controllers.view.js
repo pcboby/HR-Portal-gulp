@@ -1,6 +1,6 @@
 'use strict';
 angular.module('app')
-    .controller('RecordView', function($rootScope,$scope, $element, $stateParams, NgTableParams, RecordList) {
+    .controller('RecordView', function($rootScope, $scope, $Until, $element, $stateParams, NgTableParams, RecordList) {
         $scope.pageType = 'VIEW'; //EDIT or VIEW
 
         $scope._saveAll = _saveAll;
