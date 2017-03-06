@@ -19,7 +19,7 @@ var $path = {
 var paths = {
     scripts: [$path.app + '/scripts/app/*.js'],
     css: [$path.app + '/themes/**/css/*'],
-    images: [$path.app + '/themes/**/images/*'],
+    images: [$path.app + '/themes/**/images/**/*'],
     fonts: [$path.app + '/themes/**/fonts/*'],
     test: ['test/spec/**/*.js'],
     testRequire: [

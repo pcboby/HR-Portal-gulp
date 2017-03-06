@@ -5411,8 +5411,8 @@ function _create(expr, options) {
 	options.pluginsPath = _undef(options.pluginsPath, options.basePath + 'plugins/');
 	if (_undef(options.loadStyleMode, K.options.loadStyleMode)) {
 		var themeType = _undef(options.themeType, K.options.themeType);
-		_loadStyle(options.themesPath + 'default/default.css');
-		_loadStyle(options.themesPath + themeType + '/' + themeType + '.css');
+		// _loadStyle(options.themesPath + 'default/default.css');
+		// _loadStyle(options.themesPath + themeType + '/' + themeType + '.css');
 	}
 	function create(editor) {
 		_each(_plugins, function(name, fn) {

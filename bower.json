@@ -53,8 +53,7 @@
     "kindeditor": {
       "main": [
         "kindeditor.js",
-        "lang/zh-CN.js",
-        "themes/default/default.css"
+        "lang/zh-CN.js"
       ]
     },
     "angular-i18n": {
