@@ -152,7 +152,7 @@ angular.module('app.directives', [])
 
             },
             link: function(scope, elmt, attrs) {
-                var fn=attrs.formOpen=='true' ? '$edit' : '$view';
+                var fn=attrs.formOpen==='true' ? '$edit' : '$view';
                 scope[fn]();
             }
         };
