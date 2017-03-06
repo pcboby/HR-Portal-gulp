@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-9">
         <!--  -->
-        <form class="form-horizontal" ng-form-block ng-page-label data-form-type="{{pageType}}">
+        <form class="form-horizontal" ng-form-block ng-page-label data-form-open="{{pageType=='ADD'}}">
             <div class="form-horizontal-header">
                 <i class="fa fa-bookmark"></i><span>访谈记录</span>
                 <div class="btn-group pull-right">
@@ -31,7 +31,7 @@
                     <a class="btn btn-link"
                         data-type="success"
                         data-title="取消"
-                        ng-if="$isEdit"
+                        ng-if="$isEdit&&pageType=='VIEW'"
                         ng-click="$view()"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-share"></i>
@@ -111,7 +111,7 @@
             </div>
         </form>
         <!--  -->
-        <form class="form-horizontal" ng-form-block ng-page-label data-form-type="{{pageType}}">
+        <form class="form-horizontal" ng-form-block ng-page-label data-form-open="{{pageType=='ADD'}}">
             <div class="form-horizontal-header">
                 <i class="fa fa-bookmark"></i><span>基本信息</span>
                 <div class="btn-group pull-right">
@@ -130,7 +130,7 @@
                         data-type="success"
                         data-title="保存"
                         ng-if="$isEdit"
-                        ng-click="$view()"
+                        ng-click="_save();$view();"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-floppy-saved"></i>
                         <span>保存</span>
@@ -138,7 +138,7 @@
                     <a class="btn btn-link"
                         data-type="success"
                         data-title="取消"
-                        ng-if="$isEdit"
+                        ng-if="$isEdit&&pageType=='VIEW'"
                         ng-click="$view()"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-share"></i>
@@ -265,7 +265,7 @@
             </div>
         </form>
         <!--  -->
-        <form class="form-horizontal" ng-form-block ng-page-label data-form-type="{{pageType}}">
+        <form class="form-horizontal" ng-form-block ng-page-label data-form-open="{{pageType=='ADD'}}">
             <div class="form-horizontal-header">
                 <i class="fa fa-bookmark"></i><span>信息记录</span>
                 <div class="btn-group pull-right">
@@ -284,7 +284,7 @@
                         data-type="success"
                         data-title="保存"
                         ng-if="$isEdit"
-                        ng-click="$view()"
+                        ng-click="_save();$view();"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-floppy-saved"></i>
                         <span>保存</span>
@@ -292,7 +292,7 @@
                     <a class="btn btn-link"
                         data-type="success"
                         data-title="取消"
-                        ng-if="$isEdit"
+                        ng-if="$isEdit&&pageType=='VIEW'"
                         ng-click="$view()"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-share"></i>
@@ -385,7 +385,7 @@
             </div>
         </form>
         <!--  -->
-        <form class="form-horizontal" ng-form-block ng-page-label data-form-type="{{pageType}}">
+        <form class="form-horizontal" ng-form-block ng-page-label data-form-open="{{pageType=='ADD'}}">
             <div class="form-horizontal-header">
                 <i class="fa fa-bookmark"></i><span>个人发展与工作安排</span>
                 <div class="btn-group pull-right">
@@ -404,7 +404,7 @@
                         data-type="success"
                         data-title="保存"
                         ng-if="$isEdit"
-                        ng-click="$view()"
+                        ng-click="_save();$view();"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-floppy-saved"></i>
                         <span>保存</span>
@@ -412,7 +412,7 @@
                     <a class="btn btn-link"
                         data-type="success"
                         data-title="取消"
-                        ng-if="$isEdit"
+                        ng-if="$isEdit&&pageType=='VIEW'"
                         ng-click="$view()"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-share"></i>
@@ -485,7 +485,7 @@
             </div>
         </form>
         <!--  -->
-        <form class="form-horizontal" ng-form-block ng-page-label data-form-type="{{pageType}}">
+        <form class="form-horizontal" ng-form-block ng-page-label data-form-open="{{pageType=='ADD'}}">
             <div class="form-horizontal-header">
                 <i class="fa fa-bookmark"></i><span>工作环境与氛围</span>
                 <div class="btn-group pull-right">
@@ -504,7 +504,7 @@
                         data-type="success"
                         data-title="保存"
                         ng-if="$isEdit"
-                        ng-click="$view()"
+                        ng-click="_save();$view();"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-floppy-saved"></i>
                         <span>保存</span>
@@ -512,7 +512,7 @@
                     <a class="btn btn-link"
                         data-type="success"
                         data-title="取消"
-                        ng-if="$isEdit"
+                        ng-if="$isEdit&&pageType=='VIEW'"
                         ng-click="$view()"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-share"></i>
@@ -585,7 +585,7 @@
             </div>
         </form>
         <!--  -->
-        <form class="form-horizontal" ng-form-block ng-page-label data-form-type="{{pageType}}">
+        <form class="form-horizontal" ng-form-block ng-page-label data-form-open="{{pageType=='ADD'}}">
             <div class="form-horizontal-header">
                 <i class="fa fa-bookmark"></i><span>工作回报与激情</span>
                 <div class="btn-group pull-right">
@@ -604,7 +604,7 @@
                         data-type="success"
                         data-title="保存"
                         ng-if="$isEdit"
-                        ng-click="$view()"
+                        ng-click="_save();$view();"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-floppy-saved"></i>
                         <span>保存</span>
@@ -612,7 +612,7 @@
                     <a class="btn btn-link"
                         data-type="success"
                         data-title="取消"
-                        ng-if="$isEdit"
+                        ng-if="$isEdit&&pageType=='VIEW'"
                         ng-click="$view()"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-share"></i>
@@ -649,7 +649,7 @@
             </div>
         </form>
         <!--  -->
-        <form class="form-horizontal" ng-form-block ng-page-label data-form-type="{{pageType}}">
+        <form class="form-horizontal" ng-form-block ng-page-label data-form-open="{{pageType=='ADD'}}">
             <div class="form-horizontal-header">
                 <i class="fa fa-bookmark"></i><span>工作与生活平衡</span>
                 <div class="btn-group pull-right">
@@ -668,7 +668,7 @@
                         data-type="success"
                         data-title="保存"
                         ng-if="$isEdit"
-                        ng-click="$view()"
+                        ng-click="_save();$view();"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-floppy-saved"></i>
                         <span>保存</span>
@@ -676,7 +676,7 @@
                     <a class="btn btn-link"
                         data-type="success"
                         data-title="取消"
-                        ng-if="$isEdit"
+                        ng-if="$isEdit&&pageType=='VIEW'"
                         ng-click="$view()"
                         bs-tooltip>
                         <i class="glyphicon glyphicon-share"></i>
@@ -715,6 +715,7 @@
         <div style="margin: 20px 0px;">
             <button type="button" class="btn btn-success" ng-click="_saveAll()" ng-disabled="settings.hasEdit.length<1">全部提交</button>
             <button type="button" class="btn btn-default" ng-click="_reset()" ng-disabled="settings.hasEdit.length<1">重置</button>
+            <button type="button" class="btn btn-default" ng-click="_reset()" ng-if="pageType=='VIEW'">删除</button>
         </div>
     </div>
 </div>

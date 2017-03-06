@@ -122,9 +122,7 @@ angular.module('app.directives', [])
                 var qid = 'BlockForm_' + getRandom(8);
                 $element.attr('ng-form-block-query', qid);
 
-                $scope.$on('$destroy', function() {
-                    $rootScope.settings.hasEdit = [];
-                });
+                $scope.$on('$destroy', $scope.$view);
 
 
 
@@ -154,7 +152,7 @@ angular.module('app.directives', [])
 
             },
             link: function(scope, elmt, attrs) {
-                var fn=attrs.formType === 'EDIT' ? '$edit' : '$view';
+                var fn=attrs.formOpen=='true' ? '$edit' : '$view';
                 scope[fn]();
             }
         };

@@ -7,11 +7,13 @@ angular.module('app')
         $scope._save = _save;
 
         function _save() {
+            $scope.pageType = 'VIEW';
             $Until.alert('保存成功！')
         }
 
         function _saveAll() {
             $rootScope.settings.hasEdit = [];
             console.log('do _saveAll');
+            _save();
         }
     });
