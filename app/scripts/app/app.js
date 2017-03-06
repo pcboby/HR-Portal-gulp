@@ -4,6 +4,7 @@ angular.module('app', [
         'oc.lazyLoad',
         'mgcrea.ngStrap',
         'ngSanitize',
+        'angularFileUpload',
         "ngResource",
         "ngAnimate",
         'ngTable',

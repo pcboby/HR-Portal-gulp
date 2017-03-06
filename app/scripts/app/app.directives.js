@@ -60,6 +60,93 @@ angular.module('app.directives', [])
             }
         };
     }])
+    .directive('ngComboFile', function() {
+        return {
+            restrict: 'A',
+            scope: {},
+            controller: function($scope, $modal) {
+                $scope.$open = function() {
+                    console.log('open')
+                    var modal = $modal({
+                        title: '文件上传:',
+                        templateUrl: 'tpls/model.comboFile.html',
+                        backdrop: true,
+                        controller: function($scope, FileUploader) {
+
+                            $scope.settings=angular.extend({},{
+                                maxLens:5,
+                                Delay:1e3
+                            })
+
+                            var uploader = $scope.uploader = new FileUploader({
+                                url: 'upload.php'
+                            });
+
+                            // a sync filter
+                            uploader.filters.push({
+                                name: 'syncFilter',
+                                fn: function(item /*{File|FileLikeObject}*/ , options) {
+                                    console.log('syncFilter');
+                                    return this.queue.length < $scope.settings.maxLens;
+                                }
+                            });
+
+                            // an async filter
+                            uploader.filters.push({
+                                name: 'asyncFilter',
+                                fn: function(item /*{File|FileLikeObject}*/ , options, deferred) {
+                                    console.log('asyncFilter');
+                                    setTimeout(deferred.resolve, $scope.settings.Delay);
+                                }
+                            });
+
+                            // CALLBACKS
+
+                            uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/ , filter, options) {
+                                // console.info('onWhenAddingFileFailed', item, filter, options);
+                            };
+                            uploader.onAfterAddingFile = function(fileItem) {
+                                // console.info('onAfterAddingFile', fileItem);
+                            };
+                            uploader.onAfterAddingAll = function(addedFileItems) {
+                                // console.info('onAfterAddingAll', addedFileItems);
+                            };
+                            uploader.onBeforeUploadItem = function(item) {
+                                // console.info('onBeforeUploadItem', item);
+                            };
+                            uploader.onProgressItem = function(fileItem, progress) {
+                                // console.info('onProgressItem', fileItem, progress);
+                            };
+                            uploader.onProgressAll = function(progress) {
+                                // console.info('onProgressAll', progress);
+                            };
+                            uploader.onSuccessItem = function(fileItem, response, status, headers) {
+                                // console.info('onSuccessItem', fileItem, response, status, headers);
+                            };
+                            uploader.onErrorItem = function(fileItem, response, status, headers) {
+                                // console.info('onErrorItem', fileItem, response, status, headers);
+                            };
+                            uploader.onCancelItem = function(fileItem, response, status, headers) {
+                                // console.info('onCancelItem', fileItem, response, status, headers);
+                            };
+                            uploader.onCompleteItem = function(fileItem, response, status, headers) {
+                                // console.info('onCompleteItem', fileItem, response, status, headers);
+                            };
+                            uploader.onCompleteAll = function() {
+                                // console.info('onCompleteAll');
+                            };
+
+                            // console.info('uploader', uploader);
+                        },
+                        show: true
+                    });
+                }
+            },
+            link: function(scope, iElement, iAttrs) {
+                iElement.on('click', scope.$open)
+            }
+        };
+    })
     .directive('ngComboSelect', function() {
         return {
             restrict: 'AEC',
@@ -136,21 +223,21 @@ angular.module('app.directives', [])
 
                 };
 
-                $scope.$watch(function(){
+                $scope.$watch(function() {
                     return $rootScope.settings.hasEdit;
-                },function(elems){
-                    var flag=false;
-                    angular.forEach(elems,function(elmt){
+                }, function(elems) {
+                    var flag = false;
+                    angular.forEach(elems, function(elmt) {
                         if (elmt.qid === qid) {
-                            flag=true;
+                            flag = true;
                         }
                     });
-                    $scope.$isEdit=flag;
-                },true);
+                    $scope.$isEdit = flag;
+                }, true);
 
             },
             link: function(scope, elmt, attrs) {
-                var fn=attrs.formOpen==='true' ? '$edit' : '$view';
+                var fn = attrs.formOpen === 'true' ? '$edit' : '$view';
                 scope[fn]();
             }
         };

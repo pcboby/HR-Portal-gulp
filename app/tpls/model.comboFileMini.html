@@ -1,0 +1,31 @@
+
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" ng-show="title">
+                <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ng-bind="title"></h4>
+            </div>
+            <div class="modal-body">
+                <!--  -->
+                <div class="row">
+                	<div class="col-md-8">
+                		<div class="btn-group">	
+	                		<input type="file" class="btn btn-default btn-sm" nv-file-select="" uploader="uploader" />
+	                	</div>
+	                </div>
+                	<div class="col-md-4">
+                		<div class="btn-group pull-right">
+                		</div>
+                	</div>
+                </div>
+                <!--  -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="$hide();">取消</button>
+                <button type="button" class="btn btn-danger" ng-click="uploader.clearQueue()" ng-disabled="!uploader.getNotUploadedItems().length">清除</button>
+                <button type="button" class="btn btn-primary" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">上传</button>
+            </div>
+        </div>
+    </div>
+</div>
