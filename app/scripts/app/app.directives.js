@@ -63,20 +63,30 @@ angular.module('app.directives', [])
     .directive('ngComboFile', function() {
         return {
             restrict: 'A',
-            scope: {},
+            scope: {
+                ngModel: '='
+            },
             controller: function($scope, $modal) {
+
+                var getter = function(paramName) {
+                    return $scope[paramName];
+                };
+                var setter = function(paramName, val) {
+                    $scope[paramName] = val;
+                };
+
                 $scope.$open = function() {
                     console.log('open')
                     var modal = $modal({
                         title: '文件上传:',
-                        templateUrl: 'tpls/model.comboFile.html',
+                        templateUrl: $scope.mini ? 'tpls/model.comboFileMini.html' : 'tpls/model.comboFile.html',
                         backdrop: true,
                         controller: function($scope, FileUploader) {
 
-                            $scope.settings=angular.extend({},{
-                                maxLens:5,
-                                Delay:1e3
-                            })
+                            var multiple = $scope.multiple = getter('multiple');
+                            var accept = $scope.accept = getter('accept');
+                            var maxLen = $scope.maxLen = getter('maxLen');
+                            var delay = $scope.delay = getter('delay');
 
                             var uploader = $scope.uploader = new FileUploader({
                                 url: 'upload.php'
@@ -86,8 +96,8 @@ angular.module('app.directives', [])
                             uploader.filters.push({
                                 name: 'syncFilter',
                                 fn: function(item /*{File|FileLikeObject}*/ , options) {
-                                    console.log('syncFilter');
-                                    return this.queue.length < $scope.settings.maxLens;
+                                    // console.log('syncFilter');
+                                    return this.queue.length < maxLen;
                                 }
                             });
 
@@ -95,45 +105,45 @@ angular.module('app.directives', [])
                             uploader.filters.push({
                                 name: 'asyncFilter',
                                 fn: function(item /*{File|FileLikeObject}*/ , options, deferred) {
-                                    console.log('asyncFilter');
-                                    setTimeout(deferred.resolve, $scope.settings.Delay);
+                                    // console.log('asyncFilter');
+                                    setTimeout(deferred.resolve, delay * 1000);
                                 }
                             });
 
                             // CALLBACKS
 
                             uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/ , filter, options) {
-                                // console.info('onWhenAddingFileFailed', item, filter, options);
+                                console.info('onWhenAddingFileFailed', item, filter, options);
                             };
                             uploader.onAfterAddingFile = function(fileItem) {
-                                // console.info('onAfterAddingFile', fileItem);
+                                console.info('onAfterAddingFile', fileItem);
                             };
                             uploader.onAfterAddingAll = function(addedFileItems) {
-                                // console.info('onAfterAddingAll', addedFileItems);
+                                console.info('onAfterAddingAll', addedFileItems);
                             };
                             uploader.onBeforeUploadItem = function(item) {
-                                // console.info('onBeforeUploadItem', item);
+                                console.info('onBeforeUploadItem', item);
                             };
                             uploader.onProgressItem = function(fileItem, progress) {
-                                // console.info('onProgressItem', fileItem, progress);
+                                console.info('onProgressItem', fileItem, progress);
                             };
                             uploader.onProgressAll = function(progress) {
-                                // console.info('onProgressAll', progress);
+                                console.info('onProgressAll', progress);
                             };
                             uploader.onSuccessItem = function(fileItem, response, status, headers) {
-                                // console.info('onSuccessItem', fileItem, response, status, headers);
+                                console.info('onSuccessItem', fileItem, response, status, headers);
                             };
                             uploader.onErrorItem = function(fileItem, response, status, headers) {
-                                // console.info('onErrorItem', fileItem, response, status, headers);
+                                console.info('onErrorItem', fileItem, response, status, headers);
                             };
                             uploader.onCancelItem = function(fileItem, response, status, headers) {
-                                // console.info('onCancelItem', fileItem, response, status, headers);
+                                console.info('onCancelItem', fileItem, response, status, headers);
                             };
                             uploader.onCompleteItem = function(fileItem, response, status, headers) {
-                                // console.info('onCompleteItem', fileItem, response, status, headers);
+                                console.info('onCompleteItem', fileItem, response, status, headers);
                             };
                             uploader.onCompleteAll = function() {
-                                // console.info('onCompleteAll');
+                                console.info('onCompleteAll');
                             };
 
                             // console.info('uploader', uploader);
@@ -143,7 +153,12 @@ angular.module('app.directives', [])
                 }
             },
             link: function(scope, iElement, iAttrs) {
-                iElement.on('click', scope.$open)
+                iElement.on('click', scope.$open);
+                scope.mini = iAttrs['mini']==='true'; //显示方案：‘MINI’ or 'FULL'
+                scope.multiple = iAttrs['multiple']; //多文件选择方案:true or false
+                scope.accept = iAttrs['accept'] || '*'; //设置上传类型
+                scope.maxLen = iAttrs['maxLen'] || 1; //最大文件数
+                scope.delay = iAttrs['delay'] || 0; //上传前等待延时,单位:秒
             }
         };
     })
