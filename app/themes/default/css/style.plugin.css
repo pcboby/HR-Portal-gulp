@@ -160,6 +160,10 @@ footer {
     margin: -6px;
 }
 
+.checkbox-inline,.radio-inline{
+    padding-left: 20px;
+}
+
 .panel {}
 
 .panel .panel-heading {}

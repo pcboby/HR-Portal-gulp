@@ -4,11 +4,25 @@ angular.module('app')
 
 
         $scope.forms = {
-            userName: $stateParams.userName || '',
+            userName: $stateParams.userName || 'Gear',
             department: $stateParams.department || '',
             dateEntryFrom: $stateParams.dateEntryFrom || '',
             dateEntryUntil: $stateParams.dateEntryUntil || ''
         }
+
+        $scope.data_users=[{
+            value:'Gear',
+            label:'<i class="fa fa-gear"></i> Gear'
+        },{
+            value:'Globe',
+            label:'<i class="fa fa-globe"></i> Globe'
+        },{
+            value:'Heart',
+            label:'<i class="fa fa-heart"></i> Heart'
+        },{
+            value:'Camera',
+            label:'<i class="fa fa-camera"></i> Camera'
+        }]
 
         $scope.data = [];
         $scope.checked = 0; //已经选中数量

@@ -1,0 +1,11 @@
+<div class="{{$inline=='true'?'checkbox-inline':'checkbox'}}">
+	<label>
+		<input
+			type="checkbox"
+			name="{{$name}}"
+			ng-model="$model"
+            ng-disabled="$disabled"
+			>
+		<span ng-bind="$label"></span>
+	</label>
+</div>

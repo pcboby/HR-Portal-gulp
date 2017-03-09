@@ -192,6 +192,25 @@ angular.module('app.directives', [])
             }
         };
     })
+    // .directive('ngComboInput', function () {
+    //     return {
+    //         restrict: 'AEC',
+    //         templateUrl:'tpls/model.comboInput.html',
+    //         replace:true,
+    //         scope:{
+    //             $model:'=ngModel',
+    //             $data:'=ngData',
+    //             $options:'@options',
+    //             $label:'@label',
+    //             $addon:'@addon',
+    //             $placeholder:'@placeholder'
+    //         },
+    //         controller:function($scope){
+    //         },
+    //         link: function (scope, iElement, iAttrs) {
+    //         }
+    //     };
+    // })
     .directive('ngPageLabelBar', function() {
         return {
             restrict: 'AEC',
@@ -459,90 +478,90 @@ angular.module('app.directives', [])
             }
         };
     }])
-    // .directive('ngComboSearch', function() {
-    //     return {
-    //         restrict: 'AE',
-    //         replace: true,
-    //         scope: {
-    //             $data: '=ngData',
-    //             ngModel: '=',
-    //             options: '@',
-    //             //-----------------------
-    //             placeholder: '@',
-    //             iconClass: '@',
-    //             iconDisplay: '@',
-    //             btnDisplay: '@',
-    //             btnValue: '@',
-    //             //-----------------------
-    //             modalTitle: '@',
-    //             modalTemplateUrl: '@',
-    //             modalBackdrop: '@'
-    //         },
-    //         templateUrl: 'tpls/input.combosearch.html',
-    //         controller: function($scope, $log, $modal, NgTableParams) {
+    .directive('ngComboSearch', function() {
+        return {
+            restrict: 'AE',
+            replace: true,
+            scope: {
+                $data: '=ngData',
+                ngModel: '=',
+                options: '@',
+                //-----------------------
+                placeholder: '@',
+                iconClass: '@',
+                iconDisplay: '@',
+                btnDisplay: '@',
+                btnValue: '@',
+                //-----------------------
+                modalTitle: '@',
+                modalTemplateUrl: '@',
+                modalBackdrop: '@'
+            },
+            templateUrl: 'tpls/input.combosearch.html',
+            controller: function($scope, $log, $modal, NgTableParams) {
 
-//             var modal = $modal({
-//                 title: $scope.modalTitle,
-//                 templateUrl: $scope.modalTemplateUrl,
-//                 backdrop: $scope.modalBackdrop,
-//                 controller: modalCtrl,
-//                 show: false
-//             });
+            var modal = $modal({
+                title: $scope.modalTitle,
+                templateUrl: $scope.modalTemplateUrl,
+                backdrop: $scope.modalBackdrop,
+                controller: modalCtrl,
+                show: false
+            });
 
-//             $scope.openModal = function() {
-//                 // modal.$promise.then(modal.show);
-//             }
+            $scope.openModal = function() {
+                // modal.$promise.then(modal.show);
+            }
 
-//             /////*********************************************************
-//             /////*********************************************************
-//             function confirm($selected) {
-//                 $scope.ngModel = $selected;
-//             }
+            /////*********************************************************
+            /////*********************************************************
+            function confirm($selected) {
+                $scope.ngModel = $selected;
+            }
 
-//             function cancel() {
-//                 $log.log('cancel');
-//             }
+            function cancel() {
+                $log.log('cancel');
+            }
 
-//             function getSelected() {
-//                 return $scope.ngModel;
-//             }
+            function getSelected() {
+                return $scope.ngModel;
+            }
 
-//             function isSelect() {
-//                 var obj = {};
-//                 if ($scope.ngModel) {
-//                     obj[$scope.ngModel] = true;
-//                 }
-//                 return obj;
-//             }
+            function isSelect() {
+                var obj = {};
+                if ($scope.ngModel) {
+                    obj[$scope.ngModel] = true;
+                }
+                return obj;
+            }
 
-//             function getData() {
-//                 return $scope.$data;
-//             }
+            function getData() {
+                return $scope.$data;
+            }
 
-//             function modalCtrl($scope) {
-//                 $scope.$data = getData();
-//                 $scope.$selected = getSelected() || null;
-//                 $scope.$isSelect = isSelect();
+            function modalCtrl($scope) {
+                $scope.$data = getData();
+                $scope.$selected = getSelected() || null;
+                $scope.$isSelect = isSelect();
 
-//                 $scope.tableParams = new NgTableParams({
-//                     page: 1,
-//                     count: 5
-//                 }, {
-//                     counts: false,
-//                     dataset: $scope.$data
-//                 });
+                $scope.tableParams = new NgTableParams({
+                    page: 1,
+                    count: 5
+                }, {
+                    counts: false,
+                    dataset: $scope.$data
+                });
 
-//                 $scope.confirm = confirm;
-//                 $scope.cancel = cancel;
+                $scope.confirm = confirm;
+                $scope.cancel = cancel;
 
-//                 $scope.$select = function($item) {
-//                     $scope.$isSelect = {};
-//                     $scope.$isSelect[$item] = !$scope.$isSelect[$item];
-//                     $scope.$selected = $item;
-//                 }
-//             }
+                $scope.$select = function($item) {
+                    $scope.$isSelect = {};
+                    $scope.$isSelect[$item] = !$scope.$isSelect[$item];
+                    $scope.$selected = $item;
+                }
+            }
 
-//         }
-//     }
-// })
+        }
+    }
+})
 ;

@@ -69,15 +69,15 @@ angular.module('app.factorys', [])
 
         function useModal(params) {
             // console.log('useModal')
-            if (angular.isObject(params[0])) {
-                var modal = $modal(angular.extend({}, modal_defaults, params[0], true));
-            } else {
-                var modal = $modal(angular.extend({}, modal_defaults, {
-                    title: params[0],
-                    content: params[1]
-                }));
-            }
-            return modal;
+            // if (angular.isObject(params[0])) {
+            //     var modal = $modal(angular.extend({}, modal_defaults, params[0], true));
+            // } else {
+            //     var modal = $modal(angular.extend({}, modal_defaults, {
+            //         title: params[0],
+            //         content: params[1]
+            //     }));
+            // }
+            // return modal;
         }
 
         return {
@@ -95,7 +95,7 @@ angular.module('app.factorys', [])
                 useBootbox('prompt', arguments);
             },
             dialog: function() {
-                return useModal(arguments);
+                // return useModal(arguments);
             }
         };
     }])

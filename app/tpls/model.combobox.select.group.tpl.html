@@ -1,0 +1,21 @@
+<ul tabindex="-1" class="select dropdown-menu dropdown-menu-list"
+    ng-show="$isVisible()"
+    role="select">
+    <li ng-if="$showAllNoneButtons" ng-init="traceAll()"
+        ng-click="$activeIndex.length==$matches.length?$selectNone():$selectAll()">
+        <div>
+            <input type="checkbox" class="combo-select-all"
+                ng-checked="$activeIndex.length==$matches.length">
+            <span>全部</span>
+        </div>
+
+    </li>
+    <li role="separator" class="divider" ng-if="$showAllNoneButtons"></li>
+    <li role="presentation" ng-repeat="match in $matches"
+        ng-click="$select($index, $event);">
+        <div>
+            <input type="radio" ng-checked="$isActive($index);" style="margin-right: 5px;">
+            <span ng-bind="match.label"></span>
+        </div>
+    </li>
+</ul>

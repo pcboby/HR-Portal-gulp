@@ -4,7 +4,7 @@
     	aria-valuenow="{{valueNow}}"
     	aria-valuemin="{{valueMin}}"
     	aria-valuemax="{{valueMax}}"
-    	style="width: {{valueNow}}%">
+    	ng-style="{ 'width': valueNow + '%' }">
         <span class="sr-only">{{valueNow}}%</span>
     </div>
 </div>

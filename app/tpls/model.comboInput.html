@@ -1,0 +1,17 @@
+<div class="form-group">
+    <label class="col-md-3 control-label" ng-bind="$label"></label>
+    <div class="input-group col-md-9">
+        <span ng-if="$addon" class="input-group-addon">
+            <i class="{{$addon}}"></i>
+        </span>
+
+        <input type="text" class="form-control"
+            placeholder="{{$placeholder}}"
+            ng-model="$model"
+            data-min-length="0"
+            data-html="1"
+            data-auto-select="true"
+            bs-options="{{$options}}"
+            bs-typeahead>
+    </div>
+</div>

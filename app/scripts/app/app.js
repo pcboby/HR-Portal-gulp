@@ -13,7 +13,8 @@ angular.module('app', [
         'app.factorys',
         'app.directives',
         'app.resources',
-        'app.filters'
+        'app.filters',
+        'ngCombobox'
     ])
     .run(['$rootScope', 'settings', '$state', function($rootScope, settings, $state) {
         $rootScope.$state = $state;

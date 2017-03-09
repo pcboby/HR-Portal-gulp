@@ -3,36 +3,48 @@ angular.module('app')
     .controller('UI', function($scope, $Until, $element, $state, $stateParams, NgTableParams, RecordList, DataSearch) {
 
         $scope.dimensions = [{
-            id: 0,
+            id: '1000',
             name: '沟通方式'
         }, {
-            id: 1,
+            id: '1001',
             name: '职级'
         }, {
-            id: 2,
+            id: '1002',
             name: '近3年商业领袖职能'
         }, {
-            id: 3,
+            id: '1003',
             name: '近3年海外回机关',
             checked: true
         }, {
-            id: 4,
+            id: '1004',
             name: '沟通发起'
         }, {
-            id: 5,
+            id: '1005',
             name: '部门'
         }, {
-            id: 6,
+            id: '1006',
             name: '年龄数'
         }, {
-            id: 7,
+            id: '1008',
             name: '是否管理者'
         }, {
-            id: 8,
+            id: '1009',
             name: '人才类型'
         }, {
-            id: 9,
+            id: '1010',
             name: '工作地'
+        }]
+
+
+        $scope.data_choose=[{
+            label:'选择1',
+            value:'1001'
+        },{
+            label:'选择2',
+            value:'1002'
+        },{
+            label:'选择3',
+            value:'1003'
         }]
 
 

@@ -1,0 +1,12 @@
+<div class="{{$inline=='true'?'radio-inline':'radio'}}">
+	<label>
+		<input
+			type="radio"
+			value="{{$value}}"
+			name="{{$name}}"
+			ng-model="$model"
+            ng-disabled="$disabled"
+			>
+		<span ng-bind="$label"></span>
+	</label>
+</div>
