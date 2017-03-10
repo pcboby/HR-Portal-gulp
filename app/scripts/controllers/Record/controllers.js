@@ -1,6 +1,6 @@
 'use strict';
 angular.module('app')
-    .controller('Record', function($scope, $element, $Until, $state, $stateParams, $tableParams, $tableParamsLock, RecordList) {
+    .controller('Record', function($scope, $element, $Until, $state, $stateParams, $tableParams, RecordList) {
 
 
         $scope.forms = {
@@ -54,18 +54,16 @@ angular.module('app')
                     $scope.statistics = res.statistics;
                     params.total(res.total);
 
-                    $tableParamsLock.settings($scope, {
-                        dataset: res.rows,
-                        page: params.page(),
-                        counts: params.count()
-                    })
-
                     return res.rows;
                 });
             }
         })
 
-        $tableParamsLock.init($scope, $scope.tableParams);
+        $scope.tableParamsLock=$tableParams.creat($scope);
+
+        $tableParams.bind($scope,'tableParams','tableParamsLock')
+
+        // $tableParamsLock.init($scope, $scope.tableParams);
 
         function _search() {
             console.log('_search', $scope.forms);

@@ -236,24 +236,59 @@ angular.module('app.factorys', [])
                     angular.element($document[0].getElementsByClassName("select-all")).prop("indeterminate", (checked !== 0 && unchecked !== 0));
                 }, true);
                 return nt;
+            },
+            bind:function(scope,tableObj,bindTableObj){
+
+                //主表count变化时，改变子表count
+                scope.$watch(function(){
+                    return scope[tableObj].count();
+                },function(count){
+                    scope[bindTableObj].count(count)
+                },true)
+                //主表data变化时，改变子表dataset
+                scope.$watch(function(){
+                    return scope[tableObj].data
+                },function(dataset){
+                    scope[bindTableObj].settings({dataset:dataset})
+                },true)
+
+                //子表sorting变化时，调整主表sorting
+                scope.$watch(function() {
+                    return scope[bindTableObj].sorting();
+                }, function(sort) {
+                    scope[tableObj].sorting(sort);
+                }, true);
+
             }
         };
     }])
     // 辅助封装NgTableParams表格锁定列
-    .factory('$tableParamsLock', ['$tableParams', function($tableParams) {
-        return {
-            init: function(scope, lockTableObj) {
-                scope.tableParamsLock = $tableParams.creat(scope);
+    // .factory('$tableParamsLock', ['$tableParams', function($tableParams) {
+    //     return {
+    //         init: function(scope, tableObj) {
+    //             scope.tableParamsLock = $tableParams.creat(scope);
 
-                scope.$watch(function() {
-                    return scope.tableParamsLock.sorting();
-                }, function(sort) {
-                    lockTableObj.sorting(sort);
-                }, true);
+    //             //主表count变化时，改变子表count
+    //             scope.$watch(function(){
+    //                 return tableObj.count();
+    //             },function(count){
+    //                 console.log('tableObj',tableObj.data)
+    //                 scope.tableParamsLock.count(count)
+    //             },true)
+    //             //主表data变化时，改变子表dataset
+    //             scope.$watch(function(){
+    //                 return tableObj.data
+    //             },function(dataset){
+    //                 scope.tableParamsLock.settings({dataset:dataset})
+    //             },true)
 
-            },
-            settings: function(scope, settings) {
-                scope.tableParamsLock.settings(settings);
-            }
-        };
-    }]);
+    //             //子表sorting变化时，调整主表sorting
+    //             scope.$watch(function() {
+    //                 return scope.tableParamsLock.sorting();
+    //             }, function(sort) {
+    //                 tableObj.sorting(sort);
+    //             }, true);
+
+    //         }
+    //     };
+    // }]);
