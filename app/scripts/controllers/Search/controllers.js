@@ -1,6 +1,6 @@
 'use strict';
 angular.module('app')
-    .controller('Search', function($scope, $element, $state, $stateParams, $tableParams, $tableParamsLock, SimpleList) {
+    .controller('Search', function($scope, $element, $state, $stateParams, $tableParams, SimpleList) {
 
         // console.log('Search $stateParams',$stateParams)
 
@@ -28,18 +28,15 @@ angular.module('app')
                     $scope.statistics = res.statistics;
                     params.total(res.total);
 
-                    $tableParamsLock.settings($scope, {
-                        dataset: res.rows,
-                        page: params.page(),
-                        counts: params.count()
-                    })
 
                     return res.rows;
                 });
             }
         })
 
-        $tableParamsLock.init($scope, $scope.tableParams);
+        $scope.tableParamsLock=$tableParams.creat($scope);
+
+        $tableParams.bind($scope,'tableParams','tableParamsLock')
 
 
         function _view(id) {

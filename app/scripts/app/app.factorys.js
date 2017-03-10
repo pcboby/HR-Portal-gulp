@@ -5,7 +5,7 @@ angular.module('app.factorys', [])
             layout: {
                 pageState: 'Dashboard'
             },
-            hasEdit:[]
+            hasEdit: []
         };
 
         $rootScope.settings = settings;
@@ -133,23 +133,23 @@ angular.module('app.factorys', [])
     //                 var $http = $injector.get('$http');
     //                 var deferred = $q.defer();
 
-    //                 // Create a new session (recover the session)
-    //                 // We use login method that logs the user in using the current credentials and
-    //                 // returns a promise
-    //                 SessionService.login().then(deferred.resolve, deferred.reject);
+//                 // Create a new session (recover the session)
+//                 // We use login method that logs the user in using the current credentials and
+//                 // returns a promise
+//                 SessionService.login().then(deferred.resolve, deferred.reject);
 
-    //                 // When the session recovered, make the same backend call again and chain the request
-    //                 return deferred.promise.then(function() {
-    //                     return $http(response.config);
-    //                 });
-    //             }
-    //             return $q.reject(response);
-    //         }
-    //     };
-    //     return sessionRecoverer;
-    // }])
-    //拦截请求与返回
-    .factory('HttpInterceptor', ['$q', function($q) {
+//                 // When the session recovered, make the same backend call again and chain the request
+//                 return deferred.promise.then(function() {
+//                     return $http(response.config);
+//                 });
+//             }
+//             return $q.reject(response);
+//         }
+//     };
+//     return sessionRecoverer;
+// }])
+//拦截请求与返回
+.factory('HttpInterceptor', ['$q', function($q) {
         return {
             // 请求发出之前，可以用于添加各种身份验证信息
             request: function(config) {
@@ -204,10 +204,8 @@ angular.module('app.factorys', [])
                 }, true);
 
                 scope.$watch(function() {
-                    // console.log('nt.checkboxes',nt.checkboxes)
                     return nt.checkboxes.allchecked;
                 }, function(value) {
-                    // console.log(nt.data)
                     angular.forEach(nt.data, function(item) {
                         nt.checkboxes.items[item.id] = value;
                     });
@@ -225,8 +223,6 @@ angular.module('app.factorys', [])
                         unchecked += (!values[item.id]) || 0;
                     });
 
-                    // console.log('nt.checkboxes.items', nt.checkboxes.items);
-
                     nt.hasChecked = checked > 0;
 
                     if ((unchecked === 0) || (checked === 0)) {
@@ -237,20 +233,20 @@ angular.module('app.factorys', [])
                 }, true);
                 return nt;
             },
-            bind:function(scope,tableObj,bindTableObj){
+            bind: function(scope, tableObj, bindTableObj) {
 
                 //主表count变化时，改变子表count
-                scope.$watch(function(){
-                    return scope[tableObj].count();
-                },function(count){
-                    scope[bindTableObj].count(count)
-                },true)
-                //主表data变化时，改变子表dataset
-                scope.$watch(function(){
+                scope.$watch(function() {
+                        return scope[tableObj].count();
+                    }, function(count) {
+                        scope[bindTableObj].count(count)
+                    }, true)
+                    //主表data变化时，改变子表dataset
+                scope.$watch(function() {
                     return scope[tableObj].data
-                },function(dataset){
-                    scope[bindTableObj].settings({dataset:dataset})
-                },true)
+                }, function(dataset) {
+                    scope[bindTableObj].settings({ dataset: dataset })
+                }, true)
 
                 //子表sorting变化时，调整主表sorting
                 scope.$watch(function() {
@@ -268,27 +264,27 @@ angular.module('app.factorys', [])
     //         init: function(scope, tableObj) {
     //             scope.tableParamsLock = $tableParams.creat(scope);
 
-    //             //主表count变化时，改变子表count
-    //             scope.$watch(function(){
-    //                 return tableObj.count();
-    //             },function(count){
-    //                 console.log('tableObj',tableObj.data)
-    //                 scope.tableParamsLock.count(count)
-    //             },true)
-    //             //主表data变化时，改变子表dataset
-    //             scope.$watch(function(){
-    //                 return tableObj.data
-    //             },function(dataset){
-    //                 scope.tableParamsLock.settings({dataset:dataset})
-    //             },true)
+//             //主表count变化时，改变子表count
+//             scope.$watch(function(){
+//                 return tableObj.count();
+//             },function(count){
+//                 console.log('tableObj',tableObj.data)
+//                 scope.tableParamsLock.count(count)
+//             },true)
+//             //主表data变化时，改变子表dataset
+//             scope.$watch(function(){
+//                 return tableObj.data
+//             },function(dataset){
+//                 scope.tableParamsLock.settings({dataset:dataset})
+//             },true)
 
-    //             //子表sorting变化时，调整主表sorting
-    //             scope.$watch(function() {
-    //                 return scope.tableParamsLock.sorting();
-    //             }, function(sort) {
-    //                 tableObj.sorting(sort);
-    //             }, true);
+//             //子表sorting变化时，调整主表sorting
+//             scope.$watch(function() {
+//                 return scope.tableParamsLock.sorting();
+//             }, function(sort) {
+//                 tableObj.sorting(sort);
+//             }, true);
 
-    //         }
-    //     };
-    // }]);
+//         }
+//     };
+// }]);

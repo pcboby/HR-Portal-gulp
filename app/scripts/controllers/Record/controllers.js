@@ -47,11 +47,9 @@ angular.module('app')
                     filter: $stateParams
                 })).$promise.then(function(res) {
 
-                    console.log(res);
+                    // console.log(res);
                     $scope.data = res.rows
-                    $scope.total = res.total
-
-                    $scope.statistics = res.statistics;
+                    
                     params.total(res.total);
 
                     return res.rows;
