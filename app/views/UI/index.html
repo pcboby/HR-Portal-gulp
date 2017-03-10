@@ -1273,6 +1273,32 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
 <!-- ********************************************************************** -->
 <div class="note note-success">
     <p>
+        form-control
+    </p>
+</div>
+<div class="form-horizontal">
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">姓名</label>
+        <div class="col-md-9">
+            <span class="form-control no-border">黄磊</span>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">姓名</label>
+        <div class="col-md-9">
+            <span class="form-control no-border">黄磊</span>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">姓名</label>
+        <div class="col-md-9">
+            <span class="form-control no-border">黄磊</span>
+        </div>
+    </div>
+</div>
+<!-- ********************************************************************** -->
+<div class="note note-success">
+    <p>
         ng-combobox-input-group
     </p>
 </div>
@@ -1595,7 +1621,7 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
     </div>
 </div>
 <div class="form-horizontal">
-    <div class="col-md-4" ng-init="forms.selectGroup4=[]">
+    <div class="col-md-4" ng-init="forms.selectGroup4={}">
         <label class="col-md-3 control-label">选择</label>
         <ng-combobox-select-group class="col-md-9"
             placeholder="请选择"
@@ -1634,6 +1660,37 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             />
             {{forms.selectGroup5}}
     </div>
+</div>
+<!-- ********************************************************************** -->
+<div class="note note-success">
+    <p>
+        $Until
+    </p>
+</div>
+<div class="form-horizontal">
+    <h3>$Until.alert</h3>
+    <p>
+        <button class="btn btn-default" ng-click="alert()">alert</button>
+        <button class="btn btn-default" ng-click="alert1()">alert1</button>
+    </p>
+</div>
+<div class="form-horizontal">
+    <h3>$Until.confirm</h3>
+    <p>
+        <button class="btn btn-default" ng-click="confirm()">confirm</button>
+        <button class="btn btn-default" ng-click="confirm1()">confirm1</button>
+    </p>
+</div>
+<div class="form-horizontal">
+    <h3>$Until.prompt</h3>
+    <p>
+        <button class="btn btn-default" ng-click="prompt()">prompt</button>
+        <button class="btn btn-default" ng-click="promptNumber()">promptNumber</button>
+        <button class="btn btn-default" ng-click="promptPassword()">promptPassword</button>
+        <button class="btn btn-default" ng-click="promptSelect()">promptSelect</button>
+        <button class="btn btn-default" ng-click="promptCheckbox()">promptCheckbox</button>
+        <button class="btn btn-default" ng-click="promptTextarea()">promptTextarea</button>
+    </p>
 </div>
 
 
@@ -1677,16 +1734,6 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
     </p>
 </div>
 <div>
-    <button class="btn btn-default" ng-click="alert()">alert</button>
-    <button class="btn btn-default" ng-click="alert1()">alert1</button>
-    <button class="btn btn-default" ng-click="confirm()">confirm</button>
-    <button class="btn btn-default" ng-click="confirm1()">confirm1</button>
-    <button class="btn btn-default" ng-click="prompt()">prompt</button>
-    <button class="btn btn-default" ng-click="promptNumber()">promptNumber</button>
-    <button class="btn btn-default" ng-click="promptPassword()">promptPassword</button>
-    <button class="btn btn-default" ng-click="promptSelect()">promptSelect</button>
-    <button class="btn btn-default" ng-click="promptCheckbox()">promptCheckbox</button>
-    <button class="btn btn-default" ng-click="promptTextarea()">promptTextarea</button>
     <button class="btn btn-default" ng-click="dialog()">dialog</button>
     <button type="button" class="btn btn-lg btn-primary" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal">Click to toggle modal
         <br>
