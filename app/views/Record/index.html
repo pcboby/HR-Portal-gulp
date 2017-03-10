@@ -1,25 +1,13 @@
 <form class="form-horizontal form-horizontal-box">
-    <!-- <div class="form-group col-md-4">
-        <label class="col-md-3 control-label">姓名</label>
-        <div class="input-group col-md-9">
-            <span class="input-group-addon">
-                <i class="glyphicon glyphicon-user"></i>
-            </span>
-            <input type="text"
-                class="form-control"
-                placeholder="员工姓名/工号"
-                ng-model="forms.userName"
-                ng-combo-input>
-        </div>
-    </div> -->
-    <ng-combo-input class="col-md-4"
-        placeholder="员工姓名/工号"
-        data-label="姓名"
-        data-addon="glyphicon glyphicon-user"
-        ng-model="forms.userName"
-        ng-data="data_users"
-        data-options="d.value as d.label for d in $data"
-        />
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">员工帐号</label>
+        <ng-combobox-input-user-group class="col-md-9"
+            placeholder="姓名/工号"
+            ng-model="forms.inputSearchGroup1"
+            data-options="data.keys as data.name for data in $getter($viewValue)"
+            />
+    </div>
+    
 
     <div class="form-group col-md-4">
         <label class="col-md-3 control-label">部门</label>

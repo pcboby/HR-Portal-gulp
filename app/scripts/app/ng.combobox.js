@@ -53,7 +53,8 @@ angular.module('ngCombobox', [])
                 $placeholder: '@placeholder',
                 $options: '@options',
                 $dropTemplate: '@dropTemplate',
-                $modalTemplate: '@dropTemplate'
+                $modalTemplate: '@dropTemplate',
+                $searchButton:'@searchButton'
             },
             controller: function($scope) {
                 $scope.$getter = function(key) {
@@ -65,7 +66,7 @@ angular.module('ngCombobox', [])
                     var modal = $modal({
                         title:'人员选择：',
                         scope: $scope,
-                        template: $scope.$modalTemplate,
+                        templateUrl: $scope.$modalTemplate,
                         controller:function($scope){
                         },
                         show: true 
