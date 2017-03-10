@@ -9,7 +9,6 @@ angular.module('ngCombobox', [])
                 $model: '=ngModel',
                 $disabled: '=ngDisabled',
                 $placeholder: '@placeholder',
-                $label: '@label',
                 $addon: '@addon',
                 $maxlength: '@maxlength',
                 $type: '@type',
@@ -103,7 +102,6 @@ angular.module('ngCombobox', [])
                 $model: '=ngModel',
                 $data: '=ngData',
                 $disabled: '=ngDisabled',
-                $label: '@label',
                 $name: '@name',
                 $inline: '@inline',
                 $checkAll: '@checkAll'
@@ -196,7 +194,6 @@ angular.module('ngCombobox', [])
                 $model: '=ngModel',
                 $data: '=ngData',
                 $disabled: '=ngDisabled',
-                $label: '@label',
                 $name: '@name',
                 $inline: '@inline'
             },
@@ -258,7 +255,6 @@ angular.module('ngCombobox', [])
                 $model: '=ngModel',
                 $data: '=ngData',
                 $disabled: '=ngDisabled',
-                $label: '@label',
                 $options: '@options',
                 $multiple: '@multiple',
                 $maxLength: '@maxLength',

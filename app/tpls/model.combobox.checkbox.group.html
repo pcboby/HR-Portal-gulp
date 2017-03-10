@@ -1,42 +1,26 @@
-<div class="form-group">
-	<label class="col-md-3 control-label" ng-bind="$label"></label>
-	<div class="col-md-9">
-<!-- 	    <ng-combobox-checkbox ng-show="$checkAll=='true'"
-	    	class="checkAll"
-	        name="{{$name}}"
-	        data-inline="{{$inline}}"
-	        data-label="全选"
-	        ng-model="$checks.checkAll"
-	        />
-	    <ng-combobox-checkbox ng-repeat="data in $data"
-	        name="{{$name}}"
-	        data-inline="{{$inline}}"
-	        data-label="{{data.label}}"
-	        ng-model="$checks.items[$index]"
-	        /> -->
-	    <div ng-show="$checkAll=='true'" class="checkAll {{$inline=='true'?'checkbox-inline':'checkbox'}}">
-			<label>
-				<input
-					type="checkbox"
-					name="{{$name}}"
-					ng-model="$checks.checkAll"
-					ng-click="checkAll()"
-            		ng-disabled="$disabled"
-					>
-				<span>全部</span>
-			</label>
-		</div>
-	    <div class="{{$inline=='true'?'checkbox-inline':'checkbox'}}" ng-repeat="data in $data">
-			<label>
-				<input
-					type="checkbox"
-					name="{{$name}}"
-					ng-model="$checks.items[$index]"
-					ng-click="checkItem();"
-            		ng-disabled="$disabled"
-					>
-				<span ng-bind="data.label"></span>
-			</label>
-		</div>
-    </div>
+<div class="col-md-9">
+    <div ng-show="$checkAll=='true'" class="checkAll {{$inline=='true'?'checkbox-inline':'checkbox'}}">
+		<label>
+			<input
+				type="checkbox"
+				name="{{$name}}"
+				ng-model="$checks.checkAll"
+				ng-click="checkAll()"
+        		ng-disabled="$disabled"
+				>
+			<span>全部</span>
+		</label>
+	</div>
+    <div class="{{$inline=='true'?'checkbox-inline':'checkbox'}}" ng-repeat="data in $data">
+		<label>
+			<input
+				type="checkbox"
+				name="{{$name}}"
+				ng-model="$checks.items[$index]"
+				ng-click="checkItem();"
+        		ng-disabled="$disabled"
+				>
+			<span ng-bind="data.label"></span>
+		</label>
+	</div>
 </div>

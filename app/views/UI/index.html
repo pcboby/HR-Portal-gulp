@@ -1277,80 +1277,85 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
     </p>
 </div>
 <div class="form-horizontal">
-    <ng-combobox-input-group class="col-md-4"
-        ng-model="forms.username"
-        placeholder="please input here.."
-        maxlength="10"
-        type="text"
-        data-label="姓名"
-        data-addon="glyphicon glyphicon-user"
-        />
-    <ng-combobox-input-group class="col-md-4"
-        ng-model="forms.password"
-        placeholder="please input here.."
-        maxlength="10"
-        type="password"
-        data-label="密码"
-        data-addon="glyphicon glyphicon-lock"
-        />
-    <ng-combobox-input-group class="col-md-4"
-        ng-model="forms.input"
-        placeholder="please input here.."
-        maxlength="10"
-        type="number"
-        data-label="数字"
-        data-addon="glyphicon glyphicon-yen"
-        />
-    <ng-combobox-input-group class="col-md-4"
-        ng-model="forms.username"
-        placeholder="please input here.."
-        maxlength="10"
-        type="text"
-        data-addon="glyphicon glyphicon-user"
-        />
-    <ng-combobox-input-group class="col-md-4"
-        ng-model="forms.password"
-        placeholder="please input here.."
-        maxlength="10"
-        type="password"
-        ng-disabled="true"
-        data-addon="glyphicon glyphicon-lock"
-        />
-    <ng-combobox-input-group class="col-md-4"
-        ng-model="forms.input"
-        placeholder="please input here.."
-        maxlength="10"
-        type="number"
-        ng-disabled="true"
-        data-addon="glyphicon glyphicon-yen"
-        />
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">姓名</label>
+        <ng-combobox-input-group class="col-md-9"
+            ng-model="forms.username"
+            placeholder="please input here.."
+            maxlength="10"
+            type="text"
+            data-addon="glyphicon glyphicon-user"
+            />
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">密码</label>
+        <ng-combobox-input-group class="col-md-9"
+            ng-model="forms.password"
+            placeholder="please input here.."
+            maxlength="10"
+            type="password"
+            data-addon="glyphicon glyphicon-lock"
+            />
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label">数字</label>
+        <ng-combobox-input-group class="col-md-9"
+            ng-model="forms.input"
+            placeholder="please input here.."
+            maxlength="10"
+            type="number"
+            data-addon="glyphicon glyphicon-yen"
+            />
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label"></label>
+        <ng-combobox-input-group class="col-md-9"
+            ng-model="forms.username"
+            placeholder="please input here.."
+            maxlength="10"
+            type="text"
+            data-addon="glyphicon glyphicon-user"
+            />
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label"></label>
+        <ng-combobox-input-group class="col-md-9"
+            ng-model="forms.password"
+            placeholder="please input here.."
+            maxlength="10"
+            type="password"
+            ng-disabled="true"
+            data-addon="glyphicon glyphicon-lock"
+            />
+    </div>
+    <div class="form-group col-md-4">
+        <label class="col-md-3 control-label"></label>
+        <ng-combobox-input-group class="col-md-9"
+            ng-model="forms.input"
+            placeholder="please input here.."
+            maxlength="10"
+            type="number"
+            ng-disabled="true"
+            data-addon="glyphicon glyphicon-yen"
+            />
+    </div>
 </div>
 <!-- ********************************************************************** -->
 <div class="note note-success">
     <p>
-        ng-combobox-input-search-group
+        ng-combobox-input-user-group
     </p>
 </div>
 <div class="form-horizontal">
-<!--     <div class="col-md-12">
-        <ng-combobox-input-search-group
-            placeholder="please input here.."
-            data-addon="glyphicon glyphicon-user"
-            ng-model="forms.inputSearchGroup"
-            ng-data="dataSearch"
-            data-options="d.name as d.name for d in $data"
-            />
-
-            {{forms.inputSearchGroup}}
-    </div> -->
-    <div class="col-md-12">
-        <ng-combobox-input-user-group
+    <div class="form-group col-md-12">
+        <label class="col-md-1 control-label">员工帐号</label>
+        <ng-combobox-input-user-group class="col-md-9"
             placeholder="姓名/工号"
             ng-model="forms.inputSearchGroup1"
             data-options="data.keys as data.name for data in $getter($viewValue)"
             />
 
-            {{forms.inputSearchGroup1}}
+        {{forms.inputSearchGroup1}}
     </div>
 </div>
 <!-- ********************************************************************** -->
@@ -1361,27 +1366,29 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
 </div>
 <div class="form-horizontal">
     <div class="col-md-12">
-        <ng-combobox-checkbox
-            name="checkbox1"
-            data-inline="true"
-            data-label="测试1"
-            ng-model="forms.checkbox"
-            />
-        <ng-combobox-checkbox
-            name="checkbox1"
-            data-inline="true"
-            data-label="测试2"
-            ng-model="forms.checkbox"
-            />
-        <ng-combobox-checkbox
-            name="checkbox1"
-            data-inline="true"
-            data-label="测试3"
-            ng-model="forms.checkbox"
-            ng-disabled="true"
-            />
-
+        <label class="col-md-1 control-label">选择</label>
+        <div class="col-md-9">
+            <ng-combobox-checkbox
+                name="checkbox1"
+                data-inline="true"
+                data-label="测试1"
+                ng-model="forms.checkbox"
+                />
+            <ng-combobox-checkbox
+                name="checkbox1"
+                data-inline="true"
+                data-label="测试2"
+                ng-model="forms.checkbox"
+                />
+            <ng-combobox-checkbox
+                name="checkbox1"
+                data-inline="true"
+                data-label="测试3"
+                ng-model="forms.checkbox"
+                ng-disabled="true"
+                />
             {{forms.checkbox}}
+        </div>
     </div>
 </div>
 <!-- ********************************************************************** -->
@@ -1392,7 +1399,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
 </div>
 <div class="form-horizontal">
     <div class="col-md-4" ng-init="forms.checkboxGroup='1002'">
-        <ng-combobox-checkbox-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-checkbox-group class="col-md-9"
             data-inline="true"
             data-check-all="false"
             data-label="请选择"
@@ -1402,7 +1410,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             {{forms.checkboxGroup}}
     </div>
     <div class="col-md-4">
-        <ng-combobox-checkbox-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-checkbox-group class="col-md-9"
             data-inline="true"
             data-check-all="true"
             data-label="请选择"
@@ -1412,7 +1421,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             {{forms.checkboxGroup}}
     </div>
     <div class="col-md-4">
-        <ng-combobox-checkbox-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-checkbox-group class="col-md-9"
             data-inline="true"
             data-check-all="true"
             data-label="请选择"
@@ -1430,29 +1440,32 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
 </div>
 <div class="form-horizontal">
     <div class="col-md-12" ng-init="forms.radiobox='2'">
-        <ng-combobox-radiobox
-            name="radiobox"
-            value="1"
-            data-inline="true"
-            data-label="测试1"
-            ng-model="forms.radiobox"
-            />
-        <ng-combobox-radiobox
-            name="radiobox"
-            value="2"
-            data-inline="true"
-            data-label="测试2"
-            ng-model="forms.radiobox"
-            />
-        <ng-combobox-radiobox
-            name="radiobox"
-            value="3"
-            data-inline="true"
-            data-label="测试3"
-            ng-model="forms.radiobox"
-            />
+        <label class="col-md-1 control-label">选择</label>
+        <div class="col-md-9">
+            <ng-combobox-radiobox
+                name="radiobox"
+                value="1"
+                data-inline="true"
+                data-label="测试1"
+                ng-model="forms.radiobox"
+                />
+            <ng-combobox-radiobox
+                name="radiobox"
+                value="2"
+                data-inline="true"
+                data-label="测试2"
+                ng-model="forms.radiobox"
+                />
+            <ng-combobox-radiobox
+                name="radiobox"
+                value="3"
+                data-inline="true"
+                data-label="测试3"
+                ng-model="forms.radiobox"
+                />
 
             {{forms.radiobox}}
+        </div>
     </div>
 </div>
 <!-- ********************************************************************** -->
@@ -1463,7 +1476,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
 </div>
 <div class="form-horizontal">
     <div class="col-md-4" ng-init="forms.radioGroup='1002'">
-        <ng-combobox-radiobox-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-radiobox-group class="col-md-9"
             data-inline="true"
             data-label="请选择"
             ng-model="forms.radioGroup"
@@ -1472,7 +1486,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             {{forms.radioGroup}}
     </div>
     <div class="col-md-4">
-        <ng-combobox-radiobox-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-radiobox-group class="col-md-9"
             data-inline="true"
             data-label="请选择"
             ng-model="forms.radioGroup"
@@ -1481,7 +1496,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             {{forms.radioGroup}}
     </div>
     <div class="col-md-4">
-        <ng-combobox-radiobox-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-radiobox-group class="col-md-9"
             data-inline="true"
             data-label="请选择"
             ng-model="forms.radioGroup1"
@@ -1498,7 +1514,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
 </div>
 <div class="form-horizontal">
     <div class="col-md-4" ng-init="forms.selectGroup='-1'">
-        <ng-combobox-select-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-select-group class="col-md-9"
             placeholder="请选择"
             data-label="单选"
             ng-model="forms.selectGroup"
@@ -1508,7 +1525,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             {{forms.selectGroup}}
     </div>
     <div class="col-md-4" ng-init="forms.selectGroup1=['1002']">
-        <ng-combobox-select-multiple-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-select-multiple-group class="col-md-9"
             placeholder="请选择"
             data-label="多选"
             data-multiple="true"
@@ -1521,7 +1539,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             {{forms.selectGroup1}}
     </div>
     <div class="col-md-4">
-        <ng-combobox-select-multiple-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-select-multiple-group class="col-md-9"
             placeholder="请选择"
             data-label="多选"
             data-multiple="true"
@@ -1536,7 +1555,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
 </div>
 <div class="form-horizontal">
     <div class="col-md-4" ng-init="forms.selectGroup2='-1'">
-        <ng-combobox-select-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-select-group class="col-md-9"
             placeholder="请选择"
             data-label="单选"
             ng-model="forms.selectGroup2"
@@ -1546,7 +1566,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             {{forms.selectGroup2}}
     </div>
     <div class="col-md-4" ng-init="forms.selectGroup3=['沟通方式']">
-        <ng-combobox-select-multiple-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-select-multiple-group class="col-md-9"
             placeholder="请选择"
             data-label="多选"
             data-multiple="true"
@@ -1559,7 +1580,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             {{forms.selectGroup3}}
     </div>
     <div class="col-md-4">
-        <ng-combobox-select-multiple-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-select-multiple-group class="col-md-9"
             placeholder="请选择"
             data-label="多选"
             data-multiple="true"
@@ -1574,7 +1596,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
 </div>
 <div class="form-horizontal">
     <div class="col-md-4" ng-init="forms.selectGroup4=[]">
-        <ng-combobox-select-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-select-group class="col-md-9"
             placeholder="请选择"
             data-label="单选"
             ng-model="forms.selectGroup4"
@@ -1584,7 +1607,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             {{forms.selectGroup4}}
     </div>
     <div class="col-md-4" ng-init="forms.selectGroup5=[{id:'1000',name:'沟通方式'}]">
-        <ng-combobox-select-multiple-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-select-multiple-group class="col-md-9"
             placeholder="请选择"
             data-label="多选"
             data-multiple="true"
@@ -1597,7 +1621,8 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             {{forms.selectGroup5}}
     </div>
     <div class="col-md-4">
-        <ng-combobox-select-multiple-group
+        <label class="col-md-3 control-label">选择</label>
+        <ng-combobox-select-multiple-group class="col-md-9"
             placeholder="请选择"
             data-label="多选"
             data-multiple="true"

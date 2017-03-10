@@ -1,17 +1,14 @@
-<div class="form-group">
-	<label class="col-md-3 control-label" ng-bind="$label"></label>
-	<div class="col-md-9">
-	    <div class="{{$inline=='true'?'radio-inline':'radio'}}" ng-repeat="data in $data">
-			<label>
-				<input
-					type="radio"
-					name="{{$name}}"
-					ng-value="data.value"
-					ng-model="$checks.item"
-            		ng-disabled="$disabled"
-					>
-				<span ng-bind="data.label"></span>
-			</label>
-		</div>
-    </div>
+<div class="col-md-9">
+    <div class="{{$inline=='true'?'radio-inline':'radio'}}" ng-repeat="data in $data">
+		<label>
+			<input
+				type="radio"
+				name="{{$name}}"
+				ng-value="data.value"
+				ng-model="$checks.item"
+        		ng-disabled="$disabled"
+				>
+			<span ng-bind="data.label"></span>
+		</label>
+	</div>
 </div>
