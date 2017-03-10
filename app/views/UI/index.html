@@ -1328,6 +1328,34 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
 <!-- ********************************************************************** -->
 <div class="note note-success">
     <p>
+        ng-combobox-input-search-group
+    </p>
+</div>
+<div class="form-horizontal">
+<!--     <div class="col-md-12">
+        <ng-combobox-input-search-group
+            placeholder="please input here.."
+            data-addon="glyphicon glyphicon-user"
+            ng-model="forms.inputSearchGroup"
+            ng-data="dataSearch"
+            data-options="d.name as d.name for d in $data"
+            />
+
+            {{forms.inputSearchGroup}}
+    </div> -->
+    <div class="col-md-12">
+        <ng-combobox-input-user-group
+            placeholder="姓名/工号"
+            ng-model="forms.inputSearchGroup1"
+            data-options="data.keys as data.name for data in $getter($viewValue)"
+            />
+
+            {{forms.inputSearchGroup1}}
+    </div>
+</div>
+<!-- ********************************************************************** -->
+<div class="note note-success">
+    <p>
         ng-combobox-checkbox
     </p>
 </div>

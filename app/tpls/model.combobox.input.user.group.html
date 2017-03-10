@@ -1,0 +1,21 @@
+<div class="input-group">
+    <span class="input-group-addon">
+        <i class="glyphicon glyphicon-user"></i>
+    </span>
+
+    <input
+        type="text"
+        class="form-control"
+        ng-model="$model"
+        placeholder="{{$placeholder}}"
+        data-min-length="0"
+        data-html="1"
+        data-auto-select="true"
+        data-template="{{$dropTemplate}}"
+        bs-options="{{$options}}"
+        bs-typeahead>
+
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+    </span>
+</div>

@@ -7,7 +7,7 @@ angular.module('ngCombobox', [])
             replace: true,
             scope: {
                 $model: '=ngModel',
-                $disabled:'=ngDisabled',
+                $disabled: '=ngDisabled',
                 $placeholder: '@placeholder',
                 $label: '@label',
                 $addon: '@addon',
@@ -20,6 +20,66 @@ angular.module('ngCombobox', [])
             }
         };
     }])
+    // .directive('ngComboboxInputSearchGroup', function (DataSearch) {
+    //     return {
+    //         restrict: 'AEC',
+    //         replace:true,
+    //         transclude: true,
+    //         templateUrl:'tpls/model.combobox.input.search.group.html',
+    //         scope:{
+    //             $params:'=ngComboboxInputSearchGroup',
+    //             $model:'=ngModel',
+    //             $data:'=ngData',
+    //             // $getData:'&ngGetData',
+    //             $options:'@options',
+    //             $addon:'@addon',
+    //             $placeholder:'@placeholder'
+    //         },
+    //         controller:function($scope){
+
+//         },
+//         link: function (scope, iElement, iAttrs) {
+
+//         }
+//     };
+// })
+.directive('ngComboboxInputUserGroup', function($modal, SimpleUsers) {
+        return {
+            restrict: 'AEC',
+            replace: true,
+            templateUrl: 'tpls/model.combobox.input.user.group.html',
+            scope: {
+                $model: '=ngModel',
+                $data: '=ngData',
+                $placeholder: '@placeholder',
+                $options: '@options',
+                $dropTemplate: '@dropTemplate',
+                $modalTemplate: '@dropTemplate'
+            },
+            controller: function($scope) {
+                $scope.$getter = function(key) {
+                    return SimpleUsers.query({ key: key }).$promise.then(function(res) {
+                        return res.rows;
+                    });
+                }
+                $scope.$open = function() {
+                    var modal = $modal({
+                        title:'人员选择：',
+                        scope: $scope,
+                        template: $scope.$modalTemplate,
+                        controller:function($scope){
+                        },
+                        show: true 
+                    });
+                }
+            },
+            link: function(scope, iElement, iAttrs) {
+                scope.$dropTemplate = scope.$dropTemplate || 'tpls/model.combobox.input.user.group.tpl.drop.html';
+                scope.$modalTemplate = scope.$modalTemplate || 'tpls/model.combobox.input.user.group.tpl.modal.html';
+                iElement.find('button[type=button]').on('click', scope.$open);
+            }
+        };
+    })
     .directive('ngComboboxCheckbox', [function() {
         return {
             restrict: 'AEC',
@@ -27,7 +87,7 @@ angular.module('ngCombobox', [])
             replace: true,
             scope: {
                 $model: '=ngModel',
-                $disabled:'=ngDisabled',
+                $disabled: '=ngDisabled',
                 $label: '@label',
                 $name: '@name',
                 $inline: '@inline'
@@ -42,7 +102,7 @@ angular.module('ngCombobox', [])
             scope: {
                 $model: '=ngModel',
                 $data: '=ngData',
-                $disabled:'=ngDisabled',
+                $disabled: '=ngDisabled',
                 $label: '@label',
                 $name: '@name',
                 $inline: '@inline',
@@ -118,7 +178,7 @@ angular.module('ngCombobox', [])
             replace: true,
             scope: {
                 $model: '=ngModel',
-                $disabled:'=ngDisabled',
+                $disabled: '=ngDisabled',
                 $value: '@value',
                 $label: '@label',
                 $name: '@name',
@@ -127,7 +187,7 @@ angular.module('ngCombobox', [])
 
         };
     }])
-    .directive('ngComboboxRadioboxGroup', [function () {
+    .directive('ngComboboxRadioboxGroup', [function() {
         return {
             restrict: 'AEC',
             templateUrl: 'tpls/model.combobox.radiobox.group.html',
@@ -135,7 +195,7 @@ angular.module('ngCombobox', [])
             scope: {
                 $model: '=ngModel',
                 $data: '=ngData',
-                $disabled:'=ngDisabled',
+                $disabled: '=ngDisabled',
                 $label: '@label',
                 $name: '@name',
                 $inline: '@inline'
@@ -145,31 +205,31 @@ angular.module('ngCombobox', [])
 
             link: function(scope) {
                 scope.$name = scope.$name || 'radioGroup_' + getRandom(8);
-                scope.$checks={
-                    item:null
+                scope.$checks = {
+                    item: null
                 };
-                scope.$watch(function(){
+                scope.$watch(function() {
                     return scope.$model;
-                },function(val){
-                    scope.$checks.item=val;
+                }, function(val) {
+                    scope.$checks.item = val;
                 });
-                scope.$watch(function(){
+                scope.$watch(function() {
                     return scope.$checks.item;
-                },function(val){
-                    scope.$model=val;
+                }, function(val) {
+                    scope.$model = val;
                 });
             }
         };
     }])
-    .directive('ngComboboxSelectGroup', [function () {
+    .directive('ngComboboxSelectGroup', [function() {
         return {
             restrict: 'AEC',
             templateUrl: 'tpls/model.combobox.select.group.html',
             scope: {
                 $model: '=ngModel',
                 $data: '=ngData',
-                $disabled:'=ngDisabled',
-                $label:'@label',
+                $disabled: '=ngDisabled',
+                $label: '@label',
                 $options: '@options',
                 $placeholder: '@placeholder',
                 $checkAll: '@checkAll'
@@ -190,17 +250,17 @@ angular.module('ngCombobox', [])
             }
         };
     }])
-    .directive('ngComboboxSelectMultipleGroup', [function () {
+    .directive('ngComboboxSelectMultipleGroup', [function() {
         return {
             restrict: 'AEC',
             templateUrl: 'tpls/model.combobox.select.Multiple.group.html',
             scope: {
                 $model: '=ngModel',
                 $data: '=ngData',
-                $disabled:'=ngDisabled',
-                $label:'@label',
+                $disabled: '=ngDisabled',
+                $label: '@label',
                 $options: '@options',
-                $multiple:'@multiple',
+                $multiple: '@multiple',
                 $maxLength: '@maxLength',
                 $placeholder: '@placeholder',
                 $checkAll: '@checkAll',

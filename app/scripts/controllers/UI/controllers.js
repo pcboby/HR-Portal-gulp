@@ -36,15 +36,15 @@ angular.module('app')
         }]
 
 
-        $scope.data_choose=[{
-            label:'选择1',
-            value:'1001'
-        },{
-            label:'选择2',
-            value:'1002'
-        },{
-            label:'选择3',
-            value:'1003'
+        $scope.data_choose = [{
+            label: '选择1',
+            value: '1001'
+        }, {
+            label: '选择2',
+            value: '1002'
+        }, {
+            label: '选择3',
+            value: '1003'
         }]
 
 

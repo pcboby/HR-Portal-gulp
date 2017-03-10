@@ -7,6 +7,13 @@ angular.module('app.resources', [])
             }
         });
     }])
+    .factory('SimpleUsers', ['$resource', function($resource) {
+        return $resource($path_api + '/SimpleUsers.json', null, {
+            query: {
+                method: 'GET'
+            }
+        });
+    }])
     .factory('SimpleData', ['$resource', function($resource) {
         return $resource($path_api + '/SimpleData.json', null, {
             query: {
