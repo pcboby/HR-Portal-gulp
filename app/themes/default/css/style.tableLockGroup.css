@@ -62,3 +62,13 @@
 .table-lock-group .progress{
 	margin: 5px 0px;
 }
+
+@media screen and (max-width: 767px){
+	.table-responsive {
+	    border: 0;
+	}
+	.table-lock-group .table{
+		border: 1px solid #eee;
+	}
+	
+}
