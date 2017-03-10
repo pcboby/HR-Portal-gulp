@@ -1,0 +1,59 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" ng-show="title">
+                <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" ng-bind="title"></h4>
+            </div>
+            <div class="modal-body">
+                <!--  -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div ng-if="!multiple" class="btn-group">
+                            <label class="btn btn-default btn-labelBtn">
+                            	点击选择您要上传的文件：({{ uploader.queue.length }} / {{maxLen}})
+                                <input type="file" nv-file-select="" uploader="uploader" accept="{{accept}}" />
+                            </label>
+                        </div>
+                        <div ng-if="multiple" class="btn-group">
+                            <label class="btn btn-default btn-labelBtn">
+                            	点击选择您要上传的文件：({{ uploader.queue.length }} / {{maxLen}})
+                                <input type="file" nv-file-select="" uploader="uploader" accept="{{accept}}" multiple/>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success pull-right">
+                            <span>下载模板</span>
+                            <i class="glyphicon glyphicon-cloud-download"></i>
+                        </button>
+                    </div>
+                </div>
+                <div ng-if="maxLen>1">
+                    <div class="btn-group" ng-repeat="item in uploader.queue" style="margin-top:10px; margin-right: 10px;">
+                        <span class="btn btn-default nowrap" style="width: 6em;">{{ item.file.name }}</span>
+                        <button class="btn btn-default" type="button" ng-click="item.remove()">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left">
+                    <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span> 上传
+                    </button>
+                    <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                        <span class="glyphicon glyphicon-ban-circle"></span> 暂停
+                    </button>
+                    <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                        <span class="glyphicon glyphicon-trash"></span> 移除
+                    </button>
+                </div>
+                <button type="button" class="btn btn-default" ng-click="$hide();">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="" ng-disabled="!uploader.queue.progress">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
