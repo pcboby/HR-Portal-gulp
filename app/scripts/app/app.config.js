@@ -36,7 +36,7 @@ angular.module('app.config', [])
             container: 'body',
         };
         angular.extend($modalProvider.defaults, defaultOptions, {
-            animation: 'am-fade-and-scale'
+            animation: 'am-fade-and-slide-top'//'am-fade-and-scale'
         });
         angular.extend($tooltipProvider.defaults, defaultOptions, {
             trigger: 'hover'

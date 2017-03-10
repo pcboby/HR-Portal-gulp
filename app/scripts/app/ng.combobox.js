@@ -15,8 +15,8 @@ angular.module('ngCombobox', [])
                 $type: '@type',
                 $name: '@name'
             },
-            link: function(scope, iElement, iAttrs) {
-                scope.$type = scope.$type || 'text'
+            link: function(scope) {
+                scope.$type = scope.$type || 'text';
             }
         };
     }])
@@ -31,8 +31,7 @@ angular.module('ngCombobox', [])
                 $label: '@label',
                 $name: '@name',
                 $inline: '@inline'
-            },
-            link: function(scope, iElement, iAttrs) {}
+            }
         };
     }])
     .directive('ngComboboxCheckboxGroup', [function() {
@@ -55,11 +54,11 @@ angular.module('ngCombobox', [])
                         $scope.$checks.items[index] = $scope.$checks.checkAll;
                     });
                     $scope.setter();
-                }
+                };
                 $scope.checkItem = function() {
                     var checked = 0;
                     var unchecked = 0;
-                    var total = $scope.$data.length
+                    var total = $scope.$data.length;
 
                     angular.forEach($scope.$data, function(item, index) {
                         checked += ($scope.$checks.items[index]) || 0;
@@ -71,24 +70,24 @@ angular.module('ngCombobox', [])
                     }
                     // grayed checkbox
                     $element.find('.checkAll input[type=checkbox]').prop("indeterminate", (checked !== 0 && unchecked !== 0));
-                    $scope.setter()
-                }
+                    $scope.setter();
+                };
 
                 $scope.setter = function() {
                     var tmp = [];
 
                     angular.forEach($scope.$data, function(item, index) {
                         if ($scope.$checks.items[index]) {
-                            tmp.push(item.value)
+                            tmp.push(item.value);
                         }
                     });
 
                     $scope.$model = tmp.join();
-                }
+                };
 
             },
-            link: function(scope, iElement, iAttrs) {
-                scope.$name = scope.$name || 'checkboxGroup_' + getRandom(8)
+            link: function(scope) {
+                scope.$name = scope.$name || 'checkboxGroup_' + getRandom(8);
                 scope.$checks = {
                     checkAll: false,
                     items: {}
@@ -101,13 +100,13 @@ angular.module('ngCombobox', [])
                         // console.log(val)
                         angular.forEach(scope.$data, function(item, index) {
                             scope.$checks.items[index] = val.indexOf(item.value) > -1;
-                        })
+                        });
                     } else {
-                        scope.$checks.items = {}
+                        scope.$checks.items = {};
                     }
                     scope.checkItem();
 
-                })
+                });
 
             }
         };
@@ -124,8 +123,8 @@ angular.module('ngCombobox', [])
                 $label: '@label',
                 $name: '@name',
                 $inline: '@inline'
-            },
-            link: function(scope, iElement, iAttrs) {}
+            }
+
         };
     }])
     .directive('ngComboboxRadioboxGroup', [function () {
@@ -141,24 +140,24 @@ angular.module('ngCombobox', [])
                 $name: '@name',
                 $inline: '@inline'
             },
-            controller:function($scope){
 
-            },
-            link: function(scope, iElement, iAttrs) {
+
+
+            link: function(scope) {
                 scope.$name = scope.$name || 'radioGroup_' + getRandom(8);
                 scope.$checks={
                     item:null
-                }
+                };
                 scope.$watch(function(){
                     return scope.$model;
                 },function(val){
                     scope.$checks.item=val;
-                })
+                });
                 scope.$watch(function(){
                     return scope.$checks.item;
                 },function(val){
-                    scope.$model=scope.$checks.item;
-                })
+                    scope.$model=val;
+                });
             }
         };
     }])
@@ -222,4 +221,4 @@ angular.module('ngCombobox', [])
                 }, scope.traceAll);
             }
         };
-    }])
+    }]);

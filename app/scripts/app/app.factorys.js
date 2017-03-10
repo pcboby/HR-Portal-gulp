@@ -12,10 +12,10 @@ angular.module('app.factorys', [])
 
         return settings;
     }])
-    .factory('$Until', ['$rootScope', '$modal', function($rootScope, $modal) {
-        var modal_defaults = {
-            show: true
-        };
+    .factory('$Until', ['$rootScope', function($rootScope) {
+        // var modal_defaults = {
+        //     show: true
+        // };
         var bootbox_defaults = {
             alert: {
                 title: '提示:',
@@ -239,14 +239,14 @@ angular.module('app.factorys', [])
                 scope.$watch(function() {
                         return scope[tableObj].count();
                     }, function(count) {
-                        scope[bindTableObj].count(count)
-                    }, true)
+                        scope[bindTableObj].count(count);
+                    }, true);
                     //主表data变化时，改变子表dataset
                 scope.$watch(function() {
-                    return scope[tableObj].data
+                    return scope[tableObj].data;
                 }, function(dataset) {
-                    scope[bindTableObj].settings({ dataset: dataset })
-                }, true)
+                    scope[bindTableObj].settings({ dataset: dataset });
+                }, true);
 
                 //子表sorting变化时，调整主表sorting
                 scope.$watch(function() {
@@ -287,4 +287,5 @@ angular.module('app.factorys', [])
 
 //         }
 //     };
-// }]);
+// }])
+;
