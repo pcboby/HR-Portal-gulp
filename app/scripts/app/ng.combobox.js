@@ -19,30 +19,7 @@ angular.module('ngCombobox', [])
             }
         };
     }])
-    // .directive('ngComboboxInputSearchGroup', function (DataSearch) {
-    //     return {
-    //         restrict: 'AEC',
-    //         replace:true,
-    //         transclude: true,
-    //         templateUrl:'tpls/model.combobox.input.search.group.html',
-    //         scope:{
-    //             $params:'=ngComboboxInputSearchGroup',
-    //             $model:'=ngModel',
-    //             $data:'=ngData',
-    //             // $getData:'&ngGetData',
-    //             $options:'@options',
-    //             $addon:'@addon',
-    //             $placeholder:'@placeholder'
-    //         },
-    //         controller:function($scope){
-
-//         },
-//         link: function (scope, iElement, iAttrs) {
-
-//         }
-//     };
-// })
-.directive('ngComboboxInputUserGroup', function($modal, SimpleUsers) {
+    .directive('ngComboboxInputUserGroup', function($modal, $tableParams, SimpleUsers) {
         return {
             restrict: 'AEC',
             replace: true,
@@ -52,30 +29,52 @@ angular.module('ngCombobox', [])
                 $data: '=ngData',
                 $placeholder: '@placeholder',
                 $options: '@options',
-                $dropTemplate: '@dropTemplate',
-                $modalTemplate: '@dropTemplate',
-                $searchButton:'@searchButton'
+                // $dropTemplate: '@dropTemplate',
+                // $modalTemplate: '@dropTemplate',
+                $searchButton: '@searchButton'
             },
             controller: function($scope) {
-                $scope.$getter = function(key) {
-                    return SimpleUsers.query({ key: key }).$promise.then(function(res) {
-                        return res.rows;
+                function formatter(d) {
+                    angular.forEach(d, function(item, idx) {
+                        item.label = item.name + ' (' + item.keys + ')'
+                    })
+                    return d
+                }
+                $scope.$getter = function(value) {
+                    return SimpleUsers.query({ keywords: angular.isObject(value) ? value.keys : value }).$promise.then(function(res) {
+                        return formatter(res.rows);
                     });
                 }
                 $scope.$open = function() {
                     var modal = $modal({
-                        title:'人员选择：',
+                        title: '人员选择：',
                         scope: $scope,
                         templateUrl: $scope.$modalTemplate,
-                        controller:function($scope){
+                        controller: function($scope) {
+                            $scope.$checks={
+                                item:""
+                            };
+                            $scope.$checkItem=function(key){
+                                $scope.$checks.item=key;
+                            }
+                            $scope.userTableParams = $tableParams.creat($scope, {
+                                getData: function(params) {
+                                    return SimpleUsers.get(params.url()).$promise.then(function(res) {
+                                        // console.log(res);
+                                        $scope.data = res.rows
+                                        params.total(res.total);
+                                        return res.rows;
+                                    });
+                                }
+                            })
                         },
-                        show: true 
+                        show: true
                     });
                 }
             },
             link: function(scope, iElement, iAttrs) {
-                scope.$dropTemplate = scope.$dropTemplate || 'tpls/model.combobox.input.user.group.tpl.drop.html';
-                scope.$modalTemplate = scope.$modalTemplate || 'tpls/model.combobox.input.user.group.tpl.modal.html';
+                scope.$dropTemplate = 'tpls/model.combobox.input.user.group.tpl.drop.html';
+                scope.$modalTemplate = 'tpls/model.combobox.input.user.group.tpl.modal.html';
                 iElement.find('button[type=button]').on('click', scope.$open);
             }
         };

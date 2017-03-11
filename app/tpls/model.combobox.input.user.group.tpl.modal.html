@@ -1,5 +1,5 @@
 <div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" ng-show="title">
                 <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
@@ -7,7 +7,35 @@
             </div>
             <div class="modal-body">
                 <!--  -->
-                11111
+                <form class="form-horizontal form-horizontal-box">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-3 control-label">姓名</label>
+                        <ng-combobox-input-group class="col-md-9"
+                            ng-model="forms.username"
+                            placeholder="姓名/工号"
+                            type="text"
+                            data-addon="glyphicon glyphicon-user"
+                            />
+                    </div>
+                </form>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" ng-table="userTableParams">
+                        <tr ng-repeat="data in $data" ng-click="$checkItem(data.keys)">
+                            <td data-title="'选择'" style="width:42px; text-align: center;">
+                                <span><input type="radio" name="checkUser" ng-model="$checks.item" ng-value="data.keys"/></span>
+                            </td>
+                            <td data-title="'姓名'">
+                                <span ng-bind="data.name"></span>    
+                            </td>
+                            <td data-title="'工号'">
+                                <span ng-bind="data.keys"></span>    
+                            </td>
+                            <td data-title="'性别'">
+                                <span ng-bind="data.sex"></span>    
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 <!--  -->
             </div>
             <div class="modal-footer">
