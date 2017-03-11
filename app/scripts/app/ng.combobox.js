@@ -28,9 +28,6 @@ angular.module('ngCombobox', [])
                 $model: '=ngModel',
                 $data: '=ngData',
                 $placeholder: '@placeholder',
-                $options: '@options',
-                // $dropTemplate: '@dropTemplate',
-                // $modalTemplate: '@dropTemplate',
                 $searchButton: '@searchButton'
             },
             controller: function($scope) {
@@ -51,6 +48,14 @@ angular.module('ngCombobox', [])
                         scope: $scope,
                         templateUrl: $scope.$modalTemplate,
                         controller: function($scope) {
+                            $scope.forms={
+                                key:''
+                            }
+                            $scope.$watch(function(){
+                                return $scope.forms.key;
+                            },function(val){
+                                $scope.userTableParams.filter({$:val});
+                            })
                             $scope.$checks={
                                 item:""
                             };
@@ -59,7 +64,12 @@ angular.module('ngCombobox', [])
                             }
                             $scope.userTableParams = $tableParams.creat($scope, {
                                 getData: function(params) {
-                                    return SimpleUsers.get(params.url()).$promise.then(function(res) {
+                                    // console.log(params.url()['filter[%24]'])
+                                    return SimpleUsers.get({
+                                        key:params.url()['filter[%24]'],
+                                        page:params.url().page,
+                                        count:params.url().count
+                                    }).$promise.then(function(res) {
                                         // console.log(res);
                                         $scope.data = res.rows
                                         params.total(res.total);

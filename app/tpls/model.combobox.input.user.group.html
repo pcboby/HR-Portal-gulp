@@ -12,7 +12,7 @@
         data-html="1"
         data-auto-select="true"
         data-template="{{$dropTemplate}}"
-        bs-options="{{$options}}"
+        bs-options="data as data.label for data in $getter($viewValue)"
         bs-typeahead>
 
     <span class="input-group-btn" ng-if="$searchButton">
