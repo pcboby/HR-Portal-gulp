@@ -191,7 +191,8 @@ angular.module('app.factorys', [])
                     count: 5
                 }, angular.extend({
                     counts: [5, 10, 20],
-                    dataset: null
+                    dataset: null,
+                    checkFiledName:'id'
                 }, options, true));
 
                 scope.$watch(function() {
@@ -207,20 +208,21 @@ angular.module('app.factorys', [])
                     return nt.checkboxes.allchecked;
                 }, function(value) {
                     angular.forEach(nt.data, function(item) {
-                        nt.checkboxes.items[item.id] = value;
+                        nt.checkboxes.items[item[nt.settings().checkFiledName]] = value;
                     });
                 });
 
                 scope.$watch(function() {
                     return nt.checkboxes.items;
                 }, function(values) {
+                    console.log(values)
                     var checked = 0;
                     var unchecked = 0;
                     var total = nt.data.length;
 
                     angular.forEach(nt.data, function(item) {
-                        checked += (values[item.id]) || 0;
-                        unchecked += (!values[item.id]) || 0;
+                        checked += (values[item[nt.settings().checkFiledName]]) || 0;
+                        unchecked += (!values[item[nt.settings().checkFiledName]]) || 0;
                     });
 
                     nt.hasChecked = checked > 0;

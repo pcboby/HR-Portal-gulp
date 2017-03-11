@@ -41,6 +41,7 @@ angular.module('app')
 
 
         $scope.tableParams = $tableParams.creat($scope, {
+            checkFiledName:'countId',
             getData: function(params) {
                 // console.log('params.url()',params.url())
                 return RecordList.get(angular.extend(params.url(), {
