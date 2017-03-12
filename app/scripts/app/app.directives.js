@@ -60,6 +60,22 @@ angular.module('app.directives', [])
             }
         };
     }])
+    .directive('ngTreeMenu', [function () {
+        return {
+            restrict: 'AEC',
+            replace:true,
+            templateUrl:'tpls/model.tree.menu.html',
+            scope:{
+                $model:'=ngModel'
+            },
+            controller:function($scope,$element){
+                $scope.build=function(){}
+            },
+            link: function (scope, iElement, iAttrs) {
+                scope.build();
+            }
+        };
+    }])
     .directive('ngComboFile', function() {
         return {
             restrict: 'A',

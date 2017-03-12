@@ -1,4 +1,4 @@
-<!-- <div class="note note-success">
+<div class="note note-success">
     <p>
         Font Awesome gives you scalable vector icons that can instantly be customized — size, color, drop shadow, and anything that can be done with the power of CSS. The complete set of 439 icons in Font Awesome 4.4.7
     </p>
@@ -793,9 +793,9 @@
     <li><a><i class="fa fa-wpexplorer"></i><span>.fa-wpexplorer</span></a></li>
     <li><a><i class="fa fa-meetup"></i><span>.fa-meetup</span></a></li>
 </ul>
-<div class="clearfix"></div> -->
+<div class="clearfix"></div>
 <!--  -->
-<!-- <div class="note note-success">
+<div class="note note-success">
     <p>
         Simple Line Icons. 162 Beautifully Crafted Webfont Icons.
     </p>
@@ -993,9 +993,9 @@
     <li><a><i class="icon icon-social-vkontakte"></i><span>.icon-social-vkontakte</span></a></li>
     <li><a><i class="icon icon-social-steam"></i><span>.icon-social-steam</span></a></li>
 </ul>
-<div class="clearfix"></div> -->
+<div class="clearfix"></div>
 <!--  -->
-<!-- <div class="note note-success">
+<div class="note note-success">
     <p>
         Includes 200 glyphs in font format from the Glyphicon Halflings set. <a href="http://glyphicons.com/" target="_blank">
 Glyphicons </a> Halflings are normally not available for free, but their creator has made them available for Bootstrap free of cost.
@@ -1267,7 +1267,7 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
     <li><a><i class="glyphicon glyphicon-menu-down"></i><span>.glyphicon-menu-down</span></a></li>
     <li><a><i class="glyphicon glyphicon-menu-up"></i><span>.glyphicon-menu-up</span></a></li>
 </ul>
-<div class="clearfix"></div> -->
+<div class="clearfix"></div>
 
 <!--  -->
 <!-- ********************************************************************** -->
@@ -1377,11 +1377,39 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
         <label class="col-md-1 control-label">员工帐号</label>
         <ng-combobox-input-user-group class="col-md-9"
             placeholder="姓名/工号"
-            ng-model="forms.inputSearchGroup1"
+            ng-model="forms.inputUserGroup1"
             data-options="data.keys as data.name for data in $getter($viewValue)"
             />
 
-        {{forms.inputSearchGroup1}}
+        {{forms.inputUserGroup1}}
+    </div>
+    <div class="form-group col-md-12">
+        <label class="col-md-1 control-label">员工帐号</label>
+        <ng-combobox-input-user-group class="col-md-9"
+            placeholder="姓名/工号"
+            ng-model="forms.inputUserGroup2"
+            data-options="data as data.name for data in $getter($viewValue)"
+            />
+
+        {{forms.inputUserGroup2}}
+    </div>
+</div>
+<!-- ********************************************************************** -->
+<div class="note note-success">
+    <p>
+        ng-combobox-input-department-group
+    </p>
+</div>
+<div class="form-horizontal">
+    <div class="form-group col-md-12">
+        <label class="col-md-3 control-label">部门</label>
+        <ng-combobox-input-department-group class="col-md-9"
+            placeholder="部门名称/代码"
+            ng-model="forms.inputSearchGroup2"
+            data-search-button="true"
+            />
+
+        {{forms.inputSearchGroup2}}
     </div>
 </div>
 <!-- ********************************************************************** -->

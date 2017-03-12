@@ -76,9 +76,9 @@ ul.list-group li.list-group-item:hover::before{
 	content: "";
 	position: absolute;
 	z-index: 3;
-	top: -1px;
-	left: -1px;
-	bottom: -1px;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
 	width: 4px;
 	background-color: #d9534f;
 }

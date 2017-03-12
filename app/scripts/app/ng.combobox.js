@@ -85,6 +85,77 @@ angular.module('ngCombobox', [])
             link: function(scope, iElement, iAttrs) {
                 scope.$dropTemplate = 'tpls/model.combobox.input.user.group.tpl.drop.html';
                 scope.$modalTemplate = 'tpls/model.combobox.input.user.group.tpl.modal.html';
+                // scope.$options=
+                iElement.find('button[type=button]').on('click', scope.$open);
+            }
+        };
+    })
+    .directive('ngComboboxInputDepartmentGroup', function($modal, $tableParams, SimpleDepartment) {
+        return {
+            restrict: 'AEC',
+            replace: true,
+            templateUrl: 'tpls/model.combobox.input.department.group.html',
+            scope: {
+                $model: '=ngModel',
+                $data: '=ngData',
+                $placeholder: '@placeholder',
+                $searchButton: '@searchButton'
+            },
+            controller: function($scope) {
+                function formatter(d) {
+                    angular.forEach(d, function(item, idx) {
+                        item.label = item.name + ' (' + item.code + ')'
+                    })
+                    return d
+                }
+                $scope.$getter = function(value) {
+                    return SimpleDepartment.query({ keywords: angular.isObject(value) ? value.keys : value }).$promise.then(function(res) {
+                        return formatter(res.rows);
+                    });
+                }
+                $scope.$open = function() {
+                    var modal = $modal({
+                        title: '部门选择：',
+                        scope: $scope,
+                        templateUrl: $scope.$modalTemplate,
+                        controller: function($scope) {
+                            $scope.forms={
+                                key:''
+                            }
+                            $scope.$watch(function(){
+                                return $scope.forms.key;
+                            },function(val){
+                                $scope.departmentTableParams.filter({$:val});
+                            })
+                            $scope.$checks={
+                                item:""
+                            };
+                            $scope.$checkItem=function(key){
+                                $scope.$checks.item=key;
+                            }
+                            $scope.departmentTableParams = $tableParams.creat($scope, {
+                                getData: function(params) {
+                                    // console.log(params.url()['filter[%24]'])
+                                    return SimpleDepartment.get({
+                                        key:params.url()['filter[%24]'],
+                                        page:params.url().page,
+                                        count:params.url().count
+                                    }).$promise.then(function(res) {
+                                        // console.log(res);
+                                        $scope.data = res.rows
+                                        params.total(res.total);
+                                        return res.rows;
+                                    });
+                                }
+                            })
+                        },
+                        show: true
+                    });
+                }
+            },
+            link: function(scope, iElement, iAttrs) {
+                scope.$dropTemplate = 'tpls/model.combobox.input.department.group.tpl.drop.html';
+                scope.$modalTemplate = 'tpls/model.combobox.input.department.group.tpl.modal.html';
                 iElement.find('button[type=button]').on('click', scope.$open);
             }
         };

@@ -1,6 +1,7 @@
 'use strict';
 angular.module('app', [
         'ui.router',
+        'ui.slimscroll',
         'oc.lazyLoad',
         'mgcrea.ngStrap',
         'ngSanitize',

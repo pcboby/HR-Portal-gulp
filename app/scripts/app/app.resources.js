@@ -11,6 +11,19 @@ angular.module('app.resources', [])
         return $resource($path_api + '/SimpleUsers.json', null, {
             query: {
                 method: 'GET'
+            },
+            get: {
+                method: 'GET'
+            }
+        });
+    }])
+    .factory('SimpleDepartment', ['$resource', function($resource) {
+        return $resource($path_api + '/SimpleDepartment.json', null, {
+            query: {
+                method: 'GET'
+            },
+            get: {
+                method: 'GET'
             }
         });
     }])

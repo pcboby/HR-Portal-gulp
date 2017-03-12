@@ -1,0 +1,21 @@
+<div class="input-group">
+    <span class="input-group-addon">
+        <i class="glyphicon glyphicon-menu-hamburger"></i>
+    </span>
+
+    <input
+        type="text"
+        class="form-control"
+        ng-model="$model"
+        placeholder="{{$placeholder}}"
+        data-min-length="0"
+        data-html="1"
+        data-auto-select="true"
+        data-template="{{$dropTemplate}}"
+        bs-options="data as data.label for data in $getter($viewValue)"
+        bs-typeahead>
+
+    <span class="input-group-btn" ng-if="$searchButton">
+        <button class="btn btn-default" type="button" ng-click="$open()"><i class="fa fa-search"></i></button>
+    </span>
+</div>
