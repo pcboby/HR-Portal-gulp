@@ -26,7 +26,7 @@ angular.module('ngCombobox', [])
             templateUrl: 'tpls/model.combobox.input.user.group.html',
             scope: {
                 $model: '=ngModel',
-                $data: '=ngData',
+                $disabled: '=ngDisabled',
                 $placeholder: '@placeholder',
                 $searchButton: '@searchButton'
             },
@@ -85,8 +85,10 @@ angular.module('ngCombobox', [])
             link: function(scope, iElement, iAttrs) {
                 scope.$dropTemplate = 'tpls/model.combobox.input.user.group.tpl.drop.html';
                 scope.$modalTemplate = 'tpls/model.combobox.input.user.group.tpl.modal.html';
-                // scope.$options=
-                iElement.find('button[type=button]').on('click', scope.$open);
+
+
+
+                // iElement.find('button[type=button]').on('click', scope.$open);
             }
         };
     })
@@ -97,7 +99,7 @@ angular.module('ngCombobox', [])
             templateUrl: 'tpls/model.combobox.input.department.group.html',
             scope: {
                 $model: '=ngModel',
-                $data: '=ngData',
+                $disabled: '=ngDisabled',
                 $placeholder: '@placeholder',
                 $searchButton: '@searchButton'
             },
@@ -156,7 +158,8 @@ angular.module('ngCombobox', [])
             link: function(scope, iElement, iAttrs) {
                 scope.$dropTemplate = 'tpls/model.combobox.input.department.group.tpl.drop.html';
                 scope.$modalTemplate = 'tpls/model.combobox.input.department.group.tpl.modal.html';
-                iElement.find('button[type=button]').on('click', scope.$open);
+
+                // iElement.find('button[type=button]').on('click', scope.$open);
             }
         };
     })

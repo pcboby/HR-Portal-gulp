@@ -1378,7 +1378,6 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
         <ng-combobox-input-user-group class="col-md-9"
             placeholder="姓名/工号"
             ng-model="forms.inputUserGroup1"
-            data-options="data.keys as data.name for data in $getter($viewValue)"
             />
 
         {{forms.inputUserGroup1}}
@@ -1387,8 +1386,19 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
         <label class="col-md-1 control-label">员工帐号</label>
         <ng-combobox-input-user-group class="col-md-9"
             placeholder="姓名/工号"
+            data-search-button="true"
             ng-model="forms.inputUserGroup2"
-            data-options="data as data.name for data in $getter($viewValue)"
+            />
+
+        {{forms.inputUserGroup2}}
+    </div>
+    <div class="form-group col-md-12">
+        <label class="col-md-1 control-label">员工帐号</label>
+        <ng-combobox-input-user-group class="col-md-9"
+            placeholder="姓名/工号"
+            data-search-button="true"
+            ng-model="forms.inputUserGroup2"
+            ng-disabled="true"
             />
 
         {{forms.inputUserGroup2}}
@@ -1402,14 +1412,35 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
 </div>
 <div class="form-horizontal">
     <div class="form-group col-md-12">
-        <label class="col-md-3 control-label">部门</label>
+        <label class="col-md-1 control-label">部门</label>
         <ng-combobox-input-department-group class="col-md-9"
             placeholder="部门名称/代码"
-            ng-model="forms.inputSearchGroup2"
             data-search-button="true"
+            ng-model="forms.inputDepartmentGroup1"
             />
 
-        {{forms.inputSearchGroup2}}
+        {{forms.inputDepartmentGroup1}}
+    </div>
+    <div class="form-group col-md-12">
+        <label class="col-md-1 control-label">部门</label>
+        <ng-combobox-input-department-group class="col-md-9"
+            placeholder="部门名称/代码"
+            data-search-button="true"
+            ng-model="forms.inputDepartmentGroup2"
+            />
+
+        {{forms.inputDepartmentGroup2}}
+    </div>
+    <div class="form-group col-md-12">
+        <label class="col-md-1 control-label">部门</label>
+        <ng-combobox-input-department-group class="col-md-9"
+            placeholder="部门名称/代码"
+            data-search-button="true"
+            ng-model="forms.inputDepartmentGroup2"
+            ng-disabled="true"
+            />
+
+        {{forms.inputDepartmentGroup2}}
     </div>
 </div>
 <!-- ********************************************************************** -->

@@ -33,7 +33,7 @@ angular.module('app.config', [])
     .config(function($modalProvider, $tooltipProvider, $popoverProvider, $typeaheadProvider, $datepickerProvider, $timepickerProvider, $dropdownProvider, $selectProvider) {
         var defaultOptions = {
             // animation: 'am-flip-x',
-            container: 'body',
+            // container: 'body',
         };
         angular.extend($modalProvider.defaults, defaultOptions, {
             animation: 'am-fade-and-slide-top'//'am-fade-and-scale'
