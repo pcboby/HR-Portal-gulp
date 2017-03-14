@@ -32,44 +32,48 @@ angular.module('ngCombobox', [])
             },
             controller: function($scope) {
                 function formatter(d) {
-                    angular.forEach(d, function(item, idx) {
-                        item.label = item.name + ' (' + item.keys + ')'
-                    })
+                    if(angular.isArray(d)){
+                        angular.forEach(d, function(item, idx) {
+                            item.label = item.name + '（' + item.keys + '）'
+                        })
+                    }
+                    if(angular.isObject(d)){
+                        d.label = d.name + '（' + d.keys + '）'
+                    }
                     return d
                 }
+
+                $scope.$model=formatter($scope.$model);
+
                 $scope.$getter = function(value) {
                     return SimpleUsers.query({ keywords: angular.isObject(value) ? value.keys : value }).$promise.then(function(res) {
                         return formatter(res.rows);
                     });
                 }
+
+                $scope.$getModel=function(){
+                    return $scope.$model;
+                }
+
+                $scope.$setter=function(data){
+                    $scope.$model=formatter(data);
+                }
+
                 $scope.$open = function() {
                     var modal = $modal({
                         title: '人员选择：',
                         scope: $scope,
                         templateUrl: $scope.$modalTemplate,
                         controller: function($scope) {
-                            $scope.forms = {
-                                key: ''
-                            }
-                            $scope.$watch(function() {
-                                return $scope.forms.key;
-                            }, function(val) {
-                                $scope.userTableParams.filter({ $: val });
-                            })
-                            $scope.$checks = {
-                                item: ""
-                            };
-                            $scope.$checkItem = function(key) {
-                                $scope.$checks.item = key;
-                            }
-                            $scope.userTableParams = $tableParams.creat($scope, {
-                                getData: function(params) {
-                                    // console.log(params.url()['filter[%24]'])
-                                    return SimpleUsers.get({
-                                        key: params.url()['filter[%24]'],
-                                        page: params.url().page,
-                                        count: params.url().count
-                                    }).$promise.then(function(res) {
+                            $scope.$selection=$scope.$getModel()||'';
+                            $scope.$filter='';
+                            $scope.userTableParams=$tableParams.creat($scope,{
+                                getData:function(params){
+                                    return SimpleUsers.get(angular.extend({}, {
+                                        page: params.url()['page'],
+                                        count: params.url()['count'],
+                                        keywords: params.url()['filter[%24]']
+                                    })).$promise.then(function(res) {
                                         // console.log(res);
                                         $scope.data = res.rows
                                         params.total(res.total);
@@ -77,6 +81,24 @@ angular.module('ngCombobox', [])
                                     });
                                 }
                             })
+                            $scope.$watch(function(){
+                                return $scope.$filter;
+                            },function(val){
+                                $scope.userTableParams.filter({$:val});
+                            })
+                            //列表选择
+                            $scope._selectItem = function(d) {
+                                if ($scope.$selection.keys == d.keys) {
+                                    $scope.$selection = '';
+                                } else {
+                                    $scope.$selection = angular.copy(d);
+                                };
+                            }
+
+                            $scope._save=function(){
+                                // console.log('$scope._getDepartment()',$scope._getDepartment())
+                                $scope.$setter(angular.copy($scope.$selection));
+                            }
                         },
                         show: true
                     });
@@ -177,11 +199,11 @@ angular.module('ngCombobox', [])
                                     $scope.$select = idx;
                                     $scope.$filter = '';
                                 }
-                                //列表选择
+                            //列表选择
                             $scope._selectItem = function(d) {
-                                if ($scope.$selections[$scope.$select].name == d.name) {
-                                    $scope.$selections[$scope.$select] = '';
+                                if ($scope.$selections[$scope.$select].code == d.code) {
                                     removeAfterByIdx($scope.$select);
+                                    $scope.$selections[$scope.$select] = '';
                                 } else {
                                     $scope.$selections[$scope.$select] = angular.copy(d);
                                     removeAfterByIdx($scope.$select);

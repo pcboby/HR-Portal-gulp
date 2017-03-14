@@ -19,7 +19,7 @@
                                 ng-repeat="selection in $selections"
                                 ng-click="_selectIdx($index)">
                                 <a>
-                                    <span ng-bind="selection.name||'请选择部门'"></span>
+                                    <span ng-bind="selection.name||($selections.length>1?'请选择下级部门':'请选择部门')"></span>
                                     <i class="fa fa-chevron-right pull-right" ng-show="$select==$index"></i>
                                 </a>
                             </li>
@@ -46,7 +46,7 @@
                                     <td data-title="'选择'" style="width:42px; text-align: center;">
                                         <span>
                                             <input type="checkbox" name="checkDepartment" 
-                                                ng-checked="$selections[$select].name==data.name"/>
+                                                ng-checked="$selections[$select].code==data.code"/>
                                         </span>
                                     </td>
                                     <td data-title="'部门编号'" style="width:120px; text-align: center;">

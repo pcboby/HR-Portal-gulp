@@ -48,7 +48,11 @@
                 <div ng-if="!$isEdit" class="input-group col-md-8">
                     <span class="form-control no-border">hwx333214</span>
                 </div>
-                <ng-input-search ng-if="$isEdit" class="col-md-8" placeholder="部门名称/代码" data-btn-icon-cls="fa fa-search" ng-model="forms.department"></ng-input-search>
+                <ng-combobox-input-department-group ng-if="$isEdit" class="col-md-8"
+                    placeholder="部门名称/代码"
+                    ng-model="forms.inputSearchGroup2"
+                    data-search-button="true"
+                    />
             </div>
             <div class="form-group col-md-6">
                 <label class="col-md-4 control-label">任命岗位</label>

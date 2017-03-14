@@ -3,7 +3,11 @@
         <div class="modal-content">
             <div class="modal-header" ng-show="title">
                 <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" ng-bind="title"></h4>
+                <h4 class="modal-title">
+                    <span ng-bind="title"></span>
+                    <span ng-bind="$selection.name || '您尚未选择人员'"></span>
+                    <span ng-bind="$selection.keys"></span>
+                </h4>
             </div>
             <div class="modal-body">
                 <!--  -->
@@ -24,9 +28,10 @@
                 </nav>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" ng-table="userTableParams">
-                        <tr ng-repeat="data in $data" ng-click="$checkItem(data.keys)">
+                        <tr ng-repeat="data in $data" ng-click="_selectItem(data)">
                             <td data-title="'选择'" style="width:42px; text-align: center;">
-                                <span><input type="radio" name="checkUser" ng-model="$checks.item" ng-value="data.keys"/></span>
+                                <span><input type="checkbox" name="checkUser"
+                                    ng-checked="$selection.keys==data.keys" /></span>
                             </td>
                             <td data-title="'姓名'">
                                 <span ng-bind="data.name"></span>    
@@ -44,7 +49,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" ng-click="$hide();">取消</button>
-                <button type="button" class="btn btn-primary" ng-click="$hide();">确认</button>
+                <button type="button" class="btn btn-primary" ng-click="_save();$hide();" ng-disabled="!$selection">确认</button>
             </div>
         </div>
     </div>
