@@ -23,7 +23,10 @@ angular.module('app.resources', [])
                 method: 'GET'
             },
             get: {
-                method: 'GET'
+                method: 'GET',
+                params:{
+                    local:'zh'
+                }
             }
         });
     }])

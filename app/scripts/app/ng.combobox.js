@@ -48,27 +48,27 @@ angular.module('ngCombobox', [])
                         scope: $scope,
                         templateUrl: $scope.$modalTemplate,
                         controller: function($scope) {
-                            $scope.forms={
-                                key:''
+                            $scope.forms = {
+                                key: ''
                             }
-                            $scope.$watch(function(){
+                            $scope.$watch(function() {
                                 return $scope.forms.key;
-                            },function(val){
-                                $scope.userTableParams.filter({$:val});
+                            }, function(val) {
+                                $scope.userTableParams.filter({ $: val });
                             })
-                            $scope.$checks={
-                                item:""
+                            $scope.$checks = {
+                                item: ""
                             };
-                            $scope.$checkItem=function(key){
-                                $scope.$checks.item=key;
+                            $scope.$checkItem = function(key) {
+                                $scope.$checks.item = key;
                             }
                             $scope.userTableParams = $tableParams.creat($scope, {
                                 getData: function(params) {
                                     // console.log(params.url()['filter[%24]'])
                                     return SimpleUsers.get({
-                                        key:params.url()['filter[%24]'],
-                                        page:params.url().page,
-                                        count:params.url().count
+                                        key: params.url()['filter[%24]'],
+                                        page: params.url().page,
+                                        count: params.url().count
                                     }).$promise.then(function(res) {
                                         // console.log(res);
                                         $scope.data = res.rows
@@ -105,15 +105,24 @@ angular.module('ngCombobox', [])
             },
             controller: function($scope) {
                 function formatter(d) {
-                    angular.forEach(d, function(item, idx) {
-                        item.label = item.name + ' (' + item.code + ')'
-                    })
+                    if(angular.isArray(d)){
+                        angular.forEach(d, function(item, idx) {
+                            item.label = item.name + '（' + item.code + '）'
+                        })
+                    }
+                    if(angular.isObject(d)){
+                        d.label = d.name + '（' + d.code + '）';
+                    }
                     return d
                 }
+                $scope.$model=formatter($scope.$model);
                 $scope.$getter = function(value) {
                     return SimpleDepartment.query({ keywords: angular.isObject(value) ? value.keys : value }).$promise.then(function(res) {
                         return formatter(res.rows);
                     });
+                }
+                $scope.$setter = function(data){
+                    $scope.$model=formatter(data);
                 }
                 $scope.$open = function() {
                     var modal = $modal({
@@ -121,35 +130,81 @@ angular.module('ngCombobox', [])
                         scope: $scope,
                         templateUrl: $scope.$modalTemplate,
                         controller: function($scope) {
-                            $scope.forms={
-                                key:''
-                            }
-                            $scope.$watch(function(){
-                                return $scope.forms.key;
-                            },function(val){
-                                $scope.departmentTableParams.filter({$:val});
-                            })
-                            $scope.$checks={
-                                item:""
-                            };
-                            $scope.$checkItem=function(key){
-                                $scope.$checks.item=key;
-                            }
+                            $scope.$selections = ['']
+                            $scope.$select = 0;
+                            $scope.$filter = '';
                             $scope.departmentTableParams = $tableParams.creat($scope, {
                                 getData: function(params) {
-                                    // console.log(params.url()['filter[%24]'])
-                                    return SimpleDepartment.get({
-                                        key:params.url()['filter[%24]'],
-                                        page:params.url().page,
-                                        count:params.url().count
-                                    }).$promise.then(function(res) {
+                                    // console.log(params.url())
+                                    return SimpleDepartment.get(angular.extend({}, {
+                                        page: params.url()['page'],
+                                        count: params.url()['count'],
+                                        keywords: params.url()['filter[%24]'],
+                                        departmentLevel: params.url()['filter[departmentLevel]'],
+                                        upperDepartmentCode: params.url()['filter[upperDepartmentCode]']
+                                    })).$promise.then(function(res) {
                                         // console.log(res);
                                         $scope.data = res.rows
                                         params.total(res.total);
                                         return res.rows;
                                     });
                                 }
-                            })
+                            });
+                            $scope.$watch(function() {
+                                return $scope.$filter + $scope.$select;
+                            }, function(val) {
+                                //取父级code
+                                var upperDepartmentCode = $scope.$selections[$scope.$select - 1] ?
+                                    $scope.$selections[$scope.$select - 1].code ?
+                                    $scope.$selections[$scope.$select - 1].code :
+                                    '' :
+                                    '';
+                                if (!!upperDepartmentCode) { //有父级code，按父级code查询
+                                    var filter = {
+                                        $: $scope.$filter,
+                                        upperDepartmentCode: upperDepartmentCode
+                                    }
+                                } else { //无父级code，按0级查询
+                                    var filter = {
+                                        $: $scope.$filter,
+                                        departmentLevel: 0
+                                    }
+                                }
+                                $scope.departmentTableParams.filter(filter);
+                            });
+                            //菜单选择
+                            $scope._selectIdx = function(idx) {
+                                    $scope.$select = idx;
+                                    $scope.$filter = '';
+                                }
+                                //列表选择
+                            $scope._selectItem = function(d) {
+                                if ($scope.$selections[$scope.$select].name == d.name) {
+                                    $scope.$selections[$scope.$select] = '';
+                                    removeAfterByIdx($scope.$select);
+                                } else {
+                                    $scope.$selections[$scope.$select] = angular.copy(d);
+                                    removeAfterByIdx($scope.$select);
+                                    if (d.hasChild === 'true') {
+                                        $scope.$selections.push('');
+                                    }
+                                };
+
+                            }
+                            $scope._getDepartment=function(){
+                                return $scope.$selections[$scope.$selections.length-1]?$scope.$selections[$scope.$selections.length-1]:$scope.$selections[$scope.$selections.length-2]?$scope.$selections[$scope.$selections.length-2]:'';
+                            }
+                            $scope._save=function(){
+                                // console.log('$scope._getDepartment()',$scope._getDepartment())
+                                $scope.$setter(angular.copy($scope._getDepartment()));
+                            }
+
+                            function removeAfterByIdx(idx) {
+                                for (var i = $scope.$selections.length - 1; i > idx; i--) {
+                                    $scope.$selections.remove(i);
+                                }
+                            }
+
                         },
                         show: true
                     });

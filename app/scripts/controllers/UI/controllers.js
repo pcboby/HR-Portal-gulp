@@ -166,6 +166,36 @@ angular.module('app')
             })
         }
 
+        $scope.forms={
+            inputDepartmentGroup1:{
+                id:"1",
+                code:"0001",
+                name:"董事长办公室",
+                hasChild:"true",
+                upperDepartmentCode:"null"
+            }
+        }
+
+
+        $scope.icons = [{
+            value:"Gear",
+            label:"<i class='fa fa-gear'></i> Gear"
+        },{
+            value:"Globe",
+            label:"<i class='fa fa-globe'></i> Globe"
+        },{
+            value:"Heart",
+            label:"<i class='fa fa-heart'></i> Heart"
+        },{
+            value:"Camera",
+            label:"<i class='fa fa-camera'></i> Camera"
+        }];
+
+        $scope.selectedIcon = {
+            value:"Gear",
+            label:"<i class='fa fa-gear'></i> Gear"
+        };
+
         $scope.modal = {
             "title": "Title",
             "content": "Hello Modal<br />This is a multiline message!"

@@ -60,18 +60,18 @@ angular.module('app.directives', [])
             }
         };
     }])
-    .directive('ngTreeMenu', [function () {
+    .directive('ngTreeMenu', [function() {
         return {
             restrict: 'AEC',
-            replace:true,
-            templateUrl:'tpls/model.tree.menu.html',
-            scope:{
-                $model:'=ngModel'
+            replace: true,
+            templateUrl: 'tpls/model.tree.menu.html',
+            scope: {
+                $model: '=ngModel'
             },
-            controller:function($scope,$element){
-                $scope.build=function(){}
+            controller: function($scope, $element) {
+                $scope.build = function() {}
             },
-            link: function (scope, iElement, iAttrs) {
+            link: function(scope, iElement, iAttrs) {
                 scope.build();
             }
         };
@@ -170,7 +170,7 @@ angular.module('app.directives', [])
             },
             link: function(scope, iElement, iAttrs) {
                 iElement.on('click', scope.$open);
-                scope.mini = iAttrs['mini']==='true'; //显示方案：‘MINI’ or 'FULL'
+                scope.mini = iAttrs['mini'] === 'true'; //显示方案：‘MINI’ or 'FULL'
                 scope.multiple = iAttrs['multiple']; //多文件选择方案:true or false
                 scope.accept = iAttrs['accept'] || '*'; //设置上传类型
                 scope.maxLen = iAttrs['maxLen'] || 1; //最大文件数
@@ -516,68 +516,67 @@ angular.module('app.directives', [])
             templateUrl: 'tpls/input.combosearch.html',
             controller: function($scope, $log, $modal, NgTableParams) {
 
-            var modal = $modal({
-                title: $scope.modalTitle,
-                templateUrl: $scope.modalTemplateUrl,
-                backdrop: $scope.modalBackdrop,
-                controller: modalCtrl,
-                show: false
-            });
-
-            $scope.openModal = function() {
-                // modal.$promise.then(modal.show);
-            }
-
-            /////*********************************************************
-            /////*********************************************************
-            function confirm($selected) {
-                $scope.ngModel = $selected;
-            }
-
-            function cancel() {
-                $log.log('cancel');
-            }
-
-            function getSelected() {
-                return $scope.ngModel;
-            }
-
-            function isSelect() {
-                var obj = {};
-                if ($scope.ngModel) {
-                    obj[$scope.ngModel] = true;
-                }
-                return obj;
-            }
-
-            function getData() {
-                return $scope.$data;
-            }
-
-            function modalCtrl($scope) {
-                $scope.$data = getData();
-                $scope.$selected = getSelected() || null;
-                $scope.$isSelect = isSelect();
-
-                $scope.tableParams = new NgTableParams({
-                    page: 1,
-                    count: 5
-                }, {
-                    counts: false,
-                    dataset: $scope.$data
+                var modal = $modal({
+                    title: $scope.modalTitle,
+                    templateUrl: $scope.modalTemplateUrl,
+                    backdrop: $scope.modalBackdrop,
+                    controller: modalCtrl,
+                    show: false
                 });
 
-                $scope.confirm = confirm;
-                $scope.cancel = cancel;
-
-                $scope.$select = function($item) {
-                    $scope.$isSelect = {};
-                    $scope.$isSelect[$item] = !$scope.$isSelect[$item];
-                    $scope.$selected = $item;
+                $scope.openModal = function() {
+                    // modal.$promise.then(modal.show);
                 }
-            }
 
+                /////*********************************************************
+                /////*********************************************************
+                function confirm($selected) {
+                    $scope.ngModel = $selected;
+                }
+
+                function cancel() {
+                    $log.log('cancel');
+                }
+
+                function getSelected() {
+                    return $scope.ngModel;
+                }
+
+                function isSelect() {
+                    var obj = {};
+                    if ($scope.ngModel) {
+                        obj[$scope.ngModel] = true;
+                    }
+                    return obj;
+                }
+
+                function getData() {
+                    return $scope.$data;
+                }
+
+                function modalCtrl($scope) {
+                    $scope.$data = getData();
+                    $scope.$selected = getSelected() || null;
+                    $scope.$isSelect = isSelect();
+
+                    $scope.tableParams = new NgTableParams({
+                        page: 1,
+                        count: 5
+                    }, {
+                        counts: false,
+                        dataset: $scope.$data
+                    });
+
+                    $scope.confirm = confirm;
+                    $scope.cancel = cancel;
+
+                    $scope.$select = function($item) {
+                        $scope.$isSelect = {};
+                        $scope.$isSelect[$item] = !$scope.$isSelect[$item];
+                        $scope.$selected = $item;
+                    }
+                }
+
+            }
         }
-    }
-})
-;
+    });

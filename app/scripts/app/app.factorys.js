@@ -192,7 +192,7 @@ angular.module('app.factorys', [])
                 }, angular.extend({
                     counts: [5, 10, 20],
                     dataset: null,
-                    checkFiledName:'id'
+                    checkFiledName: 'id'
                 }, options, true));
 
                 scope.$watch(function() {
@@ -215,7 +215,7 @@ angular.module('app.factorys', [])
                 scope.$watch(function() {
                     return nt.checkboxes.items;
                 }, function(values) {
-                    console.log(values)
+                    // console.log(values)
                     var checked = 0;
                     var unchecked = 0;
                     var total = nt.data.length;
@@ -239,11 +239,11 @@ angular.module('app.factorys', [])
 
                 //主表count变化时，改变子表count
                 scope.$watch(function() {
-                        return scope[tableObj].count();
-                    }, function(count) {
-                        scope[bindTableObj].count(count);
-                    }, true);
-                    //主表data变化时，改变子表dataset
+                    return scope[tableObj].count();
+                }, function(count) {
+                    scope[bindTableObj].count(count);
+                }, true);
+                //主表data变化时，改变子表dataset
                 scope.$watch(function() {
                     return scope[tableObj].data;
                 }, function(dataset) {
