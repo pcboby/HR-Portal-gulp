@@ -32,79 +32,79 @@ angular.module('ngCombobox', [])
             },
             controller: function($scope) {
                 function formatter(d) {
-                    if(angular.isArray(d)){
-                        angular.forEach(d, function(item, idx) {
-                            item.label = item.name + '（' + item.keys + '）'
-                        })
+                    if (angular.isArray(d)) {
+                        angular.forEach(d, function(item) {
+                            item.label = item.name + '（' + item.keys + '）';
+                        });
                     }
-                    if(angular.isObject(d)){
-                        d.label = d.name + '（' + d.keys + '）'
+                    if (angular.isObject(d)) {
+                        d.label = d.name + '（' + d.keys + '）';
                     }
-                    return d
+                    return d;
                 }
 
-                $scope.$model=formatter($scope.$model);
+                $scope.$model = formatter($scope.$model);
 
                 $scope.$getter = function(value) {
                     return SimpleUsers.query({ keywords: angular.isObject(value) ? value.keys : value }).$promise.then(function(res) {
                         return formatter(res.rows);
                     });
-                }
+                };
 
-                $scope.$getModel=function(){
+                $scope.$getModel = function() {
                     return $scope.$model;
-                }
+                };
 
-                $scope.$setter=function(data){
-                    $scope.$model=formatter(data);
-                }
+                $scope.$setter = function(data) {
+                    $scope.$model = formatter(data);
+                };
 
                 $scope.$open = function() {
-                    var modal = $modal({
+                    $modal({
                         title: '人员选择：',
                         scope: $scope,
                         templateUrl: $scope.$modalTemplate,
                         controller: function($scope) {
-                            $scope.$selection=$scope.$getModel()||'';
-                            $scope.$filter='';
-                            $scope.userTableParams=$tableParams.creat($scope,{
-                                getData:function(params){
+                            $scope.$selection = $scope.$getModel() || '';
+                            $scope.$filter = '';
+                            $scope.userTableParams = $tableParams.creat($scope, {
+                                getData: function(params) {
                                     return SimpleUsers.get(angular.extend({}, {
-                                        page: params.url()['page'],
-                                        count: params.url()['count'],
+                                        page: params.url().page,
+                                        count: params.url().count,
                                         keywords: params.url()['filter[%24]']
                                     })).$promise.then(function(res) {
                                         // console.log(res);
-                                        $scope.data = res.rows
+                                        $scope.data = res.rows;
                                         params.total(res.total);
                                         return res.rows;
                                     });
                                 }
-                            })
-                            $scope.$watch(function(){
+                            });
+                            $scope.$watch(function() {
                                 return $scope.$filter;
-                            },function(val){
-                                $scope.userTableParams.filter({$:val});
-                            })
+                            }, function(val) {
+                                $scope.userTableParams.filter({ $: val });
+                            });
                             //列表选择
                             $scope._selectItem = function(d) {
-                                if ($scope.$selection.keys == d.keys) {
+                                if ($scope.$selection.keys === d.keys) {
                                     $scope.$selection = '';
                                 } else {
                                     $scope.$selection = angular.copy(d);
-                                };
-                            }
+                                }
+                            };
 
-                            $scope._save=function(){
+                            $scope._save = function() {
                                 // console.log('$scope._getDepartment()',$scope._getDepartment())
                                 $scope.$setter(angular.copy($scope.$selection));
-                            }
+                            };
                         },
                         show: true
                     });
-                }
+                };
             },
-            link: function(scope, iElement, iAttrs) {
+            link: function(scope) {
                 scope.$dropTemplate = 'tpls/model.combobox.input.user.group.tpl.drop.html';
                 scope.$modalTemplate = 'tpls/model.combobox.input.user.group.tpl.modal.html';
 
@@ -127,54 +127,61 @@ angular.module('ngCombobox', [])
             },
             controller: function($scope) {
                 function formatter(d) {
-                    if(angular.isArray(d)){
-                        angular.forEach(d, function(item, idx) {
-                            item.label = item.name + '（' + item.code + '）'
-                        })
+                    if (angular.isArray(d)) {
+                        angular.forEach(d, function(item) {
+                            item.label = item.name + '（' + item.code + '）';
+                        });
                     }
-                    if(angular.isObject(d)){
+                    if (angular.isObject(d)) {
                         d.label = d.name + '（' + d.code + '）';
                     }
-                    return d
+                    return d;
                 }
-                $scope.$model=formatter($scope.$model);
+                $scope.$model = formatter($scope.$model);
                 $scope.$getter = function(value) {
                     return SimpleDepartment.query({ keywords: angular.isObject(value) ? value.keys : value }).$promise.then(function(res) {
                         return formatter(res.rows);
                     });
-                }
-                $scope.$setter = function(data){
-                    $scope.$model=formatter(data);
-                }
+                };
+                $scope.$setter = function(data) {
+                    $scope.$model = formatter(data);
+                };
                 $scope.$open = function() {
-                    var modal = $modal({
+                    $modal({
                         title: '部门选择：',
                         scope: $scope,
                         templateUrl: $scope.$modalTemplate,
                         controller: function($scope) {
-                            $scope.$selections = ['']
+                            $scope.$selections = [''];
                             $scope.$select = 0;
                             $scope.$filter = '';
                             $scope.departmentTableParams = $tableParams.creat($scope, {
                                 getData: function(params) {
                                     // console.log(params.url())
                                     return SimpleDepartment.get(angular.extend({}, {
-                                        page: params.url()['page'],
-                                        count: params.url()['count'],
+                                        page: params.url().page,
+                                        count: params.url().count,
                                         keywords: params.url()['filter[%24]'],
                                         departmentLevel: params.url()['filter[departmentLevel]'],
                                         upperDepartmentCode: params.url()['filter[upperDepartmentCode]']
                                     })).$promise.then(function(res) {
                                         // console.log(res);
-                                        $scope.data = res.rows
+                                        $scope.data = res.rows;
                                         params.total(res.total);
                                         return res.rows;
                                     });
                                 }
                             });
+                            
+                            function removeAfterByIdx(idx) {
+                                for (var i = $scope.$selections.length - 1; i > idx; i--) {
+                                    $scope.$selections.remove(i);
+                                }
+                            }
+                            
                             $scope.$watch(function() {
                                 return $scope.$filter + $scope.$select;
-                            }, function(val) {
+                            }, function() {
                                 //取父级code
                                 var upperDepartmentCode = $scope.$selections[$scope.$select - 1] ?
                                     $scope.$selections[$scope.$select - 1].code ?
@@ -182,26 +189,26 @@ angular.module('ngCombobox', [])
                                     '' :
                                     '';
                                 if (!!upperDepartmentCode) { //有父级code，按父级code查询
-                                    var filter = {
+                                    $scope.departmentTableParams.filter({
                                         $: $scope.$filter,
                                         upperDepartmentCode: upperDepartmentCode
-                                    }
+                                    });
                                 } else { //无父级code，按0级查询
-                                    var filter = {
+                                    $scope.departmentTableParams.filter({
                                         $: $scope.$filter,
                                         departmentLevel: 0
-                                    }
+                                    });
                                 }
-                                $scope.departmentTableParams.filter(filter);
+                                
                             });
                             //菜单选择
                             $scope._selectIdx = function(idx) {
-                                    $scope.$select = idx;
-                                    $scope.$filter = '';
-                                }
+                                $scope.$select = idx;
+                                $scope.$filter = '';
+                            };
                             //列表选择
                             $scope._selectItem = function(d) {
-                                if ($scope.$selections[$scope.$select].code == d.code) {
+                                if ($scope.$selections[$scope.$select].code === d.code) {
                                     removeAfterByIdx($scope.$select);
                                     $scope.$selections[$scope.$select] = '';
                                 } else {
@@ -210,29 +217,24 @@ angular.module('ngCombobox', [])
                                     if (d.hasChild === 'true') {
                                         $scope.$selections.push('');
                                     }
-                                };
+                                }
 
-                            }
-                            $scope._getDepartment=function(){
-                                return $scope.$selections[$scope.$selections.length-1]?$scope.$selections[$scope.$selections.length-1]:$scope.$selections[$scope.$selections.length-2]?$scope.$selections[$scope.$selections.length-2]:'';
-                            }
-                            $scope._save=function(){
+                            };
+                            $scope._getDepartment = function() {
+                                return $scope.$selections[$scope.$selections.length - 1] ? $scope.$selections[$scope.$selections.length - 1] : $scope.$selections[$scope.$selections.length - 2] ? $scope.$selections[$scope.$selections.length - 2] : '';
+                            };
+                            $scope._save = function() {
                                 // console.log('$scope._getDepartment()',$scope._getDepartment())
                                 $scope.$setter(angular.copy($scope._getDepartment()));
-                            }
+                            };
 
-                            function removeAfterByIdx(idx) {
-                                for (var i = $scope.$selections.length - 1; i > idx; i--) {
-                                    $scope.$selections.remove(i);
-                                }
-                            }
 
                         },
                         show: true
                     });
-                }
+                };
             },
-            link: function(scope, iElement, iAttrs) {
+            link: function(scope) {
                 scope.$dropTemplate = 'tpls/model.combobox.input.department.group.tpl.drop.html';
                 scope.$modalTemplate = 'tpls/model.combobox.input.department.group.tpl.modal.html';
 
