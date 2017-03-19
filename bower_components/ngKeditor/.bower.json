@@ -1,0 +1,41 @@
+{
+  "name": "ngKeditor",
+  "homepage": "https://github.com/zedwang/angular-kindeditor.git",
+  "authors": [
+    "Zed <343650735@qq.com>"
+  ],
+  "description": "Angular port for kindeditor",
+  "main": [
+    "build/angular-kindeditor.min.js"
+  ],
+  "moduleType": [
+    "es5"
+  ],
+  "keywords": [
+    "angular",
+    "kindeditor"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.4.1",
+    "jquery": "~3.1.0"
+  },
+  "version": "1.1.1",
+  "_release": "1.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.1",
+    "commit": "fc03b3fa05f7c51982ecd153477c8c3c55319210"
+  },
+  "_source": "https://github.com/zedwang/angular-kindeditor.git",
+  "_target": "^1.1.1",
+  "_originalSource": "ngKeditor",
+  "_direct": true
+}

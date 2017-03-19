@@ -9,6 +9,7 @@ angular.module('app', [
         "ngResource",
         "ngAnimate",
         'ngTable',
+        'ngKeditor',
         'app.config',
         'app.routers',
         'app.factorys',
