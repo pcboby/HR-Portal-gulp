@@ -1,6 +1,6 @@
 <ul class="list-group">
     <li class="list-group-item" ng-repeat="data in $data">
-        <a>
+        <a href="{{data.href}}">
             <i ng-class="{active:false}" class="{{data.iconCls}}" style="margin-right: .615em;"></i>
             <span ng-bind="data.title"></span>
             <i class="fa fa-check pull-right"></i>

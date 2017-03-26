@@ -231,17 +231,47 @@ angular.module('app.directives', [])
         return {
             restrict: 'AEC',
             templateUrl: 'tpls/model.pageLabelBar.html',
-            controller: function($scope, $document) {
+            controller: function($scope, $document, $element, $timeout) {
                 $scope.$data = [];
 
 
                 function build() {
                     angular.forEach($document.find('[ng-page-label]'), function(item) {
+                        var id=angular.element(item).attr('id')||'page-label-'+getRandom(8);
+                        angular.element(item).attr('id', id);
                         $scope.$data.push({
                             iconCls: angular.element(item).find('i').attr('class'),
-                            title: angular.element(item).find('span').html()
+                            title: angular.element(item).find('span').html(),
+                            href:'#'+id
                         });
                     });
+                    $timeout(function(){
+                        console.log($element.find('a').length);
+                        angular.forEach($element.find('a'),function(el,idx){
+                            var e=angular.element(el);
+                            var href=e.attr('href')
+                            e.click(function(){
+                                angular.element('body').animate({scrollTop: angular.element(href).offset().top-70}, "slow");
+                                return false
+                            })
+                            e.parent().click(function(event) {
+                                angular.element('body').animate({scrollTop: angular.element(href).offset().top-70}, "slow");
+                            });
+                        })
+                    },0)
+                    
+                }
+
+                $scope.$on('$destroy',function() {  
+                  document.onscroll=null; 
+                });
+
+                document.onscroll=function(){
+                    var mt=document.body.scrollTop-60;//angular.element($element[0]).offset().top;//-document.body.scrollTop
+                        mt=mt<0?0:mt;
+                    angular.element($element[0]).children('ul').css('margin-top',mt);
+                    // console.log(angular.element($element[0]).offset().top,document.body.scrollTop);
+
                 }
 
                 $scope.build = build;

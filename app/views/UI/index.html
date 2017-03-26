@@ -1414,6 +1414,7 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
     <!-- <div class="form-group col-md-12">
         <input type="text" class="form-control" ng-model="selectedIcon" data-min-length="0" data-html="1" data-auto-select="true" data-animation="am-flip-x" bs-options="icon as icon.label for icon in icons" placeholder="Enter icon" bs-typeahead>
     </div> -->
+    <h4>Default</h4>
     <div class="form-group col-md-12">
         <label class="col-md-1 control-label">部门</label>
         <ng-combobox-input-department-group class="col-md-9"
@@ -1444,6 +1445,41 @@ Glyphicons </a> Halflings are normally not available for free, but their creator
             />
 
         {{forms.inputDepartmentGroup2}}
+    </div>
+    <h4>Mini</h4>
+    <div class="form-group col-md-12">
+        <label class="col-md-1 control-label">部门</label>
+        <ng-combobox-input-department-group class="col-md-9"
+            placeholder="部门名称/代码"
+            data-search-button="true"
+            ng-model="forms.inputDepartmentGroup3"
+            data-mini="true"
+            />
+
+        {{forms.inputDepartmentGroup3}}
+    </div>
+    <div class="form-group col-md-12">
+        <label class="col-md-1 control-label">部门</label>
+        <ng-combobox-input-department-group class="col-md-9"
+            placeholder="部门名称/代码"
+            data-search-button="true"
+            ng-model="forms.inputDepartmentGroup4"
+            data-mini="true"
+            />
+
+        {{forms.inputDepartmentGroup4}}
+    </div>
+    <div class="form-group col-md-12">
+        <label class="col-md-1 control-label">部门</label>
+        <ng-combobox-input-department-group class="col-md-9"
+            placeholder="部门名称/代码"
+            data-search-button="true"
+            ng-model="forms.inputDepartmentGroup4"
+            data-mini="true"
+            ng-disabled="true"
+            />
+
+        {{forms.inputDepartmentGroup4}}
     </div>
 </div>
 <!-- ********************************************************************** -->

@@ -1,0 +1,40 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" ng-show="title">
+                <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    <span ng-bind="title"></span>
+                    <span ng-bind="_getDepartment().name || '您尚未选择部门'"></span>
+                    <span ng-bind="_getDepartment().code"></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <!--  -->
+                <div class="form-horizontal">
+                    <div class="form-group col-md-12" ng-repeat="selection in $selections">
+                        <label class="col-md-2 control-label" ng-bind="selection.label"></label>
+                        <div class="input-group col-md-10">
+                            <button type="button" class="btn btn-default col-md-12"
+                            	placeholder="请选择"
+                            	ng-model="selection.selected"
+                            	ng-change="nextData($index+1)",
+                            	ng-disabled="!selection.data"
+                            	data-html="1"
+                            	data-toggle="true"
+                            	bs-options="data as data.name+'（'+data.code+'）' for data in selection.data"
+                            	bs-select>
+                                Action <span class="caret"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="$hide();">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="_save();$hide();" ng-disabled="!_getDepartment()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>

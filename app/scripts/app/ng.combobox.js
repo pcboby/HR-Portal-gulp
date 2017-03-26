@@ -123,7 +123,8 @@ angular.module('ngCombobox', [])
                 $model: '=ngModel',
                 $disabled: '=ngDisabled',
                 $placeholder: '@placeholder',
-                $searchButton: '@searchButton'
+                $searchButton: '@searchButton',
+                $mini: '@mini'
             },
             controller: function($scope) {
                 function formatter(d) {
@@ -137,6 +138,153 @@ angular.module('ngCombobox', [])
                     }
                     return d;
                 }
+                $scope.$modalCtrl = function($scope) {
+                    $scope.$selections = [''];
+                    $scope.$select = 0;
+                    $scope.$filter = '';
+                    $scope.departmentTableParams = $tableParams.creat($scope, {
+                        getData: function(params) {
+                            // console.log(params.url())
+                            return SimpleDepartment.get(angular.extend({}, {
+                                page: params.url().page,
+                                count: params.url().count,
+                                keywords: params.url()['filter[%24]'],
+                                departmentLevel: params.url()['filter[departmentLevel]'],
+                                upperDepartmentCode: params.url()['filter[upperDepartmentCode]']
+                            })).$promise.then(function(res) {
+                                // console.log(res);
+                                $scope.data = res.rows;
+                                params.total(res.total);
+                                return res.rows;
+                            });
+                        }
+                    });
+
+                    function removeAfterByIdx(idx) {
+                        for (var i = $scope.$selections.length - 1; i > idx; i--) {
+                            $scope.$selections.remove(i);
+                        }
+                    }
+
+                    $scope.$watch(function() {
+                        return $scope.$filter + $scope.$select;
+                    }, function() {
+                        //取父级code
+                        var upperDepartmentCode = $scope.$selections[$scope.$select - 1] ?
+                            $scope.$selections[$scope.$select - 1].code ?
+                            $scope.$selections[$scope.$select - 1].code :
+                            '' :
+                            '';
+                        if (!!upperDepartmentCode) { //有父级code，按父级code查询
+                            $scope.departmentTableParams.filter({
+                                $: $scope.$filter,
+                                upperDepartmentCode: upperDepartmentCode
+                            });
+                        } else { //无父级code，按0级查询
+                            $scope.departmentTableParams.filter({
+                                $: $scope.$filter,
+                                departmentLevel: 0
+                            });
+                        }
+
+                    });
+                    //菜单选择
+                    $scope._selectIdx = function(idx) {
+                        $scope.$select = idx;
+                        $scope.$filter = '';
+                    };
+                    //列表选择
+                    $scope._selectItem = function(d) {
+                        if ($scope.$selections[$scope.$select].code === d.code) {
+                            removeAfterByIdx($scope.$select);
+                            $scope.$selections[$scope.$select] = '';
+                        } else {
+                            $scope.$selections[$scope.$select] = angular.copy(d);
+                            removeAfterByIdx($scope.$select);
+                            if (d.hasChild === 'true') {
+                                $scope.$selections.push('');
+                            }
+                        }
+
+                    };
+                    $scope._getDepartment = function() {
+                        return $scope.$selections[$scope.$selections.length - 1] ? $scope.$selections[$scope.$selections.length - 1] : $scope.$selections[$scope.$selections.length - 2] ? $scope.$selections[$scope.$selections.length - 2] : '';
+                    };
+                    $scope._save = function() {
+                        // console.log('$scope._getDepartment()',$scope._getDepartment())
+                        $scope.$setter(angular.copy($scope._getDepartment()));
+                    };
+                };
+                $scope.$modalCtrlMini = function($scope) {
+                    $scope.$selections = [{
+                        label: '一级部门',
+                        data: ''
+                    }, {
+                        label: '二级部门',
+                        data: ''
+                    }, {
+                        label: '三级部门',
+                        data: ''
+                    }, {
+                        label: '四级部门',
+                        data: ''
+                    }, {
+                        label: '五级部门',
+                        data: ''
+                    }, {
+                        label: '六级部门',
+                        data: ''
+                    }, {
+                        label: '七级部门',
+                        data: ''
+                    }, {
+                        label: '八级部门',
+                        data: ''
+                    }];
+
+
+                    function removeAfterByIdx(idx) {
+                        for(var i=$scope.$selections.length-1;i>=idx;i--){
+                            $scope.$selections[i].data='';
+                            $scope.$selections[i].selected='';
+                        }
+                    }
+
+                    $scope._getDepartment=function(){
+                        for(var i=$scope.$selections.length-1;i>=0;i--){
+                            if($scope.$selections[i].selected){
+                                return $scope.$selections[i].selected
+                            }
+                        }
+                        return '';
+                    }
+
+                    $scope._save = function() {
+                        $scope.$setter(angular.copy($scope._getDepartment()));
+                    };
+                    
+                    $scope.nextData=function(idx){
+                        //清理
+                        removeAfterByIdx(idx);
+                        //初始0级
+                        if(idx===0){
+                            var params={departmentLevel: 0};
+                            SimpleDepartment.query(params,function(res){
+                                $scope.$selections[0].data=res.rows
+                            });
+                        }else if($scope.$selections[idx-1].selected&&$scope.$selections[idx-1].selected.hasChild==='true'){
+                            var params={upperDepartmentCode:$scope.$selections[idx-1].selected.code};
+                            SimpleDepartment.query(params,function(res){
+                                $scope.$selections[idx].data=res.rows
+                            });
+                        }
+
+                    }
+                    //初始化
+                    $scope.nextData(0);
+                    
+
+                };
                 $scope.$model = formatter($scope.$model);
                 $scope.$getter = function(value) {
                     return SimpleDepartment.query({ keywords: angular.isObject(value) ? value.keys : value }).$promise.then(function(res) {
@@ -150,86 +298,8 @@ angular.module('ngCombobox', [])
                     $modal({
                         title: '部门选择：',
                         scope: $scope,
-                        templateUrl: $scope.$modalTemplate,
-                        controller: function($scope) {
-                            $scope.$selections = [''];
-                            $scope.$select = 0;
-                            $scope.$filter = '';
-                            $scope.departmentTableParams = $tableParams.creat($scope, {
-                                getData: function(params) {
-                                    // console.log(params.url())
-                                    return SimpleDepartment.get(angular.extend({}, {
-                                        page: params.url().page,
-                                        count: params.url().count,
-                                        keywords: params.url()['filter[%24]'],
-                                        departmentLevel: params.url()['filter[departmentLevel]'],
-                                        upperDepartmentCode: params.url()['filter[upperDepartmentCode]']
-                                    })).$promise.then(function(res) {
-                                        // console.log(res);
-                                        $scope.data = res.rows;
-                                        params.total(res.total);
-                                        return res.rows;
-                                    });
-                                }
-                            });
-                            
-                            function removeAfterByIdx(idx) {
-                                for (var i = $scope.$selections.length - 1; i > idx; i--) {
-                                    $scope.$selections.remove(i);
-                                }
-                            }
-                            
-                            $scope.$watch(function() {
-                                return $scope.$filter + $scope.$select;
-                            }, function() {
-                                //取父级code
-                                var upperDepartmentCode = $scope.$selections[$scope.$select - 1] ?
-                                    $scope.$selections[$scope.$select - 1].code ?
-                                    $scope.$selections[$scope.$select - 1].code :
-                                    '' :
-                                    '';
-                                if (!!upperDepartmentCode) { //有父级code，按父级code查询
-                                    $scope.departmentTableParams.filter({
-                                        $: $scope.$filter,
-                                        upperDepartmentCode: upperDepartmentCode
-                                    });
-                                } else { //无父级code，按0级查询
-                                    $scope.departmentTableParams.filter({
-                                        $: $scope.$filter,
-                                        departmentLevel: 0
-                                    });
-                                }
-                                
-                            });
-                            //菜单选择
-                            $scope._selectIdx = function(idx) {
-                                $scope.$select = idx;
-                                $scope.$filter = '';
-                            };
-                            //列表选择
-                            $scope._selectItem = function(d) {
-                                if ($scope.$selections[$scope.$select].code === d.code) {
-                                    removeAfterByIdx($scope.$select);
-                                    $scope.$selections[$scope.$select] = '';
-                                } else {
-                                    $scope.$selections[$scope.$select] = angular.copy(d);
-                                    removeAfterByIdx($scope.$select);
-                                    if (d.hasChild === 'true') {
-                                        $scope.$selections.push('');
-                                    }
-                                }
-
-                            };
-                            $scope._getDepartment = function() {
-                                return $scope.$selections[$scope.$selections.length - 1] ? $scope.$selections[$scope.$selections.length - 1] : $scope.$selections[$scope.$selections.length - 2] ? $scope.$selections[$scope.$selections.length - 2] : '';
-                            };
-                            $scope._save = function() {
-                                // console.log('$scope._getDepartment()',$scope._getDepartment())
-                                $scope.$setter(angular.copy($scope._getDepartment()));
-                            };
-
-
-                        },
+                        templateUrl: $scope.$mini == 'true' ? $scope.$modalTemplateMini : $scope.$modalTemplate,
+                        controller: $scope.$mini == 'true' ? $scope.$modalCtrlMini : $scope.$modalCtrl,
                         show: true
                     });
                 };
@@ -237,6 +307,7 @@ angular.module('ngCombobox', [])
             link: function(scope) {
                 scope.$dropTemplate = 'tpls/model.combobox.input.department.group.tpl.drop.html';
                 scope.$modalTemplate = 'tpls/model.combobox.input.department.group.tpl.modal.html';
+                scope.$modalTemplateMini = 'tpls/model.combobox.input.department.group.tpl.modal.mini.html';
 
                 // iElement.find('button[type=button]').on('click', scope.$open);
             }
