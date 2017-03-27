@@ -516,12 +516,12 @@ angular.module('app.directives', [])
 
                 function build() {
                     $timeout(function(){
-                        var editor=KindEditor.create('#'+$scope.$id, angular.extend({}, $scope.defaults, parseObj($scope.options)));
-                        $scope.$watch(function(){
-                            return editor.html()
-                        },function(val){
-                            $scope.$model=val;
-                        })
+                        var editor=KindEditor.create('#'+$scope.$id, angular.extend({
+                            afterChange: function () {
+                                $scope.$model=this.html()
+                                $scope.$apply();
+                            }
+                        }, $scope.defaults, parseObj($scope.options)));
                     },0)
                 }
                 $scope.build = build;
