@@ -83,10 +83,10 @@
                     <input type="text" class="form-control" placeholder="日期" data-placement="auto" data-autoclose="1" data-date-format="yyyy-MM-dd" data-container="body" ng-model="forms.date" bs-datepicker>
                 </div>
             </div>
-            <div class="form-group col-md-12" ng-init="forms.rem='aaabbbccc'">
+            <div class="form-group col-md-12">
                 <label class="col-md-2 control-label">访谈原始记录</label>
                 <div ng-if="!$isEdit" class="input-group col-md-8">
-                    <span class="form-control no-border" style="height: auto;" ng-bind-html="forms.rem|trustAsHtml"></span>
+                    <span class="form-control no-border" style="height: auto; min-height: 34px;" ng-bind-html="forms.rem|trustAsHtml"></span>
                 </div>
                 <div ng-if="$isEdit" ng-if="$isEdit" class="input-group col-md-10">
                     <ng-combo-kindeditor name="rems" ng-model="forms.rem" placeholder="请输入访谈内容" height="320" width="100%" />

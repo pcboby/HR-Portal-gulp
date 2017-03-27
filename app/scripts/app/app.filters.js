@@ -2,7 +2,11 @@
 angular.module('app.filters', [])
     .filter('trustAsHtml', function($sce) {
         return function(val) {
-            return $sce.trustAsHtml(val.replace(/\n/g, '<br/>'));
+            if(val){
+                return $sce.trustAsHtml(val.replace(/\n/g, '<br/>'));
+            }else{
+                return ''
+            }
         };
     })
     .filter('sex', ['$sce', function($sce) {
