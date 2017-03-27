@@ -491,12 +491,11 @@ angular.module('app.directives', [])
     .directive('ngComboKindeditor', [function() {
         return {
             restrict: 'AEC',
-            template: '<textarea id="{{$id}}" class="form-control">{{$model||placeholder}}</textarea>',
+            template: '<textarea id="{{$id}}" class="form-control">{{$model}}</textarea>',
             // replace: true,
             scope: {
                 $model: '=ngModel',
-                name: '@',
-                placeholder: '@'
+                name: '@'
             },
             controller: function($scope, $element,$timeout) {
                 $scope.defaults = {
@@ -527,7 +526,7 @@ angular.module('app.directives', [])
                 $scope.build = build;
             },
             link: function(scope) {
-                scope.$id='editor_'+getRandom(8)
+                scope.$id='editor_'+getRandom(8);
                 scope.build();
             }
         };
