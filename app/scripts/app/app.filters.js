@@ -1,10 +1,10 @@
 'use strict';
 angular.module('app.filters', [])
-    // .filter('trustAsHtml', function($sce) {
-    //        return function(type) {
-    //            return $sce.trustAsHtml(input.replace(/\n/g, '<br/>'));
-    //        };
-    //    })
+    .filter('trustAsHtml', function($sce) {
+        return function(val) {
+            return $sce.trustAsHtml(val.replace(/\n/g, '<br/>'));
+        };
+    })
     .filter('sex', ['$sce', function($sce) {
         return function(val) {
             var styles = [{ //女
