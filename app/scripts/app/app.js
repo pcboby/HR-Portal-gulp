@@ -2,6 +2,7 @@
 angular.module('app', [
         'ui.router',
         'ui.slimscroll',
+        'ui.bootstrap',
         'oc.lazyLoad',
         'mgcrea.ngStrap',
         'ngSanitize',

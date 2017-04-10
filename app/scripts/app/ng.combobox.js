@@ -34,11 +34,11 @@ angular.module('ngCombobox', [])
                 function formatter(d) {
                     if (angular.isArray(d)) {
                         angular.forEach(d, function(item) {
-                            item.label = item.name + '（' + item.keys + '）';
+                            item.label = item.name + ' ' + item.keys;
                         });
                     }
                     if (angular.isObject(d)) {
-                        d.label = d.name + '（' + d.keys + '）';
+                        d.label = d.name + ' ' + d.keys;
                     }
                     return d;
                 }
