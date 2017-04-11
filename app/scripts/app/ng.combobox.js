@@ -51,6 +51,10 @@ angular.module('ngCombobox', [])
                     });
                 };
 
+                $scope.$onSelection=function(e, m, l, evt){
+                    console.log('1111111111',e)
+                }
+
                 $scope.$getModel = function() {
                     return $scope.$model;
                 };

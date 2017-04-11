@@ -3,7 +3,7 @@
         <i class="glyphicon glyphicon-user"></i>
     </span>
 
-    <input
+    <!-- <input
         type="text"
         class="form-control"
         ng-model="$model"
@@ -13,7 +13,15 @@
         data-html="1"
         data-template="{{$dropTemplate}}"
         bs-options="$item as $item.label for $item in $getter($viewValue)"
-        bs-typeahead>
+        bs-typeahead> -->
+
+    <input type="text"
+        ng-model="$model"
+        ng-disabled="$disabled"
+        placeholder="{{$placeholder}}"
+        uib-typeahead="$item as $item.label for $item in $getter($viewValue)"
+        typeahead-focus-on-select="true"
+        class="form-control">
 
     <span class="input-group-btn" ng-if="$searchButton">
         <button class="btn btn-default"

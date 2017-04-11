@@ -46,10 +46,11 @@ angular.module('app.config', [])
         });
         angular.extend($typeaheadProvider.defaults, defaultOptions, {
             autoSelect:true,
-            minLength: 2,
+            minLength: 1,
             limit: 8,
+            focusOnSelect:false,
             onSelect:function(d,i,e){
-                e.$element.focus();
+                // e.$element.focus();
             }
         });
         angular.extend($datepickerProvider.defaults, defaultOptions, {
