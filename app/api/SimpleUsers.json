@@ -6,34 +6,39 @@
 		"keys":"hwx333214",
 		"age":"37",
 		"sex":"1",
-		"updatetime":"2016-08-08"
+		"updatetime":"2016-08-08",
+		"Department":"董事长办公室"
 	},{
 		"id":"2",
 		"name":"pcboby1",
 		"keys":"hwx3332141",
 		"age":"37",
 		"sex":"1",
-		"updatetime":"2016-08-08"
+		"updatetime":"2016-08-08",
+		"Department":"财务筹资（财务部）"
 	},{
 		"id":"3",
 		"name":"pcboby2",
 		"keys":"hwx3332142",
 		"age":"37",
 		"sex":"1",
-		"updatetime":"2016-08-08"
+		"updatetime":"2016-08-08",
+		"Department":"物料采购供应（物资管理部）"
 	},{
 		"id":"4",
 		"name":"pcboby3",
 		"keys":"hwx3332143",
 		"age":"37",
 		"sex":"1",
-		"updatetime":"2016-08-08"
+		"updatetime":"2016-08-08",
+		"Department":"质量监督（质量管理部）"
 	},{
 		"id":"5",
 		"name":"pcboby3",
 		"keys":"hwx3332153",
 		"age":"37",
 		"sex":"1",
-		"updatetime":"2016-08-08"
+		"updatetime":"2016-08-08",
+		"Department":"质量监督（质量管理部）"
 	}]
 }

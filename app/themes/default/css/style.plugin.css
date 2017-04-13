@@ -279,3 +279,20 @@ div[slimscroll]{
 div[slimscroll]>*{
     margin-top: -1px;
 }
+
+
+/*  */
+.uib-typeahead-match .dropItem {
+  display: table;
+  width: 100%;
+}
+
+.uib-typeahead-match .dropItem>span {
+  display: table-cell;
+  white-space: nowrap;
+}
+
+.uib-typeahead-match .dropItem>span:last-child {
+  text-align: right;
+  padding-left: 3em;
+}

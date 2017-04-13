@@ -45,13 +45,13 @@ angular.module('app.config', [])
             trigger: 'hover'
         });
         angular.extend($typeaheadProvider.defaults, defaultOptions, {
-            autoSelect:true,
-            minLength: 1,
-            limit: 8,
-            focusOnSelect:false,
-            onSelect:function(d,i,e){
-                // e.$element.focus();
-            }
+            // autoSelect:true,
+            // minLength: 1,
+            // limit: 8,
+            // focusOnSelect:false,
+            // onSelect:function(d,i,e){
+            //     // e.$element.focus();
+            // }
         });
         angular.extend($datepickerProvider.defaults, defaultOptions, {
             dateFormat: 'yyyy-MM-dd',

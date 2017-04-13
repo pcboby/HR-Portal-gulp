@@ -20,7 +20,8 @@
         ng-disabled="$disabled"
         placeholder="{{$placeholder}}"
         uib-typeahead="$item as $item.label for $item in $getter($viewValue)"
-        typeahead-focus-on-select="true"
+        typeahead-focus-on-select="false"
+        typeahead-template-url={{$dropTemplate}}
         class="form-control">
 
     <span class="input-group-btn" ng-if="$searchButton">
