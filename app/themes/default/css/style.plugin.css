@@ -294,5 +294,5 @@ div[slimscroll]>*{
 
 .uib-typeahead-match .dropItem>span:last-child {
   text-align: right;
-  padding-left: 3em;
+  padding-left: 1.5em;
 }
