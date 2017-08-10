@@ -1,5 +1,5 @@
 /*!
- * angular-translate - v2.15.0 - 2017-02-27
+ * angular-translate - v2.15.2 - 2017-06-22
  * 
  * Copyright (c) 2017 The angular-translate team, Pascal Precht; Licensed MIT
  */
@@ -9,7 +9,7 @@
     define([], function () {
       return (factory());
     });
-  } else if (typeof exports === 'object') {
+  } else if (typeof module === 'object' && module.exports) {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
@@ -31,7 +31,7 @@ $translate.$inject = ['$STORAGE_KEY', '$windowProvider', '$translateSanitization
 $translateDefaultInterpolation.$inject = ['$interpolate', '$translateSanitization'];
 translateDirective.$inject = ['$translate', '$interpolate', '$compile', '$parse', '$rootScope'];
 translateAttrDirective.$inject = ['$translate', '$rootScope'];
-translateCloakDirective.$inject = ['$translate'];
+translateCloakDirective.$inject = ['$translate', '$rootScope'];
 translateFilterFactory.$inject = ['$parse', '$translate'];
 $translationCache.$inject = ['$cacheFactory'];
 angular.module('pascalprecht.translate', ['ng'])
@@ -373,6 +373,8 @@ function $translateSanitizationProvider () {
       return result;
     } else if (angular.isNumber(value)) {
       return value;
+    } else if (value === true || value === false) {
+      return value;
     } else if (!angular.isUndefined(value) && value !== null) {
       return iteratee(value);
     } else {
@@ -448,7 +450,7 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
       }
     };
 
-  var version = '2.15.0';
+  var version = '2.15.2';
 
   // tries to determine the browsers language
   var getFirstBrowserLanguage = function () {
@@ -1535,8 +1537,7 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
         };
         promiseResolved.displayName = 'promiseResolved';
 
-        promiseToWaitFor['finally'](promiseResolved)
-          .catch(angular.noop); // we don't care about errors here, already handled
+        promiseToWaitFor['finally'](promiseResolved)['catch'](angular.noop); // we don't care about errors here, already handled
       }
       return deferred.promise;
     };
@@ -2291,7 +2292,7 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
         });
         langPromises[key]['finally'](function () {
           clearNextLangAndPromise(key);
-        }).catch(angular.noop); // we don't care about errors (clearing)
+        })['catch'](angular.noop); // we don't care about errors (clearing)
       } else if (langPromises[key]) {
         // we are already loading this asynchronously
         // resolve our new deferred when the old langPromise is resolved
@@ -2461,7 +2462,7 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
         },
         //handle rejection to appease the $q validation
         angular.noop
-      ).finally(
+      )['finally'](
         function () {
           $rootScope.$emit('$translateRefreshEnd', {language : langKey});
         }
@@ -3403,7 +3404,7 @@ angular.module('pascalprecht.translate')
  */
 .directive('translateCloak', translateCloakDirective);
 
-function translateCloakDirective($translate) {
+function translateCloakDirective($translate, $rootScope) {
 
   'use strict';
 
@@ -3425,8 +3426,10 @@ function translateCloakDirective($translate) {
           iAttr.$observe('translateCloak', function (translationId) {
             $translate(translationId).then(iRemoveCloak, iApplyCloak);
           });
-        }
-        else {
+          $rootScope.$on('$translateChangeSuccess', function () {
+            $translate(iAttr.translateCloak).then(iRemoveCloak, iApplyCloak);
+          });
+        } else {
           $translate.onReady(iRemoveCloak);
         }
       };
